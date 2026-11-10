@@ -2,6 +2,24 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.6.0] - 2026-11-10
+
+### Adicionado
+
+- Skill `termfy-docs`: melhora a documentação embutida do binário, com a
+  checklist de cobertura e forma, o guia de escrita para pessoas e agentes
+  e o `docs:check` do starter kit como gate.
+- Skill `termfy-brand`: ajusta a identidade do binário em todas as
+  superfícies (`package.json`, créditos, paleta, aba About, OpenCLI, MCP),
+  com o mapa da identidade e os papéis da paleta em `references/`.
+- Capítulo `09-workflow.md` do guia: a sequência de uso das oito skills, o
+  que cada uma deixa pronto para a seguinte e quando sair da ordem.
+- `skills/README.md` descreve para que serve e como funciona cada skill.
+
+### Alterado
+
+- Compatibilidade das skills com o starter kit 0.6.x; guia 0.3.0.
+
 ## [0.5.1] - 2026-11-10
 
 ### Corrigido

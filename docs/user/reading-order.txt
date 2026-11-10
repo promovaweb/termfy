@@ -8,3 +8,4 @@ docs/user/05-mcp.md
 docs/user/06-configuration-and-credentials.md
 docs/user/07-skills.md
 docs/user/08-publishing.md
+docs/user/09-workflow.md

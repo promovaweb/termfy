@@ -4,16 +4,18 @@ Skills são pastas com um `SKILL.md` (instruções para o agente) e uma pasta
 `references/` (material de apoio). Um agente de IA que trabalha no projeto
 lê o `AGENTS.md`, escolhe a skill compatível com a tarefa e segue os passos.
 
-## As seis skills
+## As oito skills
 
 | Skill | Quando o agente usa |
 | --- | --- |
+| `termfy-brand` | ajustar nome, título, descrição, autor, links, créditos e paleta, em todas as superfícies do binário |
 | `termfy-spec` | entrevistar a pessoa e montar o `CLISPEC.md`: propósito, públicos, commands, screens, tools, configuração e credenciais |
 | `termfy-init` | personalizar o starter kit para um binário novo e preparar o primeiro commit |
 | `termfy-cli` | criar ou alterar comandos, opções, saída, códigos de saída e OpenCLI |
 | `termfy-tui` | criar ou alterar telas, componentes, tema e teclas |
 | `termfy-mcp` | criar ou alterar tools, resources e prompts; testar com o Inspector |
 | `termfy-config` | declarar chaves de configuração, consumir credenciais, revisar o cofre |
+| `termfy-docs` | melhorar a documentação embutida, passar no `docs:check` e reler o `--skill` como um agente |
 
 Cada `SKILL.md` segue a mesma forma: o que ler antes, regras que não mudam,
 passos, marcos de progresso e o que relatar ao final. As regras repetem o
@@ -51,6 +53,12 @@ podem ficar na spec planejada, mas fazem `spec check` sair com 3 até a
 implementação. O binário compilado lê a spec embutida no build; para
 conferir uma edição local, rode pelo código-fonte com `bun run dev`.
 
+## A sequência
+
+A ordem de uso, do `termfy-init` à release, com o que cada skill deixa
+pronto para a seguinte, está no capítulo
+[Sequência de uso das skills](09-workflow.md).
+
 ## As referências
 
 `references/` traz o que a skill cita:
@@ -64,6 +72,10 @@ conferir uma edição local, rode pelo código-fonte com `bun run dev`.
   especificação MCP (conceitos de servidor, transporte stdio, tools,
   resources, prompts, segurança local, Inspector e depuração).
 - `termfy-config`: modelo de segurança do cofre e declaração de chaves.
+- `termfy-brand`: mapa da identidade (onde cada dado vive e quem o lê) e os
+  papéis da paleta.
+- `termfy-docs`: checklist de cobertura e forma da documentação embutida e o
+  guia de escrita para pessoas e agentes.
 - `termfy-init`: checklist do bootstrap.
 - `termfy-spec`: contrato do `CLISPEC.md` com exemplo e roteiro em nove
   blocos.

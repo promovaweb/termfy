@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.2.5",
-  "edition": "v0.2.5",
-  "generated_at": "2026-11-10T13:07:30Z",
-  "source_sha256": "b14bc0cf7672e7736262ac623519e96685f47aeda31a2c86eeef8bd1e8a93abc",
+  "version": "0.3.0",
+  "edition": "v0.3.0",
+  "generated_at": "2026-11-10T13:32:39Z",
+  "source_sha256": "32b6d1dac7eea9c12e1ca83f074c571d018338a34244f3394c717ec5093df638",
   "sources": [
     ".ebook/assets/logo.png",
     ".ebook/build-ebook.mjs",
@@ -20,18 +20,19 @@
     "docs/user/06-configuration-and-credentials.md",
     "docs/user/07-skills.md",
     "docs/user/08-publishing.md",
+    "docs/user/09-workflow.md",
     "docs/user/README.md",
     "docs/user/reading-order.txt",
     "ebook/VERSION"
   ],
   "artifacts": {
     "pdf": {
-      "file": "Termfy-Guia-do-Framework-v0.2.5.pdf",
-      "sha256": "018c9e10f18089487d4985644c724f0c1e9c8a2ea2adc000a7d80945465c9ee8"
+      "file": "Termfy-Guia-do-Framework-v0.3.0.pdf",
+      "sha256": "7689082c984acd8dce62258e5a0ef1641f03f21bf7e6c082e5b5fb15d4d5febd"
     },
     "epub": {
-      "file": "Termfy-Guia-do-Framework-v0.2.5.epub",
-      "sha256": "fb3a0e752135d01bc8adba45392f00a8ec8abd5678e2339c396c0db49c9a364b"
+      "file": "Termfy-Guia-do-Framework-v0.3.0.epub",
+      "sha256": "47de1473a55a4b962801586269e644e5e37a7d2eb4b14cf6aa31633d1e3845d1"
     }
   }
 }

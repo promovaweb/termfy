@@ -37,10 +37,12 @@ Atualize as skills no projeto derivado com `bun run skills:update`.
 | --- | --- |
 | [`termfy-spec`](skills/termfy-spec/SKILL.md) | especificar o produto e revisar o contrato CLISPEC |
 | [`termfy-init`](skills/termfy-init/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
+| [`termfy-brand`](skills/termfy-brand/SKILL.md) | nome, título, descrição, autor, links, créditos e paleta |
 | [`termfy-cli`](skills/termfy-cli/SKILL.md) | comandos, opções, saída texto/JSON, códigos de saída, `--skill` e OpenCLI |
 | [`termfy-tui`](skills/termfy-tui/SKILL.md) | telas, componentes, tema modern unix e testes por frame |
 | [`termfy-mcp`](skills/termfy-mcp/SKILL.md) | tools, resources, prompts, stdio e testes com o Client do SDK |
 | [`termfy-config`](skills/termfy-config/SKILL.md) | settings.json, cofre cifrado, chave mestra e variáveis |
+| [`termfy-docs`](skills/termfy-docs/SKILL.md) | documentação embutida: cobertura, leitura como agente, `docs:check` |
 
 Instalação em qualquer projeto:
 
@@ -66,6 +68,7 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
+| 0.6.0 | 0.6.x |
 | 0.5.0 | 0.5.x |
 | 0.4.1 | 0.4.x |
 | 0.4.0 | 0.3.x |

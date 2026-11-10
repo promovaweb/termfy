@@ -177,7 +177,7 @@ async function check(value, sources) {
   const linkFailures = [...pdfLinkFailures(paths.pdf), ...epubLinkFailures(paths.epub)];
   if (linkFailures.length) fail(`links internos inválidos:\n${linkFailures.join("\n")}`);
   const text = run("pdftotext", [paths.pdf, "-"]);
-  for (const title of ["Termfy", "Visão geral", "Começar", "Três modos", "CLI", "TUI", "MCP", "Configuração e credenciais", "Skills", "Publicar"]) {
+  for (const title of ["Termfy", "Visão geral", "Começar", "Três modos", "CLI", "TUI", "MCP", "Configuração e credenciais", "Skills", "Publicar", "Sequência de uso das skills"]) {
     if (!text.includes(title)) fail(`PDF não contém a seção: ${title}`);
   }
   const fonts = run("pdffonts", [paths.pdf]);
