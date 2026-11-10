@@ -68,7 +68,10 @@ Nomes seguem `service.purpose` em minúsculas: `shop.token`,
 2. `~/.mycli/master.key`, gerado na primeira gravação.
 
 Com a variável definida, o arquivo é ignorado. Em CI e em servidores, use a
-variável e não grave a chave em disco.
+variável e não grave a chave em disco. Para trocar a chave,
+`<bin> credentials rotate-key` decifra o cofre com a chave atual, gera uma
+nova (ou lê `<BIN>_MASTER_KEY` com `--from-env`), regrava `master.key` com
+0600 e recifra o cofre.
 
 ## O que a cifra protege
 

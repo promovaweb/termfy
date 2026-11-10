@@ -119,6 +119,16 @@ A fonte é `src/app/exit-codes.ts`. Uma família nova entra lá e em
 `src/app/errors.ts`, com um atalho `error.<family>()`. Números não se
 reutilizam.
 
+## Commands de apoio
+
+`<bin> doctor` confere Bun, TTY, pasta de dados, settings, master key, cofre,
+versão e plataforma, com ✓, ! ou ✗ por item, e sai com 3 quando algo falha.
+A mesma coleta está na tool MCP `doctor`. `<bin> completion bash|zsh|fish`
+gera o script de autocompletar a partir do registry, com subcommands,
+options e valores de enum; instale com `eval "$(<bin> completion zsh)"`.
+`<bin> --skill reference` devolve só a referência gerada do registry, para
+agentes que já conhecem o método e querem economizar contexto.
+
 ## OpenCLI
 
 A OpenCLI Specification descreve a interface de um CLI em JSON para que

@@ -78,7 +78,7 @@ em `dist/`.
 
 Reescreva a abertura do `README.md` com o propósito do produto, registre a
 versão em `CHANGELOG.md` e faça o commit `release: mycli v<version>`, com a versão de `package.json`. O capítulo
-[Publicar](08-publicar.md) cobre tag, release e binários.
+[Publicar](08-publishing.md) cobre tag, release e binários.
 
 ## Pedir ajuda a um agente
 

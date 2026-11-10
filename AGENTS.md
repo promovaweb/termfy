@@ -53,11 +53,12 @@ marcador `.terceiros`) permanece no idioma original.
 bun run validate
 ```
 
-Encadeia `skills:validate` (estrutura, frontmatter e links das skills) e
+Encadeia `skills:validate` (estrutura, frontmatter e links das skills),
+`skills:check-paths` (caminhos e scripts do starter kit em pasta irmã) e
 `ebook:verify` (manifesto, hashes, XML, links e fontes do ebook). Confira
 `git status --short` ao final e preserve mudanças que já existiam.
 
 ## Publicação
 
 Versão em `package.json`, entrada em `CHANGELOG.md`, tag `vX.Y.Z` e GitHub
-Release com o PDF e o EPUB. O fluxo está em `docs/user/08-publicar.md`.
+Release com o PDF e o EPUB. O fluxo está em `docs/user/08-publishing.md`.

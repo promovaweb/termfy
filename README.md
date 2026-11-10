@@ -63,6 +63,7 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
+| 0.5.0 | 0.5.x |
 | 0.4.1 | 0.4.x |
 | 0.4.0 | 0.3.x |
 | 0.3.0 | 0.3.x |
@@ -75,8 +76,26 @@ skills e esta tabela mudam na mesma janela.
 ## Validar
 
 ```bash
-bun run validate    # skills:validate + ebook:verify
+bun run validate    # skills:validate + skills:check-paths + ebook:verify
+bun run skills:check-paths ../termfy-starter-kit
 ```
+
+A checagem de compatibilidade lê os caminhos e os scripts citados em
+`skills/*/SKILL.md` e em `skills/*/references/*.md`, apenas no nível raiz
+de `references/`. Sem argumento, usa `../termfy-starter-kit`. Caminhos com
+`<name>` e globs precisam corresponder a ao menos um caminho existente.
+Comandos como `bun run src/main.ts` são conferidos como arquivos.
+
+O job `compatibilidade` do CI exige o secret `STARTER_KIT_TOKEN` com acesso
+de leitura ao repositório privado `promovaweb/termfy-starter-kit`. Os checkouts
+ficam em pastas irmãs dentro do workspace, conforme o suporte a
+[múltiplos repositórios do actions/checkout](https://github.com/actions/checkout#checkout-multiple-repos-side-by-side).
+A partir da pasta `termfy`, o comando usa `../termfy-starter-kit`.
+
+As referências a `src/spec/`, `src/cli/commands/spec.ts`, `docs/spec.md`,
+`tests/spec.test.ts` e `spec:check` têm exceções temporárias no script,
+enquanto esses recursos são implementados no starter kit. Remova as
+exceções após a publicação desses recursos.
 
 ## Estrutura
 
@@ -85,7 +104,7 @@ skills/        cinco skills, cada uma com SKILL.md e references/
 docs/user/     guia do framework, fonte do ebook
 ebook/         PDF, EPUB, aliases, VERSION e build.json
 .ebook/        pipeline do ebook (Pandoc + WeasyPrint), CSS e template
-scripts/       validar-skills.ts
+scripts/       validate-skills.ts e check-skills-against-starter-kit.ts
 ```
 
 ## Licença

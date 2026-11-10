@@ -26,12 +26,25 @@ Antes de implementar, o agente precisa saber o que construir. A skill
 `termfy-spec` entrevista a pessoa em blocos curtos (identidade, propósito e
 públicos, modos, commands, TUI, MCP, configuração e credenciais, fora de
 escopo, checagens de aceite) e grava o resultado em `CLISPEC.md`, na raiz do
-projeto. Cada command entra com arguments, options, forma do `data`, exit
-codes e um exemplo; cada tool com entrada, saída e efeito; cada credencial
-com nome `service.purpose` e quem a usa. As skills `termfy-cli`,
-`termfy-tui`, `termfy-mcp` e `termfy-config` leem esse arquivo antes de tocar
-no código, e `AGENTS.md` do starter kit manda rodar `termfy-spec` quando ele
-não cobrir o pedido.
+projeto, no contrato descrito em `docs/spec.md` do starter kit: front matter
+YAML validado por schema (`commands`, `screens`, `mcp`, `settings`,
+`credentials`, cada um com os nomes do código), cinco seções fixas
+(`Purpose`, `Audiences`, `Out of scope`, `Checklist`, `Notes`) e uma
+checklist com `{#id}` por entrega e a tag da skill responsável.
+
+O binário lê a própria spec: `<bin> spec show` imprime front matter, seções
+e progresso; `<bin> spec check` valida o contrato e cruza com o código
+(command, option, exit code, screen, tool e setting citados precisam
+existir; o que existe no código e falta na spec vira aviso, ou erro com
+`--strict`); `<bin> spec progress` conta a checklist. A tool MCP `spec`
+devolve o mesmo conteúdo a um agente. `bun run spec:check` entra em
+`bun run validate` e ainda confere que todo `getCredential("<name>")` do
+código aparece em `credentials` da spec.
+
+As skills `termfy-cli`, `termfy-tui`, `termfy-mcp` e `termfy-config` leem a
+entrada da spec antes de tocar no código e, ao concluir cada entrega, marcam
+o item da checklist pelo `{#id}` e avançam `updatedAt`. `AGENTS.md` do
+starter kit manda rodar `termfy-spec` quando a spec não cobrir o pedido.
 
 ## As referências
 

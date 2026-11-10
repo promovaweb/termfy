@@ -2,6 +2,34 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.5.0] - 2026-11-10
+
+### Adicionado
+
+- `scripts/check-skills-against-starter-kit.ts` e o script
+  `skills:check-paths`, em `validate`: todo caminho e `bun run <script>`
+  citado nas skills precisa existir no starter kit. Job `compatibilidade`
+  no CI, com checkout do starter kit via secret `STARTER_KIT_TOKEN`.
+- `references/clispec-contract.md` na `termfy-spec`, cópia do contrato
+  `docs/spec.md` do starter kit.
+
+### Alterado
+
+- `termfy-spec` passa a escrever o `CLISPEC.md` no contrato estruturado
+  (front matter validado, seções `Purpose`, `Audiences`, `Out of scope`,
+  `Checklist`, `Notes`, itens com `{#id}`) e a conferir com
+  `bun run dev -- spec check`. As skills `termfy-cli`, `termfy-tui`,
+  `termfy-mcp` e `termfy-config` marcam a checklist da spec ao concluir cada
+  entrega. `termfy-init` roda `termfy-spec` antes de conferir os modos.
+- `termfy-cli` cita `doctor`, `completion` e `--skill reference`;
+  `termfy-tui` cita `listPanel`; `termfy-config` cita
+  `credentials rotate-key`. Compatíveis com o starter kit 0.5.x.
+- Capítulos do guia renomeados para inglês (`00-overview.md`,
+  `01-getting-started.md`, `02-three-modes.md`,
+  `06-configuration-and-credentials.md`, `08-publishing.md`); guia 0.2.4
+  com o contrato do CLISPEC, os commands de apoio, `listPanel` e
+  `rotate-key`.
+
 ## [0.4.1] - 2026-11-10
 
 ### Alterado

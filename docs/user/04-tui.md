@@ -63,7 +63,10 @@ Tokyo Night, e `day`), com nomes de papel: `accent`, `textDim`, `border`,
 ## Componentes
 
 `src/tui/components.ts` oferece `panel`, `keyValueTable`, `list`,
-`heading`, `dim` e `spacer`. Todos recebem o tema. Um componente novo entra
+`heading`, `dim`, `spacer` e `listPanel`, uma lista com rolagem
+(`ScrollBoxRenderable`), item selecionado em destaque e navegação por
+`up`, `down`, `j`, `k` e `Enter`, que devolve `select`, `selected` e `move`
+para a screen tratar em `onKey`. Todos recebem o tema. Um componente novo entra
 nesse arquivo e fica disponível para todas as telas.
 
 ## Criar uma aba

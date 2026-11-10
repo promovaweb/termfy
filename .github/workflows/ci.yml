@@ -32,4 +32,35 @@ jobs:
           sudo apt-get install -y libxml2-utils poppler-utils unzip
 
       - name: Validar
-        run: bun run validar
+        run: bun run skills:validate && bun run ebook:verify
+
+  compatibilidade:
+    name: Conferir compatibilidade com o starter kit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: termfy
+    steps:
+      - name: Obter framework
+        uses: actions/checkout@v4
+        with:
+          path: termfy
+
+      - name: Obter starter kit
+        uses: actions/checkout@v4
+        with:
+          repository: promovaweb/termfy-starter-kit
+          token: ${{ secrets.STARTER_KIT_TOKEN }}
+          path: termfy-starter-kit
+          persist-credentials: false
+
+      - name: Configurar Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Testar checagem de compatibilidade
+        run: bun test scripts/check-skills-against-starter-kit.test.ts
+
+      - name: Conferir caminhos e scripts
+        run: bun run skills:check-paths ../termfy-starter-kit

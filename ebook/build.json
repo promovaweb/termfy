@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.2.2",
-  "edition": "v0.2.2",
-  "generated_at": "2026-11-10T12:43:39Z",
-  "source_sha256": "514607ef67ff87d0226e36b2974eea5b9ded3d069f74688fdb07da6cc21d236b",
+  "version": "0.2.4",
+  "edition": "v0.2.4",
+  "generated_at": "2026-11-10T13:00:02Z",
+  "source_sha256": "4fd5243ccc4c905ea6c88b911fd570e44e25101e1fce339e95d7a6744100c775",
   "sources": [
     ".ebook/assets/logo.png",
     ".ebook/build-ebook.mjs",
@@ -11,27 +11,27 @@
     ".ebook/metadata.yaml",
     ".ebook/pdf.css",
     ".ebook/template.html",
-    "docs/user/00-visao-geral.md",
-    "docs/user/01-comecar.md",
-    "docs/user/02-tres-modos.md",
+    "docs/user/00-overview.md",
+    "docs/user/01-getting-started.md",
+    "docs/user/02-three-modes.md",
     "docs/user/03-cli.md",
     "docs/user/04-tui.md",
     "docs/user/05-mcp.md",
-    "docs/user/06-configuracao-e-credenciais.md",
+    "docs/user/06-configuration-and-credentials.md",
     "docs/user/07-skills.md",
-    "docs/user/08-publicar.md",
+    "docs/user/08-publishing.md",
     "docs/user/README.md",
     "docs/user/reading-order.txt",
     "ebook/VERSION"
   ],
   "artifacts": {
     "pdf": {
-      "file": "Termfy-Guia-do-Framework-v0.2.2.pdf",
-      "sha256": "5cf67fb7585dd5c78ba1242ed787b6a1da05774bab8e54858c02c5bf1ce11864"
+      "file": "Termfy-Guia-do-Framework-v0.2.4.pdf",
+      "sha256": "2f8756f132c07cbd4e7a77f9e521f3014496f7c06679f149d382ff7849ac3e77"
     },
     "epub": {
-      "file": "Termfy-Guia-do-Framework-v0.2.2.epub",
-      "sha256": "5a46feb568588e4d8d236762da46cd5aeb6b0d92058bdea3ee3b2e0ee2804111"
+      "file": "Termfy-Guia-do-Framework-v0.2.4.epub",
+      "sha256": "130fffbd6756dddd0d3fb295be8044a2e634952c0a028f7828ac8fa17f5e93ed"
     }
   }
 }
