@@ -63,3 +63,9 @@ documentação ajustada.
 
 Liste chaves ou credenciais adicionadas, arquivos alterados e os testes
 executados. Nunca cole valores de credenciais na resposta.
+
+## Compatibilidade
+
+Starter kit 0.1.x. Caminhos citados: `src/config/caminhos.ts`,
+`src/config/settings.ts`, `src/config/cripto.ts`,
+`src/config/credenciais.ts`, `tests/config.test.ts` e `docs/configuracao.md`.

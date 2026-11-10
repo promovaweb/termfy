@@ -1,49 +1,48 @@
 # Instruções para agentes
 
-Este repositório é o Termfy: um framework de skills mais um esqueleto de
-binário em Bun com três modos no mesmo executável: TUI (sem argumentos),
-CLI (com argumentos, saída em texto ou `--json`) e servidor MCP via stdio
-(`<bin> mcp`). Ele é um template do GitHub; projetos derivados herdam esta
-estrutura e estas regras.
+Este repositório é o framework Termfy: as skills que ensinam um agente a
+criar e evoluir binários de terminal em Bun com TUI, CLI e servidor MCP stdio
+no mesmo executável, as referências que elas usam e o guia do método em
+`docs/user/`, publicado em PDF e EPUB em `ebook/`.
+
+O código do binário não vive aqui. Ele vive no starter kit
+[`promovaweb/termfy-starter-kit`](https://github.com/promovaweb/termfy-starter-kit),
+template do GitHub que já traz estas skills instaladas em `.agents/skills/`.
 
 ## Idioma
 
-Código, comentários, documentação, mensagens de interface e respostas em
-Português do Brasil. Termos técnicos consagrados ficam em inglês (`build`,
-`stdin`, `flag`, `tool`, `resource`).
+Português do Brasil em skills, referências escritas aqui, guia e respostas.
+Termos técnicos consagrados ficam em inglês. Documentação copiada de outros
+projetos (pastas com o marcador `.terceiros`) permanece no idioma original.
 
 ## Ordem de leitura
 
 1. Este arquivo.
-2. `docs/arquitetura.md` para entender as camadas.
-3. A skill compatível com a tarefa em `skills/`:
-   - `termfy-iniciar`: criar um binário novo a partir do template;
-   - `termfy-cli`: comandos, opções, saída e códigos de saída;
-   - `termfy-tui`: telas, tema e interação por teclado;
-   - `termfy-mcp`: tools, resources e prompts;
-   - `termfy-config`: settings, credenciais e variáveis.
-4. As `references/` indicadas pela skill. Citar uma referência não substitui
-   abri-la.
+2. `docs/user/README.md` e o capítulo do guia ligado à tarefa.
+3. A skill que será alterada e suas `references/`.
+4. `skills/README.md` para a forma comum das skills.
 
-## Regras que valem para toda mudança
+## Regras
 
-- Toda opção, argumento, subcomando, tool e chave de configuração nasce
-  documentado: `descricao` no registro, linha na tabela de `docs/` e, quando
-  for conceito novo, parágrafo em prosa. O `--skill` imprime `docs/` inteiro
-  mais a referência gerada do registro, então `docs/` precisa continuar
-  correto para quem lê o binário sem o repositório.
-- Códigos de saída vêm de `src/app/saida.ts`. Zero é sucesso. Não invente
-  números em comandos; acrescente a família na tabela.
-- Segredos nunca passam por argumento, log, erro, `--json` sem `--reveal`,
-  tool MCP ou frame da TUI. Leia com `obterCredencial()`.
-- Stdout recebe dados; stderr recebe progresso e avisos. Em `mcp`, stdout é
-  do JSON-RPC.
-- Um arquivo por comando, por tela e por grupo de tools. Registro central em
-  `src/cli/comandos.ts`, `src/tui/telas/index.ts` e `src/mcp/servidor.ts`.
-- Cores da TUI só em `src/tui/tema.ts`.
-- Node e npm não entram: o projeto usa Bun para rodar, testar e compilar.
-- Documente código novo ou alterado com cabeçalho explicando o propósito do
-  arquivo e JSDoc em funções exportadas.
+- Uma skill tem `SKILL.md` com frontmatter `name` (igual ao nome da pasta) e
+  `description`, mais `references/` com ao menos um arquivo. Seções: leitura
+  prévia, regras, passos, marcos e saída.
+- Texto de instrução em prosa direta, verbos no imperativo, sem travessão
+  como pontuação, sem clichês de abertura ou fechamento. Evite as famílias
+  léxicas vetadas em `PROHIBITED-TERMOS-ABSOLUTOS.md` do Hub da Promovaweb;
+  nomeie a consequência, a escolha, a comprovação ou a regra em vez do termo
+  genérico.
+- Documentação copiada de terceiros fica em subpasta própria dentro de
+  `references/`, com a licença original e um arquivo `.terceiros`. Não a
+  edite; substitua pela versão nova quando a fonte mudar.
+- Caminhos citados nas skills apontam para o starter kit. Quando ele mudar a
+  estrutura, atualize a skill e a seção "Compatibilidade" na mesma janela.
+- O guia em `docs/user/` explica o método; não repita nele a referência de
+  comandos do binário, que vive no starter kit e sai pelo `--skill`.
+- Quando `docs/user/` mudar, avance `ebook/VERSION`, rode `bun run ebook` e
+  faça commit dos artefatos em `ebook/`.
+- Scripts em Bun. Node e npm não entram, exceto o `npx skills` citado como
+  ferramenta de distribuição.
 
 ## Validação antes de concluir
 
@@ -51,21 +50,11 @@ Português do Brasil. Termos técnicos consagrados ficam em inglês (`build`,
 bun run validar
 ```
 
-Encadeia `typecheck`, `bun test`, `skills:validar`, `opencli:check` e
-`build`. Quando o registro de comandos mudar, rode `bun run opencli` antes
-e revise o diff de `docs/opencli.json`. Confira `git status --short` ao
-final e preserve mudanças que já existiam.
+Encadeia `skills:validar` (estrutura, frontmatter e links das skills) e
+`ebook:verify` (manifesto, hashes, XML, links e fontes do ebook). Confira
+`git status --short` ao final e preserve mudanças que já existiam.
 
 ## Publicação
 
-Toda alteração publicada sai com versão em `package.json`, entrada em
-`CHANGELOG.md`, tag `vX.Y.Z` e GitHub Release com binários. O fluxo está em
-`docs/release.md`. Tags não são movidas.
-
-## Skills
-
-As skills seguem o formato `SKILL.md` com frontmatter `name` e
-`description`, mais `references/`. O texto de instrução fica em prosa
-direta, sem travessão como pontuação, sem clichês de abertura ou fechamento e
-com verbos no imperativo. `bun run skills:validar` confere a estrutura e os
-links.
+Versão em `package.json`, entrada em `CHANGELOG.md`, tag `vX.Y.Z` e GitHub
+Release com o PDF e o EPUB. O fluxo está em `docs/user/08-publicar.md`.

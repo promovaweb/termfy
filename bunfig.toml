@@ -1,5 +1,0 @@
-# Configuração do Bun para o Termfy.
-# Os testes ficam em tests/ e usam o runner nativo `bun test`.
-[test]
-root = "./tests"
-coverage = false

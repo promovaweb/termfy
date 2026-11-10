@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   validar:
-    name: Validar com Bun
+    name: Validar skills e ebook
     runs-on: ubuntu-latest
     steps:
       - name: Obter código
@@ -26,5 +26,10 @@ jobs:
       - name: Instalar dependências
         run: bun install --frozen-lockfile
 
-      - name: Validar projeto
+      - name: Instalar ferramentas de conferência do ebook
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils poppler-utils unzip
+
+      - name: Validar
         run: bun run validar

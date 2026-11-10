@@ -10,7 +10,8 @@
 
 - [ ] `package.json`: `name`, `bin`, `description`, bloco `termfy` e `repository` atualizados.
 - [ ] `.env.example`: variáveis com o novo prefixo.
-- [ ] `README.md`, `AGENTS.md`, `CHANGELOG.md` e `.github/workflows/*.yml` sem a palavra `termfy` fora de citações ao template.
+- [ ] `README.md`, `AGENTS.md`, `CHANGELOG.md` e `.github/workflows/*.yml` sem a palavra `termfy` fora de citações ao framework e ao starter kit.
+- [ ] `bun run skills:check` confirma as cinco skills em `.agents/skills/` e no `skills-lock.json`.
 - [ ] `bun run dev -- --version` imprime `<bin> 0.1.0`.
 - [ ] `bun run dev -- about --json` traz `autor`, `site` e `repositorio` preenchidos.
 - [ ] `bun run dev -- config path` aponta para `~/.<bin>/`.

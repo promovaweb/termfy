@@ -61,3 +61,9 @@ regenerado; documentação ajustada.
 
 Liste arquivos criados ou alterados, comandos de validação executados com o
 resultado e exemplos de uso do comando novo em texto e `--json`.
+
+## Compatibilidade
+
+Starter kit 0.1.x. Caminhos citados: `src/cli/registro.ts`,
+`src/cli/comandos.ts`, `src/cli/comandos/*.ts`, `template/comando/exemplo.ts`,
+`tests/cli.test.ts`, `docs/cli.md` e `docs/opencli.json`.

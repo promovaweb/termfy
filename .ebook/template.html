@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>$title$</title>
+</head>
+<body>
+  <div class="cover">
+    <img class="cover-mark" src="assets/logo.png" alt="Logo da Promovaweb">
+    <div class="cover-title">
+      <div class="cover-kicker">Termfy</div>
+      <h1>Guia do framework</h1>
+      <div class="cover-tagline">Um binário em Bun, três modos: TUI, CLI e servidor MCP</div>
+      <div class="cover-desc">Starter kit, registro de comandos, saída em texto e JSON, códigos de saída, cofre cifrado, design modern unix e as skills que orientam agentes.</div>
+    </div>
+    <div class="cover-meta">
+      <div>Edição v$version$</div>
+      <div>Gerado em $date$</div>
+      <div>Fonte editorial: docs/user/</div>
+    </div>
+  </div>
+  $if(toc)$
+  <nav id="TOC" role="doc-toc">$toc$</nav>
+  $endif$
+  <main>$body$</main>
+</body>
+</html>

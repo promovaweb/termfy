@@ -1,0 +1,17 @@
+---
+title: "Termfy: guia do framework"
+subtitle: "Um binário em Bun, três modos: TUI, CLI e servidor MCP"
+author:
+  - "Promovaweb"
+publisher: "Promovaweb"
+lang: "pt-BR"
+rights: "Documentação do framework Termfy, Promovaweb"
+description: "Guia do método Termfy para construir ferramentas de terminal em Bun com TUI, CLI com saída em texto ou JSON e servidor MCP via stdio, usando o starter kit e as skills para agentes."
+subject:
+  - "Bun"
+  - "CLI"
+  - "TUI"
+  - "Model Context Protocol"
+  - "skills"
+identifier: "https://github.com/promovaweb/termfy"
+---

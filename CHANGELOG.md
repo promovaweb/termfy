@@ -2,6 +2,34 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.2.0] - 2026-11-10
+
+### Alterado
+
+- O repositório passa a conter só o framework: skills, referências, guia em
+  `docs/user/` e ebook. O esqueleto do binário (`src/`, `docs/` embutida,
+  `template/`, `tests/`, scripts de build e bootstrap) foi movido para
+  `promovaweb/termfy-starter-kit` 0.1.0, template do GitHub que traz estas
+  skills instaladas via `npx skills add`.
+- `termfy-iniciar` passa a partir do starter kit e inclui a atualização das
+  skills com `bun run skills:update`.
+- As cinco skills ganham a seção "Compatibilidade", que declara a faixa do
+  starter kit coberta (0.1.x).
+- `scripts/validar-skills.ts` roda em Bun e ignora links em pastas
+  `.terceiros`.
+- O repositório deixa de ser template do GitHub; o template é o starter kit.
+
+### Adicionado
+
+- Guia do framework em `docs/user/`, com nove capítulos: visão geral,
+  começar, três modos, CLI, TUI, MCP, configuração e credenciais, skills e
+  publicar.
+- Ebook `Termfy-Guia-do-Framework-v0.1.0` em PDF e EPUB, gerado por
+  `bun run ebook` com o design system de PDF da Promovaweb
+  (`pdf-design-system: 1.0.0`), aliases `ebook-termfy.{pdf,epub}` e
+  manifesto `ebook/build.json`.
+- Workflow de release que anexa o PDF e o EPUB à GitHub Release.
+
 ## [0.1.0] - 2026-11-09
 
 ### Adicionado

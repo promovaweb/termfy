@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  binarios:
-    name: Compilar binários
+  release:
+    name: Publicar release com o ebook
     runs-on: ubuntu-latest
     steps:
       - name: Obter código
@@ -24,17 +24,13 @@ jobs:
       - name: Instalar dependências
         run: bun install --frozen-lockfile
 
-      - name: Instalar pacotes nativos do OpenTUI para todos os alvos
-        run: bun install --os="*" --cpu="*" @opentui/core
+      - name: Instalar ferramentas de conferência do ebook
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils poppler-utils unzip
 
-      - name: Validar projeto
+      - name: Validar
         run: bun run validar
-
-      - name: Compilar para todas as plataformas
-        run: bun run build:todos
-
-      - name: Gerar checksums
-        run: cd dist && sha256sum * > SHA256SUMS
 
       - name: Extrair notas do changelog
         run: |
@@ -51,4 +47,6 @@ jobs:
         with:
           body_path: notas.md
           files: |
-            dist/*
+            ebook/ebook-termfy.pdf
+            ebook/ebook-termfy.epub
+            ebook/build.json

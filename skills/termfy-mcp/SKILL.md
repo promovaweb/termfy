@@ -67,3 +67,9 @@ documentação atualizada.
 
 Liste tools, resources e prompts adicionados ou alterados, com entrada e
 saída, e informe os testes executados.
+
+## Compatibilidade
+
+Starter kit 0.1.x. Caminhos citados: `src/mcp/servidor.ts`, `src/mcp/tools/`,
+`src/mcp/resources/`, `src/mcp/prompts.ts`, `template/tool/exemplo.ts`,
+`tests/mcp.test.ts`, `docs/mcp.md` e `src/cli/comandos/mcp.ts`.

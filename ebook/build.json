@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "version": "0.1.0",
+  "edition": "v0.1.0",
+  "generated_at": "2026-11-10T10:57:51Z",
+  "source_sha256": "62c0bd104fed0e3cec41cd4c597a20d9e398675275a2365cc3452f7bec6afcc8",
+  "sources": [
+    ".ebook/assets/logo.png",
+    ".ebook/build-ebook.mjs",
+    ".ebook/epub.css",
+    ".ebook/metadata.yaml",
+    ".ebook/pdf.css",
+    ".ebook/template.html",
+    "docs/user/00-visao-geral.md",
+    "docs/user/01-comecar.md",
+    "docs/user/02-tres-modos.md",
+    "docs/user/03-cli.md",
+    "docs/user/04-tui.md",
+    "docs/user/05-mcp.md",
+    "docs/user/06-configuracao-e-credenciais.md",
+    "docs/user/07-skills.md",
+    "docs/user/08-publicar.md",
+    "docs/user/README.md",
+    "docs/user/reading-order.txt",
+    "ebook/VERSION"
+  ],
+  "artifacts": {
+    "pdf": {
+      "file": "Termfy-Guia-do-Framework-v0.1.0.pdf",
+      "sha256": "37b31c4085e78e8888fe6b68cba97796819493c5a4a60c8798216a5fafdc738d"
+    },
+    "epub": {
+      "file": "Termfy-Guia-do-Framework-v0.1.0.epub",
+      "sha256": "f94c1b3425606c64b627e543e1d01cb68841c893486c18178665b3820a2023ec"
+    }
+  }
+}

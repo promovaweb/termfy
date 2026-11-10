@@ -1,0 +1,10 @@
+docs/user/README.md
+docs/user/00-visao-geral.md
+docs/user/01-comecar.md
+docs/user/02-tres-modos.md
+docs/user/03-cli.md
+docs/user/04-tui.md
+docs/user/05-mcp.md
+docs/user/06-configuracao-e-credenciais.md
+docs/user/07-skills.md
+docs/user/08-publicar.md

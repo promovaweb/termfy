@@ -61,3 +61,9 @@ verdes; documentação ajustada.
 
 Liste arquivos, cole o frame capturado da tela nova (texto) e informe os
 comandos de validação executados.
+
+## Compatibilidade
+
+Starter kit 0.1.x. Caminhos citados: `src/tui/index.ts`, `src/tui/tela.ts`,
+`src/tui/componentes.ts`, `src/tui/tema.ts`, `src/tui/telas/`,
+`template/tela/exemplo.ts`, `tests/tui.test.ts` e `docs/tui.md`.

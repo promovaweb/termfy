@@ -1,19 +1,4 @@
-# Dependências
 node_modules/
-
-# Artefatos de build
-dist/
-*.tsbuildinfo
-
-# Logs e temporários
+.ebook/build/
 *.log
 .DS_Store
-tmp/
-
-# Variáveis locais
-.env
-.env.*
-!.env.example
-
-# Dados locais de desenvolvimento (a pasta real fica em ~/.<bin>/)
-.termfy-home/
