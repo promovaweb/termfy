@@ -54,4 +54,5 @@ comando.
 
 O mesmo conteúdo sai pela tool MCP `skill`, pela resource `meucli://skill`
 e pelo comando `meucli skill [topico]`. Os tópicos são `cli`, `tui`, `mcp`,
-`config` e `codigos`.
+`config` e `codigos`. A mesma pasta também vira o guia do usuário em PDF e
+EPUB (`bun run ebook`), anexado a cada release do binário.

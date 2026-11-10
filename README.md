@@ -63,7 +63,8 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
-| 0.2.x | 0.1.x |
+| 0.2.1 | 0.2.x |
+| 0.2.0 | 0.1.x |
 
 As skills citam caminhos do starter kit. Quando a estrutura dele mudar, as
 skills e esta tabela mudam na mesma janela.

@@ -2,6 +2,18 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.2.1] - 2026-11-10
+
+### Alterado
+
+- Skills compatíveis com o starter kit 0.2.x, que ganhou o guia do usuário em
+  PDF e EPUB: `termfy-iniciar` manda regenerar o ebook depois do bootstrap e
+  as demais skills avançam `ebook/VERSION` e rodam `bun run ebook` sempre
+  que `docs/` muda.
+- Guia do framework 0.1.1: capítulos "Começar", "Três modos" e "Publicar"
+  descrevem o ebook do binário derivado; tabela de compatibilidade
+  atualizada.
+
 ## [0.2.0] - 2026-11-10
 
 ### Alterado
