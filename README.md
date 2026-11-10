@@ -20,8 +20,8 @@ Este repositório guarda o método. O código do binário vive no starter kit.
 
    ```bash
    bun install
-   bun run iniciar -- --nome meucli --titulo "Meu CLI" --descricao "O que ele faz." --autor "Promovaweb" --repositorio https://github.com/promovaweb/meucli
-   bun run validar
+   bun run init -- --name mycli --title "Meu CLI" --description "O que ele faz." --author "Promovaweb" --repository https://github.com/promovaweb/meucli
+   bun run validate
    ```
 
 3. Peça ao agente a próxima tarefa. Ele lê `AGENTS.md` e as skills em
@@ -63,6 +63,7 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
+| 0.3.0 | 0.3.x |
 | 0.2.1 | 0.2.x |
 | 0.2.0 | 0.1.x |
 
@@ -72,7 +73,7 @@ skills e esta tabela mudam na mesma janela.
 ## Validar
 
 ```bash
-bun run validar    # skills:validar + ebook:verify
+bun run validate    # skills:validate + ebook:verify
 ```
 
 ## Estrutura

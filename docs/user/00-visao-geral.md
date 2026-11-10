@@ -10,9 +10,9 @@ O Termfy resolve isso com um único executável que atende os três:
 
 | Público | Modo | Como entra |
 | --- | --- | --- |
-| pessoa | TUI | `meucli` sem argumentos, em terminal interativo |
-| pessoa, script, agente | CLI | `meucli <comando> [opções]`, texto ou `--json` |
-| agente de IA | MCP | `meucli mcp`, servidor Model Context Protocol via stdio |
+| pessoa | TUI | `mycli` sem argumentos, em terminal interativo |
+| pessoa, script, agente | CLI | `mycli <comando> [opções]`, texto ou `--json` |
+| agente de IA | MCP | `mycli mcp`, servidor Model Context Protocol via stdio |
 
 Os três modos leem a mesma identidade, a mesma configuração, o mesmo cofre de
 credenciais e a mesma tabela de códigos de saída. Um comando novo aparece no
@@ -50,8 +50,9 @@ skills com `bun run skills:update`.
   comandos.
 - **AES-256-GCM** para o cofre de credenciais, com chave mestra em arquivo
   0600 ou em variável de ambiente.
-- **Português do Brasil** em código, documentação e interface, com termos
-  técnicos consagrados em inglês.
+- **Inglês no código** e na interface do binário: arquivos, identificadores,
+  comentários, commands, options, keys e campos do `--json`. Documentação,
+  guia e skills em português do Brasil, com os termos técnicos em inglês.
 
 ## Para quem é
 

@@ -2,17 +2,17 @@
 
 ## O servidor embutido
 
-`meucli mcp` conecta um `McpServer` ao transporte stdio. A partir daí, stdout
+`mycli mcp` conecta um `McpServer` ao transporte stdio. A partir daí, stdout
 pertence ao JSON-RPC e qualquer diagnóstico vai para stderr. O processo só
 termina quando o cliente fecha o transporte.
 
 Configuração em um cliente:
 
 ```json
-{ "mcpServers": { "meucli": { "command": "meucli", "args": ["mcp"] } } }
+{ "mcpServers": { "mycli": { "command": "mycli", "args": ["mcp"] } } }
 ```
 
-No Claude Code: `claude mcp add meucli -- meucli mcp`. Em desenvolvimento,
+No Claude Code: `claude mcp add mycli -- mycli mcp`. Em desenvolvimento,
 sem compilar: `"command": "bun", "args": ["run", "src/main.ts", "mcp"]`.
 
 ## O que o starter kit expõe
@@ -25,16 +25,16 @@ sem compilar: `"command": "bun", "args": ["run", "src/main.ts", "mcp"]`.
 | tool | `config_list` | chaves de settings.json em vigor e o esquema |
 | tool | `config_get` | valor de uma chave |
 | tool | `credentials_status` | arquivo, origem da chave mestra, quantidade e nomes |
-| resource | `meucli://about` | identidade em JSON |
-| resource | `meucli://exit-codes` | códigos em JSON |
-| resource | `meucli://skill` | documentação completa |
-| resource | `meucli://skill/{topico}` | uma seção; o template lista os tópicos |
-| prompt | `operar` | instrui o agente a ler `skill cli` e cumprir uma tarefa pelo CLI com `--json` |
+| resource | `mycli://about` | identidade em JSON |
+| resource | `mycli://exit-codes` | códigos em JSON |
+| resource | `mycli://skill` | documentação completa |
+| resource | `mycli://skill/{topic}` | uma seção; o template lista os tópicos |
+| prompt | `operate` | instrui o agente a ler `skill cli` e cumprir uma tarefa pelo CLI com `--json` |
 
 Nenhuma tool devolve o valor de uma credencial e nenhuma grava. Escrita
 continua no CLI, onde há confirmação humana.
 
-`meucli mcp --list` enumera tudo sem abrir o transporte. O servidor mantém um
+`mycli mcp --list` enumera tudo sem abrir o transporte. O servidor mantém um
 catálogo durante o registro, então a lista e o que o cliente vê nunca
 divergem.
 
@@ -46,8 +46,8 @@ divergem.
 - Resposta com `content` em texto e `structuredContent` com o mesmo objeto.
   Falha prevista devolve `isError: true` com a ação sugerida.
 - Tools que gravam ou chamam rede dizem isso na descrição.
-- Respostas curtas. Paginação por `limite` e `cursor` quando a lista cresce.
-- Tools que consomem APIs leem o token com `obterCredencial()` internamente.
+- Respostas curtas. Paginação por `limit` e `cursor` quando a lista cresce.
+- Tools que consomem APIs leem o token com `getCredential()` internamente.
 
 ## Economia de tokens
 
@@ -60,10 +60,10 @@ passivos.
 
 ## Adicionar uma tool
 
-1. Copie `template/tool/exemplo.ts` para `src/mcp/tools/<grupo>.ts`.
+1. Copie `template/tool/example.ts` para `src/mcp/tools/<grupo>.ts`.
 2. Implemente reutilizando funções de `src/config/` e coletores do CLI.
-3. Acrescente ao `catalogo.tools` e registre em `registrarTudo`
-   (`src/mcp/servidor.ts`).
+3. Acrescente ao `catalog.tools` e registre em `registerAll`
+   (`src/mcp/server.ts`).
 4. Teste em `tests/mcp.test.ts`, que sobe o binário e conversa pelo `Client`
    do SDK, e manualmente com `npx @modelcontextprotocol/inspector bun run src/main.ts mcp`.
 5. Atualize a tabela em `docs/mcp.md`.

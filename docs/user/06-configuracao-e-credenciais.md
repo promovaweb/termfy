@@ -1,6 +1,6 @@
 # Configuração e credenciais
 
-Tudo que o binário persiste fica em `~/.meucli/`:
+Tudo que o binário persiste fica em `~/.mycli/`:
 
 | Arquivo | Conteúdo | Permissão |
 | --- | --- | --- |
@@ -8,20 +8,20 @@ Tudo que o binário persiste fica em `~/.meucli/`:
 | `credentials.json` | envelope AES-256-GCM com os segredos | 0600 |
 | `master.key` | chave mestra em hexadecimal, criada na primeira gravação | 0600 |
 
-A pasta nasce com 0700. `MEUCLI_HOME` troca a raiz, o que isola testes e CI.
+A pasta nasce com 0700. `MYCLI_HOME` troca a raiz, o que isola testes e CI.
 
 ## settings.json
 
-Chaves em notação de ponto, com esquema tipado em `ESQUEMA_SETTINGS`
-(`src/config/settings.ts`). O starter kit reconhece `saida.formato`,
-`saida.cores`, `tui.abaInicial`, `tui.tema` e `telemetria.ativa`.
+Chaves em notação de ponto, com esquema tipado em `SETTINGS_SCHEMA`
+(`src/config/settings.ts`). O starter kit reconhece `output.format`,
+`output.colors`, `tui.initialTab`, `tui.theme` e `telemetry.enabled`.
 
 ```bash
-meucli config list
-meucli config set saida.formato json
-meucli config get tui.tema
-meucli config unset telemetria.ativa
-meucli config schema
+mycli config list
+mycli config set output.format json
+mycli config get tui.theme
+mycli config unset telemetry.enabled
+mycli config schema
 ```
 
 `config set` converte o texto para o tipo declarado e recusa valores fora de
@@ -36,36 +36,36 @@ Segredos nunca entram em settings.json.
 O arquivo guarda um envelope:
 
 ```json
-{ "versao": 1, "algoritmo": "aes-256-gcm", "iv": "...", "tag": "...", "dados": "..." }
+{ "version": 1, "algorithm": "aes-256-gcm", "iv": "...", "tag": "...", "data": "..." }
 ```
 
-`dados` é o JSON `{ "nome": "valor" }` cifrado. A tag de autenticação garante
+`data` é o JSON `{ "name": "value" }` cifrado. A tag de autenticação garante
 que um arquivo editado ou cifrado com outra chave falhe ao decifrar, com
 código 4.
 
 ```bash
-meucli credentials set loja.token               # digita sem eco
-printf '%s' "$TOKEN" | meucli credentials set loja.token --stdin
-meucli credentials get loja.token               # mascarado
-meucli credentials get loja.token --reveal
-meucli credentials list
-meucli credentials status
-meucli credentials remove loja.token
+mycli credentials set shop.token               # digita sem eco
+printf '%s' "$TOKEN" | mycli credentials set shop.token --stdin
+mycli credentials get shop.token               # mascarado
+mycli credentials get shop.token --reveal
+mycli credentials list
+mycli credentials status
+mycli credentials remove shop.token
 ```
 
 O valor nunca passa por argumento de linha de comando. Em terminal, a
 digitação é oculta; em pipe, vem pela primeira linha do stdin. Assim ele não
 entra no histórico do shell nem na lista de processos.
 
-Nomes seguem `servico.finalidade` em minúsculas: `loja.token`,
-`openai.api_key`, `smtp.senha`.
+Nomes seguem `service.purpose` em minúsculas: `shop.token`,
+`openai.api_key`, `smtp.password`.
 
 ## Chave mestra
 
 32 bytes. Fonte, em ordem:
 
-1. `MEUCLI_MASTER_KEY`, 64 caracteres hexadecimais (`openssl rand -hex 32`);
-2. `~/.meucli/master.key`, gerado na primeira gravação.
+1. `MYCLI_MASTER_KEY`, 64 caracteres hexadecimais (`openssl rand -hex 32`);
+2. `~/.mycli/master.key`, gerado na primeira gravação.
 
 Com a variável definida, o arquivo é ignorado. Em CI e em servidores, use a
 variável e não grave a chave em disco.
@@ -84,13 +84,13 @@ de um gerenciador de segredos.
 ## Usar uma credencial no código
 
 ```ts
-import { obterCredencial } from "../config/credenciais.ts";
+import { getCredential } from "../config/credentials.ts";
 
-const token = obterCredencial("loja.token"); // ErroApp(4) quando não existe
+const token = getCredential("shop.token"); // AppError(4) quando não existe
 ```
 
-O valor não vai para log, erro, `dados` do `--json` sem `--reveal`, resposta
-de tool MCP nem frame da TUI. `mascarar()` mantém quatro caracteres iniciais
+O valor não vai para log, erro, `data` do `--json` sem `--reveal`, resposta
+de tool MCP nem frame da TUI. `mask()` mantém quatro caracteres iniciais
 e dois finais para exibição.
 
 A skill `termfy-config` detalha o modelo de segurança e o passo a passo para

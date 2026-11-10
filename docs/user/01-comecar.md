@@ -14,34 +14,42 @@ No GitHub, abra `promovaweb/termfy-starter-kit` e clique em **Use this
 template**. Dê o nome do seu binário ao repositório novo. Clone e instale:
 
 ```bash
-git clone https://github.com/promovaweb/meucli
-cd meucli
+git clone https://github.com/promovaweb/mycli
+cd mycli
 bun install
 ```
 
 ## Dar identidade ao binário
 
 ```bash
-bun run iniciar -- --nome meucli --titulo "Meu CLI" \
-  --descricao "Consulta e atualiza pedidos da loja." \
-  --autor "Promovaweb" --repositorio https://github.com/promovaweb/meucli
+bun run init -- --name mycli --title "My CLI" \
+  --description "Query and update shop orders." \
+  --author "Promovaweb" --repository https://github.com/promovaweb/mycli
 ```
 
 O script reescreve `package.json`, `.env.example`, `README.md`, `AGENTS.md`,
 `CHANGELOG.md` e os workflows. Ele não toca em `src/` nem em `docs/`, porque
 esses leem a identidade do manifesto em tempo de execução. O nome define a
-pasta de dados `~/.meucli/`, o prefixo das variáveis `MEUCLI_HOME` e
-`MEUCLI_MASTER_KEY` e o esquema das URIs MCP `meucli://`.
+pasta de dados `~/.mycli/`, o prefixo das variáveis `MYCLI_HOME` e
+`MYCLI_MASTER_KEY` e o esquema das URIs MCP `mycli://`.
 
 ## Conferir os três modos
 
 ```bash
-bun run dev -- --version      # meucli 0.1.0
+bun run dev -- --version      # mycli seguido da versão de package.json
 bun run dev -- --help         # comandos, opções globais e códigos de saída
 bun run dev -- about --json   # envelope JSON com identidade e runtime
 bun run dev -- mcp --list     # tools, resources e prompts registrados
 bun run dev                   # abre a TUI; q sai
 ```
+
+## Especificar antes de implementar
+
+Peça ao agente para rodar a skill `termfy-spec`. Ela entrevista você e grava
+`CLISPEC.md` na raiz: propósito, públicos, commands com arguments e options,
+forma do `--json`, screens, tools, keys de configuração e credenciais. As
+demais skills leem esse arquivo antes de implementar. Sem spec, o agente
+adivinha; com spec, ele constrói o que foi combinado.
 
 ## Atualizar as skills
 
@@ -53,7 +61,7 @@ nova:
 bun run skills:update
 ```
 
-Se a pasta sumir ou o lock corromper, `bun run skills:instalar` refaz a
+Se a pasta sumir ou o lock corromper, `bun run skills:install` refaz a
 instalação. Não edite as skills no projeto; mudanças acontecem no framework.
 
 ## Gerar o guia do usuário
@@ -63,14 +71,14 @@ bun run ebook
 ```
 
 A pasta `docs/` do starter kit, a mesma que o binário imprime por `--skill`,
-vira `ebook/<Titulo>-Guia-do-Usuario-v0.1.0.pdf` e `.epub`, com o título novo
-na capa. Faça isso depois do bootstrap e sempre que `docs/` mudar, avançando
+vira `ebook/<Title>-User-Guide-v<version>.pdf` e `.epub`, com o título novo
+na capa. Use a versão de `ebook/VERSION` no nome dos arquivos. Faça isso depois do bootstrap e sempre que `docs/` mudar, avançando
 `ebook/VERSION`.
 
 ## Validar
 
 ```bash
-bun run validar
+bun run validate
 ```
 
 O comando encadeia typecheck, `bun test`, conferência das skills instaladas,
@@ -80,12 +88,12 @@ em `dist/`.
 ## Primeiro commit
 
 Reescreva a abertura do `README.md` com o propósito do produto, registre a
-versão em `CHANGELOG.md` e faça o commit `release: meucli v0.1.0`. O capítulo
+versão em `CHANGELOG.md` e faça o commit `release: mycli v<version>`, com a versão de `package.json`. O capítulo
 [Publicar](08-publicar.md) cobre tag, release e binários.
 
 ## Pedir ajuda a um agente
 
 Dentro do repositório, um agente lê `AGENTS.md` e as skills instaladas. Peça,
-por exemplo: "adicione o comando `pedidos listar` com filtro por status". A
+por exemplo: "adicione o comando `orders list` com filtro por status". A
 skill `termfy-cli` o guia pelo registro, pelos testes e pela regeneração do
 OpenCLI.

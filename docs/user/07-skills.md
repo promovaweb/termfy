@@ -4,10 +4,11 @@ Skills são pastas com um `SKILL.md` (instruções para o agente) e uma pasta
 `references/` (material de apoio). Um agente de IA que trabalha no projeto
 lê o `AGENTS.md`, escolhe a skill compatível com a tarefa e segue os passos.
 
-## As cinco skills
+## As seis skills
 
 | Skill | Quando o agente usa |
 | --- | --- |
+| `termfy-spec` | entrevistar a pessoa e montar o `CLISPEC.md`: propósito, públicos, commands, screens, tools, configuração e credenciais |
 | `termfy-iniciar` | personalizar o starter kit para um binário novo e preparar o primeiro commit |
 | `termfy-cli` | criar ou alterar comandos, opções, saída, códigos de saída e OpenCLI |
 | `termfy-tui` | criar ou alterar telas, componentes, tema e teclas |
@@ -18,6 +19,19 @@ Cada `SKILL.md` segue a mesma forma: o que ler antes, regras que não mudam,
 passos, marcos de progresso e o que relatar ao final. As regras repetem o
 contrato do framework (toda opção documentada, segredos fora de argumentos,
 stdout só para dados), para que o agente não dependa de ter lido o guia.
+
+## O CLISPEC.md
+
+Antes de implementar, o agente precisa saber o que construir. A skill
+`termfy-spec` entrevista a pessoa em blocos curtos (identidade, propósito e
+públicos, modos, commands, TUI, MCP, configuração e credenciais, fora de
+escopo, checagens de aceite) e grava o resultado em `CLISPEC.md`, na raiz do
+projeto. Cada command entra com arguments, options, forma do `data`, exit
+codes e um exemplo; cada tool com entrada, saída e efeito; cada credencial
+com nome `service.purpose` e quem a usa. As skills `termfy-cli`,
+`termfy-tui`, `termfy-mcp` e `termfy-config` leem esse arquivo antes de tocar
+no código, e `AGENTS.md` do starter kit manda rodar `termfy-spec` quando ele
+não cobrir o pedido.
 
 ## As referências
 
@@ -33,6 +47,8 @@ stdout só para dados), para que o agente não dependa de ter lido o guia.
   resources, prompts, segurança local, Inspector e depuração).
 - `termfy-config`: modelo de segurança do cofre e declaração de chaves.
 - `termfy-iniciar`: checklist do bootstrap.
+- `termfy-spec`: template do `CLISPEC.md` e o roteiro da entrevista em nove
+  blocos.
 
 Pastas com documentação copiada de outros projetos levam um marcador
 `.terceiros`. Validadores de texto de instrução ignoram essas pastas, porque o
@@ -48,18 +64,18 @@ cada uma.
 
 ```bash
 bun run skills:update     # traz a versão mais recente do framework
-bun run skills:instalar   # reinstala do zero
+bun run skills:install   # reinstala do zero
 bun run skills:check      # confere que as cinco estão presentes e no lock
 ```
 
-`bun run validar` inclui a conferência. Skills não são editadas no projeto
+`bun run validate` inclui a conferência. Skills não são editadas no projeto
 derivado; uma mudança acontece no framework, ganha versão e chega pelo
 `update`.
 
 ## Compatibilidade
 
-As skills citam caminhos do starter kit (`src/cli/registro.ts`,
-`template/comando/exemplo.ts`). Cada versão do framework declara a faixa do
+As skills citam caminhos do starter kit (`src/cli/registry.ts`,
+`template/command/example.ts`). Cada versão do framework declara a faixa do
 starter kit que cobre no `README.md` e na seção "Compatibilidade" de cada
 `SKILL.md`. Quando o starter kit muda a estrutura, as skills são atualizadas
 na mesma janela e as duas versões sobem juntas.
@@ -72,4 +88,4 @@ arquivo, um fluxo de aprovação), vale escrever uma skill do projeto, em
 Siga a mesma forma: frontmatter com `name` e `description`, leitura prévia,
 regras, passos, marcos e saída. Texto em prosa direta, verbos no imperativo,
 sem clichês de abertura ou fechamento. Valide a estrutura com um script como
-`scripts/validar-skills.ts` do framework.
+`scripts/validate-skills.ts` do framework.

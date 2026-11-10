@@ -2,6 +2,33 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.3.0] - 2026-11-10
+
+### Adicionado
+
+- Skill `termfy-spec`: entrevista a pessoa em nove blocos e monta o
+  `CLISPEC.md` (identidade, propósito, públicos, commands, TUI, MCP,
+  configuração, credenciais, fora de escopo, checagens de aceite e
+  pendências), com template e roteiro em `references/`. As skills
+  `termfy-cli`, `termfy-tui`, `termfy-mcp` e `termfy-config` passam a ler o
+  `CLISPEC.md` antes de implementar.
+
+### Alterado
+
+- Skills e guia compatíveis com o starter kit 0.3.x, cujo código passou a
+  ser em inglês: caminhos (`src/app/manifest.ts`, `src/cli/registry.ts`,
+  `src/cli/commands/`, `src/tui/screens/`, `template/command/` e outros),
+  identificadores (`AppError`, `ExitCode`, `getCredential`, `mountTui`),
+  scripts (`bun run init`, `bun run validate`, `build:all`,
+  `skills:install`), keys (`output.format`, `tui.theme` com `night` e `day`),
+  option `--tab`, topic `exit-codes` e envelope `--json` com `command`,
+  `data` e `error`.
+- `AGENTS.md` registra a regra: código em inglês, documentação e skills em
+  português com termos técnicos em inglês.
+- Guia do framework 0.2.0, com a seção sobre o `CLISPEC.md` e a tabela de
+  compatibilidade atualizada; `scripts/validate-skills.ts` e os scripts
+  `skills:validate` e `validate` em inglês.
+
 ## [0.2.1] - 2026-11-10
 
 ### Alterado

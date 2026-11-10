@@ -11,9 +11,12 @@ template do GitHub que já traz estas skills instaladas em `.agents/skills/`.
 
 ## Idioma
 
-Português do Brasil em skills, referências escritas aqui, guia e respostas.
-Termos técnicos consagrados ficam em inglês. Documentação copiada de outros
-projetos (pastas com o marcador `.terceiros`) permanece no idioma original.
+Português do Brasil em skills, referências escritas aqui, guia e respostas,
+com os termos técnicos em inglês preservados. Todo código do starter kit e
+dos projetos derivados é em inglês (arquivos, identificadores, comentários,
+mensagens, commands, options, keys e campos do `--json`), e as skills citam
+esses nomes em inglês. Documentação copiada de outros projetos (pastas com o
+marcador `.terceiros`) permanece no idioma original.
 
 ## Ordem de leitura
 
@@ -47,10 +50,10 @@ projetos (pastas com o marcador `.terceiros`) permanece no idioma original.
 ## Validação antes de concluir
 
 ```bash
-bun run validar
+bun run validate
 ```
 
-Encadeia `skills:validar` (estrutura, frontmatter e links das skills) e
+Encadeia `skills:validate` (estrutura, frontmatter e links das skills) e
 `ebook:verify` (manifesto, hashes, XML, links e fontes do ebook). Confira
 `git status --short` ao final e preserve mudanças que já existiam.
 

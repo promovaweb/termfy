@@ -1,6 +1,6 @@
 # Skills do Termfy
 
-Cinco skills ensinam um agente a criar e evoluir um binário derivado do
+Seis skills ensinam um agente a criar e evoluir um binário derivado do
 starter kit. Cada pasta tem `SKILL.md` (instruções) e `references/`
 (material de apoio, incluindo documentação oficial copiada do OpenTUI, da
 OpenCLI, do MCP TypeScript SDK e da especificação MCP, em pastas marcadas
@@ -8,6 +8,7 @@ com `.terceiros`).
 
 | Skill | Quando usar |
 | --- | --- |
+| [`termfy-spec`](termfy-spec/SKILL.md) | entrevistar a pessoa e montar o `CLISPEC.md` antes de implementar |
 | [`termfy-iniciar`](termfy-iniciar/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
 | [`termfy-cli`](termfy-cli/SKILL.md) | comandos, opções, saída texto/JSON, códigos de saída, `--skill` e OpenCLI |
 | [`termfy-tui`](termfy-tui/SKILL.md) | telas, componentes, tema modern unix e testes por frame |
@@ -28,6 +29,6 @@ npx skills add https://github.com/promovaweb/termfy
 ```
 
 O starter kit já vem com as skills instaladas e os scripts
-`skills:instalar`, `skills:update` e `skills:check`.
+`skills:install`, `skills:update` e `skills:check`.
 
-Validação da estrutura e dos links: `bun run skills:validar`.
+Validação da estrutura e dos links: `bun run skills:validate`.

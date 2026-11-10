@@ -11,18 +11,18 @@
 3. Com argumentos: roda o CLI. `mcp` é um comando como os outros, só que não
    devolve enquanto o transporte stdio estiver aberto.
 
-Isso mantém um único executável e um único `--help`. Não existe `meucli-tui`
-nem `meucli-mcp`.
+Isso mantém um único executável e um único `--help`. Não existe `mycli-tui`
+nem `mycli-mcp`.
 
 ## O que os modos compartilham
 
 | Peça | Arquivo | Usado por |
 | --- | --- | --- |
-| identidade (nome, versão, autor, links) | `src/app/manifesto.ts` | cabeçalho da TUI, `about`, `--version`, OpenCLI, nome do servidor MCP |
-| códigos de saída | `src/app/saida.ts` | `--help`, OpenCLI, tool `exit_codes`, resource `exit-codes` |
-| erros de domínio | `src/app/erros.ts` | todos os comandos |
+| identidade (nome, versão, autor, links) | `src/app/manifest.ts` | cabeçalho da TUI, `about`, `--version`, OpenCLI, nome do servidor MCP |
+| códigos de saída | `src/app/exit-codes.ts` | `--help`, OpenCLI, tool `exit_codes`, resource `exit-codes` |
+| erros de domínio | `src/app/errors.ts` | todos os comandos |
 | preferências | `src/config/settings.ts` | tema e aba inicial da TUI, formato padrão do CLI, tools de leitura |
-| cofre | `src/config/credenciais.ts` | comandos que chamam APIs, `credentials_status` |
+| cofre | `src/config/credentials.ts` | comandos que chamam APIs, `credentials_status` |
 | documentação | `docs/` embutida via `src/skill/index.ts` | `--skill`, comando `skill`, tool e resource `skill` |
 
 ## Quando usar cada modo
@@ -35,9 +35,9 @@ CLI faz e sugere os comandos.
 papel, mensagens de erro com o código entre colchetes.
 
 **CLI em JSON** quando um script, um pipeline ou um agente lê. Envelope
-estável `{ ok, comando, dados }` em sucesso e `{ ok, comando, erro }` em
+estável `{ ok, command, data }` em sucesso e `{ ok, command, error }` em
 falha, sempre em stdout, com o código de saída do processo igual ao
-`erro.codigo`.
+`error.code`.
 
 **MCP** quando um agente conversa por protocolo. Tools para ação, resources
 para leitura passiva, prompts para orientar a conversa. A tool `skill`
@@ -46,13 +46,13 @@ binário sem sair do protocolo.
 
 ## Documentação embutida
 
-`docs/` entra no binário em tempo de build como texto. `meucli --skill`
+`docs/` entra no binário em tempo de build como texto. `mycli --skill`
 imprime tudo em Markdown; `--skill cli` imprime só a seção da CLI, com a
 referência de comandos gerada do registro no final. Um agente que recebe o
 binário compilado, sem o repositório, lê a documentação completa com um
 comando.
 
-O mesmo conteúdo sai pela tool MCP `skill`, pela resource `meucli://skill`
-e pelo comando `meucli skill [topico]`. Os tópicos são `cli`, `tui`, `mcp`,
-`config` e `codigos`. A mesma pasta também vira o guia do usuário em PDF e
+O mesmo conteúdo sai pela tool MCP `skill`, pela resource `mycli://skill`
+e pelo comando `mycli skill [topic]`. Os tópicos são `cli`, `tui`, `mcp`,
+`config` e `exit-codes`. A mesma pasta também vira o guia do usuário em PDF e
 EPUB (`bun run ebook`), anexado a cada release do binário.
