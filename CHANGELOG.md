@@ -2,6 +2,15 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.4.1] - 2026-11-10
+
+### Alterado
+
+- Skills e guia (edição 0.2.2) deixam de pedir `bun run ebook` no projeto
+  derivado: o starter kit 0.4.0 não tem pipeline de ebook. O ebook é do
+  framework; o starter kit entrega a `docs/` do próprio projeto, embutida no
+  binário pelo `--skill`.
+
 ## [0.4.0] - 2026-11-10
 
 ### Alterado

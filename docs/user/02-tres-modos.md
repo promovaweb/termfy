@@ -54,5 +54,5 @@ comando.
 
 O mesmo conteúdo sai pela tool MCP `skill`, pela resource `mycli://skill`
 e pelo comando `mycli skill [topic]`. Os tópicos são `cli`, `tui`, `mcp`,
-`config` e `exit-codes`. A mesma pasta também vira o guia do usuário em PDF e
-EPUB (`bun run ebook`), anexado a cada release do binário.
+`config` e `exit-codes`.
+

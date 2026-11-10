@@ -63,6 +63,7 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
+| 0.4.1 | 0.4.x |
 | 0.4.0 | 0.3.x |
 | 0.3.0 | 0.3.x |
 | 0.2.1 | 0.2.x |

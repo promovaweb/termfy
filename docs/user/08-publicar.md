@@ -7,13 +7,12 @@ Isso vale para o binário derivado e para o framework.
 
 1. Atualize `version` em `package.json`.
 2. Registre a mudança em `CHANGELOG.md`, no formato Keep a Changelog.
-3. Se `docs/` mudou, avance `ebook/VERSION` e rode `bun run ebook`.
-4. Rode `bun run validate`.
-5. Commit `release: mycli vX.Y.Z`, tag `vX.Y.Z`, `git push origin main --tags`.
-6. O workflow `release.yml` compila os binários para linux-x64, linux-arm64,
+3. Rode `bun run validate`.
+4. Commit `release: mycli vX.Y.Z`, tag `vX.Y.Z`, `git push origin main --tags`.
+5. O workflow `release.yml` compila os binários para linux-x64, linux-arm64,
    darwin-x64, darwin-arm64 e windows-x64, gera `SHA256SUMS` e publica a
-   GitHub Release com as notas do changelog, o PDF e o EPUB do guia.
-7. Confira a release e baixe um binário para testar `--version`.
+   GitHub Release com as notas do changelog.
+6. Confira a release e baixe um binário para testar `--version`.
 
 Uma tag publicada não se move. Correção posterior recebe nova versão.
 

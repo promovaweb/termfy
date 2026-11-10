@@ -64,17 +64,6 @@ bun run skills:update
 Se a pasta sumir ou o lock corromper, `bun run skills:install` refaz a
 instalação. Não edite as skills no projeto; mudanças acontecem no framework.
 
-## Gerar o guia do usuário
-
-```bash
-bun run ebook
-```
-
-A pasta `docs/` do starter kit, a mesma que o binário imprime por `--skill`,
-vira `ebook/<Title>-User-Guide-v<version>.pdf` e `.epub`, com o título novo
-na capa. Use a versão de `ebook/VERSION` no nome dos arquivos. Faça isso depois do bootstrap e sempre que `docs/` mudar, avançando
-`ebook/VERSION`.
-
 ## Validar
 
 ```bash
@@ -82,7 +71,7 @@ bun run validate
 ```
 
 O comando encadeia typecheck, `bun test`, conferência das skills instaladas,
-conferência de `docs/opencli.json`, conferência do ebook e o build do binário
+conferência de `docs/opencli.json` e o build do binário
 em `dist/`.
 
 ## Primeiro commit
