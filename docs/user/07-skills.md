@@ -4,10 +4,18 @@ Skills são pastas com um `SKILL.md` (instruções para o agente) e uma pasta
 `references/` (material de apoio). Um agente de IA que trabalha no projeto
 lê o `AGENTS.md`, escolhe a skill compatível com a tarefa e segue os passos.
 
-## As oito skills
+## As dezesseis skills
 
 | Skill | Quando o agente usa |
 | --- | --- |
+| `termfy-build` | a pessoa descreve a ferramenta em uma frase; orquestra as demais com dois checkpoints |
+| `termfy-api-import` | a pessoa envia a documentação de uma API; vira entradas da spec |
+| `termfy-api` | criar o client HTTP de um serviço externo, com token do cofre e testes locais |
+| `termfy-command-set` | gerar uma família `recurso verbo` com tools e screen de uma vez |
+| `termfy-test` | cobrir CLI, MCP, TUI e config com testes antes de marcar a checklist |
+| `termfy-review` | auditar uma entrega e relatar por gravidade, sem editar |
+| `termfy-release` | publicar versão, changelog, tag e release com binários |
+| `termfy-mcp-client` | configurar o binário nos clientes de agente e validar |
 | `termfy-brand` | ajustar nome, título, descrição, autor, links, créditos e paleta, em todas as superfícies do binário |
 | `termfy-spec` | entrevistar a pessoa e montar o `CLISPEC.md`: propósito, públicos, commands, screens, tools, configuração e credenciais |
 | `termfy-init` | personalizar o starter kit para um binário novo e preparar o primeiro commit |

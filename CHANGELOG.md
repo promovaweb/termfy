@@ -2,6 +2,31 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.7.0] - 2026-11-10
+
+### Adicionado
+
+- `termfy-build`: porta de entrada do vibecoding; a pessoa descreve a
+  ferramenta e a skill conduz init, brand, spec, implementação, docs e
+  release com dois checkpoints.
+- `termfy-api-import`: converte a documentação de uma API (OpenAPI,
+  Postman, página ou texto) em entradas do `CLISPEC.md`.
+- `termfy-api`: client HTTP de serviço externo com token do cofre, base URL
+  tipada, timeout, retries limitados e testes com `Bun.serve`.
+- `termfy-command-set`: família `recurso verbo` com tools MCP e screen de
+  lista de uma vez.
+- `termfy-test`: padrões de teste para CLI, MCP, TUI e config.
+- `termfy-review`: auditoria de entrega por gravidade, sem editar.
+- `termfy-release`: versão, changelog, tag imutável e release conferida.
+- `termfy-mcp-client`: configuração em Claude Code, Codex, Cursor, OpenCode
+  e Gemini CLI, com validação.
+- Guia 0.4.0: capítulo 09 reescrito com a sequência das dezesseis skills;
+  `skills/README.md` descreve cada uma.
+
+### Alterado
+
+- Compatibilidade com o starter kit 0.7.x, que ganhou `spec sync`.
+
 ## [0.6.2] - 2026-11-10
 
 ### Corrigido
