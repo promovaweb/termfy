@@ -75,7 +75,7 @@ as limitações restantes. Não imprima valores reais de credenciais.
 
 ## Compatibilidade
 
-Starter kit 0.7.x. Referências verificadas em 0.6.1. Caminhos usados incluem
+Starter kit 0.7.x. Referências verificadas em 0.7.0. Caminhos usados incluem
 `src/main.ts`, `src/cli/registry.ts`, `src/app/exit-codes.ts`,
 `src/config/paths.ts`, `src/config/settings.ts`, `src/config/credentials.ts`,
 `src/mcp/server.ts`, `src/tui/index.ts`, `src/tui/components.ts` e `tests/`.

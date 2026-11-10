@@ -2,6 +2,12 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.7.1] - 2026-11-10
+
+### Corrigido
+
+- Seção "Compatibilidade" das skills novas alinhada ao starter kit 0.7.x.
+
 ## [0.7.0] - 2026-11-10
 
 ### Adicionado

@@ -62,7 +62,7 @@ cite o que foi conferido, sem prometer ausência de falhas fora do escopo.
 
 ## Compatibilidade
 
-Starter kit 0.7.x. Referências verificadas em 0.6.1. Caminhos usados incluem
+Starter kit 0.7.x. Referências verificadas em 0.7.0. Caminhos usados incluem
 `src/cli/commands.ts`, `src/cli/registry.ts`, `src/app/exit-codes.ts`,
 `src/app/errors.ts`, `src/config/credentials.ts`, `src/mcp/server.ts`,
 `src/tui/theme.ts`, `tests/`, `docs/cli.md` e `docs/spec.md`.

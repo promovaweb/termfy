@@ -72,7 +72,7 @@ do checksum e de `--version`. Se algo falhar, informe a etapa e o log útil.
 
 ## Compatibilidade
 
-Starter kit 0.6.x, conferido na versão 0.6.1. Caminhos do projeto derivado
+Starter kit 0.7.x, conferido na versão 0.7.0. Caminhos do projeto derivado
 citados nesta skill: `package.json`, `CHANGELOG.md`, `docs/release.md`,
 `docs/opencli.json`, `.github/workflows/release.yml` e `scripts/build.ts`.
 Scripts usados: `bun run validate` e `bun run opencli`.
