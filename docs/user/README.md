@@ -16,7 +16,7 @@ kit e as instruções operacionais vivem nas skills.
 | [Configuração e credenciais](06-configuration-and-credentials.md) | Onde ficam preferências e segredos e o que a cifra protege? |
 | [Skills](07-skills.md) | Como as skills orientam um agente e como são atualizadas? |
 | [Publicar](08-publishing.md) | Como versionar, compilar e lançar o binário e o framework? |
-| [Sequência das skills](09-workflow.md) | Em que ordem usar as oito skills e o que cada uma deixa pronta para a seguinte? |
+| [Sequência das skills](09-workflow.md) | Qual é a ordem de uso das oito skills e o que cada uma deixa pronta para a seguinte? |
 
 Repositórios: [`promovaweb/termfy`](https://github.com/promovaweb/termfy)
 (framework, skills e este guia) e

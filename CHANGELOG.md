@@ -2,6 +2,13 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.6.1] - 2026-11-10
+
+### Corrigido
+
+- Índice do guia sem a construção vetada no título do capítulo 09; guia
+  0.3.1.
+
 ## [0.6.0] - 2026-11-10
 
 ### Adicionado
