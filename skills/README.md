@@ -9,7 +9,7 @@ com `.terceiros`).
 | Skill | Quando usar |
 | --- | --- |
 | [`termfy-spec`](termfy-spec/SKILL.md) | entrevistar a pessoa e montar o `CLISPEC.md` antes de implementar |
-| [`termfy-iniciar`](termfy-iniciar/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
+| [`termfy-init`](termfy-init/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
 | [`termfy-cli`](termfy-cli/SKILL.md) | comandos, opções, saída texto/JSON, códigos de saída, `--skill` e OpenCLI |
 | [`termfy-tui`](termfy-tui/SKILL.md) | telas, componentes, tema modern unix e testes por frame |
 | [`termfy-mcp`](termfy-mcp/SKILL.md) | tools, resources, prompts, stdio e testes com o Client do SDK |

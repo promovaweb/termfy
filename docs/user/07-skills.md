@@ -9,7 +9,7 @@ lê o `AGENTS.md`, escolhe a skill compatível com a tarefa e segue os passos.
 | Skill | Quando o agente usa |
 | --- | --- |
 | `termfy-spec` | entrevistar a pessoa e montar o `CLISPEC.md`: propósito, públicos, commands, screens, tools, configuração e credenciais |
-| `termfy-iniciar` | personalizar o starter kit para um binário novo e preparar o primeiro commit |
+| `termfy-init` | personalizar o starter kit para um binário novo e preparar o primeiro commit |
 | `termfy-cli` | criar ou alterar comandos, opções, saída, códigos de saída e OpenCLI |
 | `termfy-tui` | criar ou alterar telas, componentes, tema e teclas |
 | `termfy-mcp` | criar ou alterar tools, resources e prompts; testar com o Inspector |
@@ -46,7 +46,7 @@ não cobrir o pedido.
   especificação MCP (conceitos de servidor, transporte stdio, tools,
   resources, prompts, segurança local, Inspector e depuração).
 - `termfy-config`: modelo de segurança do cofre e declaração de chaves.
-- `termfy-iniciar`: checklist do bootstrap.
+- `termfy-init`: checklist do bootstrap.
 - `termfy-spec`: template do `CLISPEC.md` e o roteiro da entrevista em nove
   blocos.
 

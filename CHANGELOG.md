@@ -2,6 +2,19 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.4.0] - 2026-11-10
+
+### Alterado
+
+- Skill `termfy-iniciar` renomeada para `termfy-init`. Projetos derivados
+  precisam remover a antiga e instalar a nova (`npx skills remove
+  termfy-iniciar` e `bun run skills:install`).
+- Arquivos de `references/` renomeados para inglês: `command-contract.md`,
+  `text-json-output.md`, `interview.md`, `tool-contract.md`, `mcp-tests.md`,
+  `REFERENCES.md`, `modern-unix-design.md`, `screen-tests.md`,
+  `security-model.md` e `settings-keys.md`.
+- Guia do framework 0.2.1 com os nomes novos.
+
 ## [0.3.0] - 2026-11-10
 
 ### Adicionado
