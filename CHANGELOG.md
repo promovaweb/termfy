@@ -2,6 +2,15 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.6.2] - 2026-11-10
+
+### Corrigido
+
+- `description` da skill `termfy-brand` tinha dois-pontos sem aspas e o
+  instalador `skills` pulava a skill com erro de YAML; o texto foi
+  reescrito e `scripts/validate-skills.ts` passa a validar o frontmatter
+  como YAML.
+
 ## [0.6.1] - 2026-11-10
 
 ### Corrigido

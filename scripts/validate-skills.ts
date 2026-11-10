@@ -27,6 +27,13 @@ for (const nome of readdirSync(raiz).sort()) {
     erros.push(`${skill}: falta frontmatter`);
     continue;
   }
+  // The skills installer parses the frontmatter as YAML; a colon in an unquoted value skips the skill silently.
+  try {
+    Bun.YAML.parse(fm[1] ?? "");
+  } catch (e) {
+    erros.push(`${skill}: frontmatter YAML inválido (${e instanceof Error ? e.message : String(e)})`);
+    continue;
+  }
   const nomeFm = /^name:\s*(.+)$/m.exec(fm[1] ?? "")?.[1]?.trim();
   const desc = /^description:\s*(.+)$/m.exec(fm[1] ?? "")?.[1]?.trim();
   if (nomeFm !== nome) erros.push(`${skill}: name "${nomeFm}" difere da pasta "${nome}"`);

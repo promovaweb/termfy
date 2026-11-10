@@ -1,6 +1,6 @@
 ---
 name: termfy-brand
-description: Ajusta a identidade do binário em um só lugar: nome, título, descrição, autor, site, repositório, créditos, paleta da TUI e os dados exibidos em --version, about, na aba About, no OpenCLI e no servidor MCP.
+description: Ajusta a identidade do binário em um só lugar (nome, título, descrição, autor, site, repositório, créditos, paleta da TUI) e os dados exibidos em --version, about, na aba About, no OpenCLI e no servidor MCP.
 ---
 
 # Ajustar a identidade do binário
