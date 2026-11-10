@@ -19,24 +19,29 @@ export function createOrdersCommand(listOrders: Command): Command {
 ```
 
 O registro descreve nome, aliases, argumentos, opções, subcomandos, exemplos,
-códigos de saída e a função `run`. Quatro consumidores leem o mesmo
-objeto:
+códigos de saída e a função `run`. Entre os consumidores do mesmo
+objeto estão:
 
 | Consumidor | Arquivo | Saída |
 | --- | --- | --- |
 | parser | `src/cli/parser.ts` | argumentos e opções validados |
 | ajuda | `src/cli/help.ts` | `--help` da raiz e de cada comando |
 | OpenCLI | `src/cli/opencli.ts` | `--opencli` e `docs/opencli.json` |
+| completion | `src/cli/completion.ts` | scripts de autocompletar |
 | documentação | `src/skill/index.ts` | referência gerada no `--skill cli` |
 
-Uma opção sem `description` não existe para o parser, então ela não pode ficar
-sem documentação.
+`OptionDefinition.default` é metadado para documentação; aplique o padrão
+em `run`, pois o parser não o preenche em `ctx.options`.
+
+`OptionDefinition` exige `description` no tipo TypeScript. O parser
+resolve opções pelo nome e pelos aliases; não testa a presença da descrição.
 
 ## Argumentos e opções
 
 - `--key value` e `--key=value` são equivalentes.
 - Aliases curtos (`-h`, `-V`, `-y`) existem, mas não se agrupam.
-- `--` encerra as opções; o que vem depois é argumento.
+- `--` encerra a leitura de flags. O parser ainda pode reconhecer um
+  subcommand enquanto nenhum argumento posicional tiver sido consumido.
 - Opções globais (`--help`, `--version`, `--json`, `--skill`, `--opencli`,
   `--no-color`) valem em qualquer posição.
 - Valores fora da lista `values`, argumentos obrigatórios ausentes e opções
@@ -90,11 +95,15 @@ código e o nome entre colchetes:
 error Credential "shop.token" not found. Save it with: credentials set shop.token [4 CREDENTIALS]
 ```
 
-Em JSON, tudo vai para stdout:
+Em JSON, resultados e erros vão para stdout; progresso e avisos permanecem
+em stderr. Uma exceção gera este envelope:
 
 ```json
 { "ok": false, "command": "mycli orders list", "error": { "code": 4, "name": "CREDENTIALS", "message": "..." } }
 ```
+
+`doctor` e `spec check` devolvem seus diagnósticos em `data` e podem sair
+com 3 mantendo `ok: true` no envelope. Nesses casos, consulte `data.ok`.
 
 `output.format = json` em settings.json torna o JSON padrão. `--json` sempre
 vence.
@@ -106,7 +115,7 @@ vence.
 | 0 | `SUCCESS` | operação concluída |
 | 1 | `GENERIC_ERROR` | falha inesperada |
 | 2 | `USAGE` | argumentos ou opções inválidos; binário sem argumentos fora de TTY |
-| 3 | `CONFIG` | settings.json ausente, inválido ou chave desconhecida |
+| 3 | `CONFIG` | settings.json inválido, valor recusado, chave ausente em `config get` ou spec inconsistente |
 | 4 | `CREDENTIALS` | cofre ilegível, chave mestra ausente ou credencial não encontrada |
 | 5 | `NETWORK_OR_API` | rede ou resposta de API fora do esperado |
 | 6 | `NOT_FOUND` | recurso inexistente |
@@ -123,9 +132,13 @@ reutilizam.
 
 `<bin> doctor` confere Bun, TTY, pasta de dados, settings, master key, cofre,
 versão e plataforma, com ✓, ! ou ✗ por item, e sai com 3 quando algo falha.
-A mesma coleta está na tool MCP `doctor`. `<bin> completion bash|zsh|fish`
+O retorno é `{ checks, ok }`; cada check tem `name`, `status` e `detail`.
+Avisos não mudam a saída para 3. A mesma coleta está na tool MCP `doctor`. `<bin> completion bash|zsh|fish`
 gera o script de autocompletar a partir do registry, com subcommands,
-options e valores de enum; instale com `eval "$(<bin> completion zsh)"`.
+options e valores enumerados. Para instalar na sessão Zsh com saída
+texto, use `eval "$(mycli completion zsh)"`; no Fish,
+`mycli completion fish | source`. Se `output.format` for `json`, restaure
+`text` ou extraia `data.script` antes de carregar o script.
 `<bin> --skill reference` devolve só a referência gerada do registry, para
 agentes que já conhecem o método e querem economizar contexto.
 

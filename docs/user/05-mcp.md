@@ -19,6 +19,8 @@ sem compilar: `"command": "bun", "args": ["run", "src/main.ts", "mcp"]`.
 
 | Tipo | Nome | Função |
 | --- | --- | --- |
+| tool | `spec` | `{ frontmatter, sections, progress }` da spec embutida |
+| tool | `doctor` | `{ checks, ok }` do diagnóstico, sem gravar arquivos |
 | tool | `about` | identidade, runtime, plataforma, pasta de dados, créditos |
 | tool | `exit_codes` | tabela de códigos de saída |
 | tool | `skill` | documentação embutida, inteira ou por tópico |
@@ -32,7 +34,8 @@ sem compilar: `"command": "bun", "args": ["run", "src/main.ts", "mcp"]`.
 | prompt | `operate` | instrui o agente a ler `skill cli` e cumprir uma tarefa pelo CLI com `--json` |
 
 Nenhuma tool devolve o valor de uma credencial e nenhuma grava. Escrita
-continua no CLI, onde há confirmação humana.
+continua no CLI. A confirmação depende do comando: `credentials clear`
+pede confirmação, enquanto `config set` e `credentials rotate-key` não.
 
 `mycli mcp --list` enumera tudo sem abrir o transporte. O servidor mantém um
 catálogo durante o registro, então a lista e o que o cliente vê nunca
@@ -43,11 +46,12 @@ divergem.
 - Nome em `snake_case`, `<grupo>_<acao>`.
 - `title`, `description` que diz quando usar e o que devolve, `inputSchema`
   em Zod com `.describe()` em cada campo.
-- Resposta com `content` em texto e `structuredContent` com o mesmo objeto.
+- Para saída estruturada, use `content` em texto e `structuredContent` com
+  o mesmo objeto. A tool `skill` devolve apenas texto Markdown.
   Falha prevista devolve `isError: true` com a ação sugerida.
 - Tools que gravam ou chamam rede dizem isso na descrição.
 - Respostas curtas. Paginação por `limit` e `cursor` quando a lista cresce.
-- Tools que consomem APIs leem o token com `getCredential()` internamente.
+- Tools que consomem APIs leem o token com `getCredential(name)` internamente.
 
 ## Economia de tokens
 

@@ -20,12 +20,14 @@ Este repositório guarda o método. O código do binário vive no starter kit.
 
    ```bash
    bun install
-   bun run init -- --name mycli --title "Meu CLI" --description "O que ele faz." --author "Promovaweb" --repository https://github.com/promovaweb/meucli
-   bun run validate
+   bun run init -- --name mycli --title "My CLI" --description "Query and update shop orders." --author "Promovaweb" --repository https://github.com/promovaweb/mycli
+   bun run opencli
    ```
 
-3. Peça ao agente a próxima tarefa. Ele lê `AGENTS.md` e as skills em
-   `.agents/skills/termfy-*`.
+3. Rode `termfy-spec` com o agente para atualizar `CLISPEC.md`, inclusive
+   `bin` e `description`, que `init` não altera. Implemente as entregas
+   planejadas e rode `bun run validate` antes de publicar. O agente lê
+   `AGENTS.md` e as skills em `.agents/skills/termfy-*`.
 
 Atualize as skills no projeto derivado com `bun run skills:update`.
 
@@ -33,6 +35,7 @@ Atualize as skills no projeto derivado com `bun run skills:update`.
 
 | Skill | Quando usar |
 | --- | --- |
+| [`termfy-spec`](skills/termfy-spec/SKILL.md) | especificar o produto e revisar o contrato CLISPEC |
 | [`termfy-init`](skills/termfy-init/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
 | [`termfy-cli`](skills/termfy-cli/SKILL.md) | comandos, opções, saída texto/JSON, códigos de saída, `--skill` e OpenCLI |
 | [`termfy-tui`](skills/termfy-tui/SKILL.md) | telas, componentes, tema modern unix e testes por frame |
@@ -92,15 +95,14 @@ ficam em pastas irmãs dentro do workspace, conforme o suporte a
 [múltiplos repositórios do actions/checkout](https://github.com/actions/checkout#checkout-multiple-repos-side-by-side).
 A partir da pasta `termfy`, o comando usa `../termfy-starter-kit`.
 
-As referências a `src/spec/`, `src/cli/commands/spec.ts`, `docs/spec.md`,
-`tests/spec.test.ts` e `spec:check` têm exceções temporárias no script,
-enquanto esses recursos são implementados no starter kit. Remova as
-exceções após a publicação desses recursos.
+A checagem não usa exceções para a spec: os caminhos e scripts já existem
+no starter kit 0.5.0. Ela confere existência, não assinaturas de funções,
+campos de dados nem comportamento; revise esses pontos contra o código.
 
 ## Estrutura
 
 ```text
-skills/        cinco skills, cada uma com SKILL.md e references/
+skills/        seis skills, cada uma com SKILL.md e references/
 docs/user/     guia do framework, fonte do ebook
 ebook/         PDF, EPUB, aliases, VERSION e build.json
 .ebook/        pipeline do ebook (Pandoc + WeasyPrint), CSS e template

@@ -33,6 +33,10 @@ esses leem a identidade do manifesto em tempo de execução. O nome define a
 pasta de dados `~/.mycli/`, o prefixo das variáveis `MYCLI_HOME` e
 `MYCLI_MASTER_KEY` e o esquema das URIs MCP `mycli://`.
 
+O bootstrap não reescreve `CLISPEC.md` nem regenera `docs/opencli.json`.
+Rode `bun run opencli` e atualize `bin` e `description` da spec para
+coincidirem com `package.json` antes da validação completa.
+
 ## Conferir os três modos
 
 ```bash
@@ -71,8 +75,10 @@ bun run validate
 ```
 
 O comando encadeia typecheck, `bun test`, conferência das skills instaladas,
-conferência de `docs/opencli.json` e o build do binário
-em `dist/`.
+conferência de `docs/opencli.json`, `spec:check` e build em `dist/`.
+Uma spec com referências a funcionalidades futuras gera erros até que
+elas sejam implementadas, mesmo com `status: draft`. Termine as entregas
+antes de publicar; não trate esses erros como uma validação aprovada.
 
 ## Primeiro commit
 

@@ -24,12 +24,12 @@ duplicar texto.
 **Starter kit.** O repositório
 [`promovaweb/termfy-starter-kit`](https://github.com/promovaweb/termfy-starter-kit)
 é um template do GitHub com o esqueleto pronto: `src/` com as camadas `app`,
-`cli`, `config`, `mcp`, `tui` e `skill`; `docs/` embutida no binário; stubs em
+`cli`, `config`, `mcp`, `tui`, `skill` e `spec`; `docs/` embutida no binário; stubs em
 `template/`; testes; workflows de CI e release. Ele já vem com as skills do
 framework instaladas em `.agents/skills/`.
 
 **Framework.** O repositório
-[`promovaweb/termfy`](https://github.com/promovaweb/termfy) guarda as cinco
+[`promovaweb/termfy`](https://github.com/promovaweb/termfy) guarda as seis
 skills que ensinam um agente a criar e evoluir um projeto derivado, as
 referências que elas usam (documentação do OpenTUI, da OpenCLI, do MCP) e
 este guia, publicado em PDF e EPUB.

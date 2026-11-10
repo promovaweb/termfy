@@ -36,8 +36,10 @@ papel, mensagens de erro com o código entre colchetes.
 
 **CLI em JSON** quando um script, um pipeline ou um agente lê. Envelope
 estável `{ ok, command, data }` em sucesso e `{ ok, command, error }` em
-falha, sempre em stdout, com o código de saída do processo igual ao
-`error.code`.
+exceções, sempre em stdout. Nessas exceções, o exit code corresponde a
+`error.code`. `doctor` e `spec check` também podem devolver `data.ok: false`
+com envelope `ok: true` e saída 3. Confira o exit code além do envelope.
+`--opencli` imprime JSON próprio, sem esse envelope.
 
 **MCP** quando um agente conversa por protocolo. Tools para ação, resources
 para leitura passiva, prompts para orientar a conversa. A tool `skill`
@@ -54,5 +56,7 @@ comando.
 
 O mesmo conteúdo sai pela tool MCP `skill`, pela resource `mycli://skill`
 e pelo comando `mycli skill [topic]`. Os tópicos são `cli`, `tui`, `mcp`,
-`config` e `exit-codes`.
+`config`, `exit-codes` e `reference`. Este último devolve apenas a
+referência gerada do registro. O texto completo inclui as páginas importadas
+em `src/skill/index.ts`, não todos os arquivos presentes em `docs/`.
 

@@ -2,6 +2,8 @@
 
 ## Estrutura da tela
 
+Esquema ilustrativo da disposição, com rótulos traduzidos para leitura:
+
 ```text
 ▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.        linux-x64 • Bun 1.3.14
 ───────────────────────────────────────────────────────────────────────────────────────
@@ -65,8 +67,11 @@ Tokyo Night, e `day`), com nomes de papel: `accent`, `textDim`, `border`,
 `src/tui/components.ts` oferece `panel`, `keyValueTable`, `list`,
 `heading`, `dim`, `spacer` e `listPanel`, uma lista com rolagem
 (`ScrollBoxRenderable`), item selecionado em destaque e navegação por
-`up`, `down`, `j`, `k` e `Enter`, que devolve `select`, `selected` e `move`
-para a screen tratar em `onKey`. Todos recebem o tema. Um componente novo entra
+`up`, `down`, `j`, `k` e `Enter`. O retorno é
+`{ box, select, selected, move }`: monte `box` e encaminhe as teclas em
+`onKey`. `move(delta)` muda o destaque; `select(index)` também chama
+`onSelect`; `selected()` devolve o índice ou -1 na lista vazia.
+`spacer(renderer, height)` é a exceção que não recebe tema. Um componente novo entra
 nesse arquivo e fica disponível para todas as telas.
 
 ## Criar uma aba

@@ -2,6 +2,19 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.5.1] - 2026-11-10
+
+### Corrigido
+
+- Rodada de revisão das skills e do guia contra o starter kit 0.5.1: fluxo
+  da spec e responsabilidade por marcar a checklist (a skill de
+  implementação marca; `termfy-spec` revisa a entrada quando o escopo muda),
+  contratos JSON de `doctor` e `spec check`, `interactive` como descrição
+  sem verificação de TTY, tipos e defaults de settings, `listPanel` e
+  `spacer`, topics do `--skill`, rotação de chave e mascaramento, sequência
+  depois do `init` e contagem das seis skills. Guia 0.2.5. Teste do
+  verificador de caminhos sem as exceções temporárias.
+
 ## [0.5.0] - 2026-11-10
 
 ### Adicionado

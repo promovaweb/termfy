@@ -35,8 +35,9 @@ checklist com `{#id}` por entrega e a tag da skill responsável.
 O binário lê a própria spec: `<bin> spec show` imprime front matter, seções
 e progresso; `<bin> spec check` valida o contrato e cruza com o código
 (command, option, exit code, screen, tool e setting citados precisam
-existir; o que existe no código e falta na spec vira aviso, ou erro com
-`--strict`); `<bin> spec progress` conta a checklist. A tool MCP `spec`
+existir, inclusive em `draft`; commands, screens, tools e settings do
+código ausentes da spec geram avisos, que também fazem a checagem falhar
+com `--strict`); `<bin> spec progress` conta a checklist. A tool MCP `spec`
 devolve o mesmo conteúdo a um agente. `bun run spec:check` entra em
 `bun run validate` e ainda confere que todo `getCredential("<name>")` do
 código aparece em `credentials` da spec.
@@ -45,6 +46,10 @@ As skills `termfy-cli`, `termfy-tui`, `termfy-mcp` e `termfy-config` leem a
 entrada da spec antes de tocar no código e, ao concluir cada entrega, marcam
 o item da checklist pelo `{#id}` e avançam `updatedAt`. `AGENTS.md` do
 starter kit manda rodar `termfy-spec` quando a spec não cobrir o pedido.
+A entrevista não marca implementações como prontas. Referências futuras
+podem ficar na spec planejada, mas fazem `spec check` sair com 3 até a
+implementação. O binário compilado lê a spec embutida no build; para
+conferir uma edição local, rode pelo código-fonte com `bun run dev`.
 
 ## As referências
 
@@ -60,7 +65,7 @@ starter kit manda rodar `termfy-spec` quando a spec não cobrir o pedido.
   resources, prompts, segurança local, Inspector e depuração).
 - `termfy-config`: modelo de segurança do cofre e declaração de chaves.
 - `termfy-init`: checklist do bootstrap.
-- `termfy-spec`: template do `CLISPEC.md` e o roteiro da entrevista em nove
+- `termfy-spec`: contrato do `CLISPEC.md` com exemplo e roteiro em nove
   blocos.
 
 Pastas com documentação copiada de outros projetos levam um marcador
@@ -78,7 +83,7 @@ cada uma.
 ```bash
 bun run skills:update     # traz a versão mais recente do framework
 bun run skills:install   # reinstala do zero
-bun run skills:check      # confere que as cinco estão presentes e no lock
+bun run skills:check      # confere que as seis estão presentes e no lock
 ```
 
 `bun run validate` inclui a conferência. Skills não são editadas no projeto

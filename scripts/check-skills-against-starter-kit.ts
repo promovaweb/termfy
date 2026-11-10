@@ -2,7 +2,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 
-
 export function skillFiles(root: string): string[] {
   const files: string[] = [];
   for (const entry of readdirSync(root, { withFileTypes: true })) {
@@ -22,7 +21,6 @@ export function skillFiles(root: string): string[] {
 }
 
 function pathExists(path: string, starterRoot: string): boolean {
-
   // Template filenames and globs must match at least one existing kit path.
   const pattern = path.replace(/<[^>]+>/g, "*");
   if (pattern.includes("*")) {

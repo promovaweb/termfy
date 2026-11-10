@@ -49,13 +49,14 @@ test("reports every missing reference with its source line", () => {
   ]);
 });
 
-test("allows only the temporary spec references", () => {
+test("requires real spec files and scripts without temporary exceptions", () => {
   const root = fixture([]);
-  expect(checkReferences(
-    "src/spec/schema.ts src/spec/ src/cli/commands/spec.ts docs/spec.md tests/spec.test.ts bun run spec:check",
-    "skill.md", root, {},
-  )).toEqual([]);
-  expect(checkReferences("docs/spec-extra.md bun run spec:other", "skill.md", root, {})).toHaveLength(2);
+  const text = "src/spec/schema.ts src/spec/ src/cli/commands/spec.ts docs/spec.md tests/spec.test.ts bun run spec:check";
+  expect(checkReferences(text, "skill.md", root, {})).toHaveLength(6);
+  const complete = fixture([
+    "src/spec/schema.ts", "src/cli/commands/spec.ts", "docs/spec.md", "tests/spec.test.ts",
+  ]);
+  expect(checkReferences(text, "skill.md", complete, { "spec:check": "bun run scripts/check-spec.ts" })).toEqual([]);
 });
 
 test("scans SKILL.md and root reference Markdown without descending into third-party folders", () => {

@@ -68,10 +68,14 @@ Nomes seguem `service.purpose` em minúsculas: `shop.token`,
 2. `~/.mycli/master.key`, gerado na primeira gravação.
 
 Com a variável definida, o arquivo é ignorado. Em CI e em servidores, use a
-variável e não grave a chave em disco. Para trocar a chave,
-`<bin> credentials rotate-key` decifra o cofre com a chave atual, gera uma
-nova (ou lê `<BIN>_MASTER_KEY` com `--from-env`), regrava `master.key` com
-0600 e recifra o cofre.
+variável quando não quiser criar uma chave em disco. A rotação é uma
+exceção: `mycli credentials rotate-key` exige um cofre existente, gera
+uma chave aleatória e a grava em `master.key` com 0600. Depois, remova
+a variável antiga do shell, se estava definida.
+
+Com `--from-env`, a chave antiga vem de `master.key` e a nova vem de
+`MYCLI_MASTER_KEY`. A nova chave também é gravada em disco. Os dois modos
+recifram o cofre; não execute gravações concorrentes durante a rotação.
 
 ## O que a cifra protege
 
@@ -89,12 +93,12 @@ de um gerenciador de segredos.
 ```ts
 import { getCredential } from "../config/credentials.ts";
 
-const token = getCredential("shop.token"); // AppError(4) quando não existe
+const token = getCredential("shop.token"); // Throws AppError with code 4 when missing
 ```
 
 O valor não vai para log, erro, `data` do `--json` sem `--reveal`, resposta
-de tool MCP nem frame da TUI. `mask()` mantém quatro caracteres iniciais
-e dois finais para exibição.
+de tool MCP nem frame da TUI. `mask(value)` mascara tudo até oito caracteres;
+para valores maiores, mantém quatro iniciais e dois finais.
 
 A skill `termfy-config` detalha o modelo de segurança e o passo a passo para
 declarar chaves e consumir credenciais.

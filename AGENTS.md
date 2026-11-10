@@ -12,7 +12,8 @@ template do GitHub que já traz estas skills instaladas em `.agents/skills/`.
 ## Idioma
 
 Português do Brasil em skills, referências escritas aqui, guia e respostas,
-com os termos técnicos em inglês preservados. Todo código do starter kit e
+com os termos técnicos em inglês preservados. Scripts do framework usam
+código, comentários e mensagens em inglês. Todo código do starter kit e
 dos projetos derivados é em inglês (arquivos, identificadores, comentários,
 mensagens, commands, options, keys e campos do `--json`), e as skills citam
 esses nomes em inglês. Documentação copiada de outros projetos (pastas com o
