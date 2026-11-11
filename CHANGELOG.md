@@ -2,6 +2,20 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.8.1] - 2026-11-11
+
+### Alterado
+
+- Bun 1.4.4 como mínimo e TypeScript 7 nas dependências de desenvolvimento.
+- Guia e skills citam o Bun 1.4.4; compatível com o starter kit 0.8.2.
+- Ebook 0.8.1.
+
+### Removido
+
+- Tabela de compatibilidade entre versões do framework e do starter kit no
+  `README.md`. A faixa coberta continua na seção "Compatibilidade" de cada
+  `SKILL.md`.
+
 ## [0.8.0] - 2026-11-10
 
 ### Adicionado

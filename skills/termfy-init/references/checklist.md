@@ -2,7 +2,7 @@
 
 ## Antes
 
-- [ ] `bun --version` responde 1.3.14 ou superior.
+- [ ] `bun --version` responde 1.4.4 ou superior.
 - [ ] `git status --short` sem mudanças alheias ao trabalho.
 - [ ] Nome do executável validado: `^[a-z][a-z0-9-]{1,39}$`.
 

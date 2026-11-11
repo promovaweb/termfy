@@ -5,13 +5,13 @@
 Esquema ilustrativo da disposição, com rótulos traduzidos para leitura:
 
 ```text
-▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.        linux-x64 • Bun 1.3.14
+▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.        linux-x64 • Bun 1.4.4 
 ───────────────────────────────────────────────────────────────────────────────────────
  Overview      About
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬
  ╭─ Ambiente ──────────────────────────────╮╭─ Estado ──────────────────────────────╮
  │ Binário     mycli v<version>               ││ settings.json     • padrões           │
- │ Runtime     Bun 1.3.14                  ││ credentials.json  • vazio             │
+ │ Runtime     Bun 1.4.4                   ││ credentials.json  • vazio             │
  ╰─────────────────────────────────────────╯╰───────────────────────────────────────╯
   ←/→  aba   1-9  ir   ?  ajuda   q  sair
 ```

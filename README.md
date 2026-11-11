@@ -71,23 +71,6 @@ bun run ebook:verify    # confere sem gerar
 
 Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
-## Compatibilidade
-
-| Framework | Starter kit |
-| --- | --- |
-| 0.8.0 | 0.8.x |
-| 0.7.0 | 0.7.x |
-| 0.6.0 | 0.6.x |
-| 0.5.0 | 0.5.x |
-| 0.4.1 | 0.4.x |
-| 0.4.0 | 0.3.x |
-| 0.3.0 | 0.3.x |
-| 0.2.1 | 0.2.x |
-| 0.2.0 | 0.1.x |
-
-As skills citam caminhos do starter kit. Quando a estrutura dele mudar, as
-skills e esta tabela mudam na mesma janela.
-
 ## Validar
 
 ```bash
@@ -108,7 +91,7 @@ ficam em pastas irmãs dentro do workspace, conforme o suporte a
 A partir da pasta `termfy`, o comando usa `../termfy-starter-kit`.
 
 A checagem não usa exceções para a spec: os caminhos e scripts já existem
-no starter kit 0.5.0. Ela confere existência, não assinaturas de funções,
+no starter kit. Ela confere existência, não assinaturas de funções,
 campos de dados nem comportamento; revise esses pontos contra o código.
 
 ## Estrutura

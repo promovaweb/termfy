@@ -138,9 +138,8 @@ projetos derivados.
 ## Compatibilidade
 
 As skills citam caminhos do starter kit (`src/cli/registry.ts`,
-`template/command/example.ts`). Cada versão do framework declara a faixa do
-starter kit que cobre no `README.md` e na seção "Compatibilidade" de cada
-`SKILL.md`. Quando o starter kit muda a estrutura, as skills são atualizadas
+`template/command/example.ts`). Cada `SKILL.md` declara, na seção
+"Compatibilidade", a faixa do starter kit que cobre. Quando o starter kit muda a estrutura, as skills são atualizadas
 na mesma janela e as duas versões sobem juntas.
 
 ## Escrever uma skill nova

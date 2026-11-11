@@ -2,7 +2,7 @@
 
 ## Pré-requisitos
 
-- Bun 1.3.14 ou superior (`curl -fsSL https://bun.sh/install | bash`).
+- Bun 1.4.4 ou superior (`curl -fsSL https://bun.sh/install | bash`).
 - Git e acesso de leitura aos repositórios `promovaweb/termfy` e
   `promovaweb/termfy-starter-kit`.
 - Um terminal com cores de 24 bits para a TUI. A CLI e o MCP funcionam em
