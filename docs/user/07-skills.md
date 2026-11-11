@@ -9,7 +9,7 @@ lê o `AGENTS.md`, escolhe a skill compatível com a tarefa e segue os passos.
 | Skill | Quando o agente usa |
 | --- | --- |
 | `termfy` | a pessoa descreve a ferramenta em uma frase; orquestra as demais com dois checkpoints |
-| `termfy-api-import` | a pessoa envia a documentação de uma API; vira `changes.add` de uma spec |
+| `termfy-api-import` | a pessoa envia a documentação de uma API; vira a seção Surface de uma spec |
 | `termfy-api` | criar o client HTTP de um serviço externo, com token do cofre e testes locais |
 | `termfy-command-set` | gerar uma família `recurso verbo` com tools e screen de uma vez |
 | `termfy-test` | cobrir CLI, MCP, TUI e config com os testes de aceite da spec antes de marcar seus itens |
@@ -35,55 +35,49 @@ stdout só para dados), para que o agente não dependa de ter lido o guia.
 ## O CLISPEC.md e as specs
 
 Antes de implementar, o agente precisa saber o que construir. O contrato,
-descrito em `docs/spec.md` do starter kit, tem dois documentos.
+descrito na skill `termfy-spec`, tem dois documentos em Markdown puro, sem
+front matter. O agente cria e edita os dois à mão; o binário não os lê nem
+os embute.
 
 **`CLISPEC.md`**, um por binário, na raiz, guarda a visão macro. A skill
 `termfy-clispec` entrevista a pessoa em blocos curtos (problema, públicos e
-modos, capacidades, dados e integrações, limites) e grava identidade,
-quatro seções fixas (`Purpose`, `Audiences`, `Out of scope`, `Notes`), a
-superfície entregue no front matter (`commands`, `screens`, `mcp`,
-`settings`, `credentials` e, quando há banco, `storage.tables`, com os
-nomes do código) e o índice das specs. O
-`CLISPEC.md` não tem checklist nem `status`: ele descreve o binário, não o
-trabalho pendente.
+modos, capacidades, dados e integrações, limites) e grava a identidade, as
+seções `Purpose`, `Audiences`, `Out of scope`, `Surface`, `Specs` e
+`Notes`. `Surface` descreve em tabelas o que já foi entregue: commands,
+screens, MCP, settings, credenciais e, quando há banco, as tabelas SQLite
+em `### Storage`, com os nomes do código. `Specs` é o índice das specs com
+título e status. O `CLISPEC.md` não tem checklist: ele descreve o binário,
+não o trabalho pendente.
 
 **`specs/NNNN-slug.md`**, um por evolução, guarda o que muda. A skill
 `termfy-spec` entrevista a pessoa a cada evolução (objetivo, comportamento,
-superfície, dados e integrações, desenho do código, aceite) e grava o
-front matter `changes` (o que entra, muda ou sai da superfície) e seis
-seções: `Goal`, `Behavior` (como o binário vai funcionar), `Design` (como o
-código deve ser feito), `Tasks` (checklist com `{#id}` e a tag da skill
-responsável), `Tests` (checklist de aceite) e `Notes`.
+superfície, dados e integrações, desenho do código, aceite) e grava a linha
+`Status:` (`draft`, `in_progress`, `done` ou `archived`) e as seções
+`Goal`, `Behavior` (como o binário vai funcionar), `Design` (como o código
+deve ser feito), `Surface` (o que entra, muda ou sai da superfície),
+`Tasks` (checklist com a tag da skill responsável no fim de cada item),
+`Tests` (checklist de aceite) e `Notes`.
 
-As skills de implementação leem a spec aberta com
-`<bin> spec show <id> --json`, seguem o Behavior e o Design e editam a spec
-pelo binário, sem YAML nem checkbox à mão: `spec start` ao começar,
-`spec task add` e `spec test add` para itens novos (o `{#id}` é gerado) e
-`spec done <id> <item>` ao concluir cada entrega. Cada entrada de
-`changes` precisa aparecer pelo nome em uma tarefa ou um teste; o
-`spec check` avisa a que ficou sem. Enquanto a
-spec está aberta, o código fica à frente do `CLISPEC.md`, e
-`<bin> spec check` relata essas entradas como `pending`, sem aviso nem
-erro. Com todos os itens marcados, `<bin> spec close <id>` aplica
-`changes` ao `CLISPEC.md`, marca a spec como `done` e registra a data em
-`## Notes`.
+As skills de implementação leem a spec aberta, seguem o Behavior e o Design
+e marcam `[x]` em cada tarefa e teste concluídos. Cada item de `Surface`
+precisa aparecer em uma tarefa ou um teste. Enquanto a spec está aberta, o
+código fica à frente do `CLISPEC.md`, e isso é esperado. Com todos os itens
+marcados, o agente fecha a spec: aplica `Surface` às tabelas do
+`CLISPEC.md`, troca o status para `done` na spec e no índice e registra a
+data em `Notes`.
 
 O banco de dados é opcional. O esqueleto não tem banco, e um binário só
 ganha um quando a pessoa pede para guardar dados entre execuções. Nesse
 caso, `termfy-database` cria `~/.<bin>/data.db` com SQLite, muda o schema
-só por migrations embutidas no binário, faz backup antes de migrar e
-declara as tabelas em `storage.tables`, que `spec check` compara com o que
-as migrations criam.
+só por migrations embutidas no binário, faz backup antes de migrar e lista
+as tabelas em `Surface`, que chegam a `### Storage` quando a spec fecha.
 
-O binário lê o próprio contrato: `spec show` sem ID imprime a visão macro;
-`spec list` mostra as specs com progresso; `spec check` valida e cruza com o
-código. As tools MCP `spec` e `specs` devolvem o mesmo conteúdo a um
-agente. `bun run spec:check` entra em `bun run validate` e ainda confere
-que todo `getCredential("<name>")` do código aparece em `credentials` do
-`CLISPEC.md` ou de uma spec aberta. Um `CLISPEC.md` no contrato antigo, com
-checklist, é convertido por `spec migrate`. O binário compilado lê o
-`CLISPEC.md` embutido no build; para conferir uma edição local, rode pelo
-código-fonte com `bun run dev`.
+Nenhum script confere esses documentos. `bun run validate` cobre o código e
+a documentação embutida; a correspondência entre `CLISPEC.md`, specs e
+código é conferida pela leitura, na revisão de `termfy-review`: cada linha
+de `Surface` existe no código, cada `getCredential("<name>")` aparece nas
+credenciais, as tabelas das migrations batem com `### Storage` e o índice
+tem uma linha por arquivo de `specs/`.
 
 ## A sequência
 

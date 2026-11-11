@@ -102,10 +102,8 @@ em stderr. Uma exceção gera este envelope:
 { "ok": false, "command": "mycli orders list", "error": { "code": 4, "name": "CREDENTIALS", "message": "..." } }
 ```
 
-`doctor` e `spec check` devolvem seus diagnósticos em `data` e podem sair
-com 3 mantendo `ok: true` no envelope. Nesses casos, consulte `data.ok`.
-Em `spec check`, `data.pending` lista o que uma spec aberta explica e não
-conta como falha.
+`doctor` devolve o diagnóstico em `data` e pode sair com 3 mantendo
+`ok: true` no envelope. Nesse caso, consulte `data.ok`.
 
 `output.format = json` em settings.json torna o JSON padrão. `--json` sempre
 vence.
@@ -117,7 +115,7 @@ vence.
 | 0 | `SUCCESS` | operação concluída |
 | 1 | `GENERIC_ERROR` | falha inesperada |
 | 2 | `USAGE` | argumentos ou opções inválidos; binário sem argumentos fora de TTY |
-| 3 | `CONFIG` | settings.json inválido, valor recusado, chave ausente em `config get`, `CLISPEC.md` ou spec inconsistente |
+| 3 | `CONFIG` | settings.json inválido, valor recusado, chave ausente em `config get` |
 | 4 | `CREDENTIALS` | cofre ilegível, chave mestra ausente ou credencial não encontrada |
 | 5 | `NETWORK_OR_API` | rede ou resposta de API fora do esperado |
 | 6 | `NOT_FOUND` | recurso inexistente |

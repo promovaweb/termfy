@@ -19,7 +19,6 @@ sem compilar: `"command": "bun", "args": ["run", "src/main.ts", "mcp"]`.
 
 | Tipo | Nome | Função |
 | --- | --- | --- |
-| tool | `spec` | `{ frontmatter, sections, progress }` da spec embutida |
 | tool | `doctor` | `{ checks, ok }` do diagnóstico, sem gravar arquivos |
 | tool | `about` | identidade, runtime, plataforma, pasta de dados, créditos |
 | tool | `exit_codes` | tabela de códigos de saída |

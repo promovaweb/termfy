@@ -13,9 +13,9 @@ marcadas com `.terceiros`).
 | [`termfy`](termfy/SKILL.md) | porta de entrada do vibecoding: a pessoa descreve a ferramenta em uma frase | diagnostica o estágio, confirma identidade e públicos em uma mensagem, chama as outras skills na ordem e para só na aprovação da spec e antes da release |
 | [`termfy-init`](termfy-init/SKILL.md) | preparar o projeto e manter suas skills | conduz o setup e as verificações; no modo de manutenção, instala, atualiza ou repara somente as skills |
 | [`termfy-brand`](termfy-brand/SKILL.md) | ajustar como o binário se apresenta | altera o bloco `termfy` do `package.json`, créditos em `src/app/manifest.ts` e paleta em `src/tui/theme.ts`; confere `--version`, `about`, aba About, OpenCLI e MCP |
-| [`termfy-clispec`](termfy-clispec/SKILL.md) | descrever o binário como um todo | entrevista sobre problema, públicos, modos, capacidades e limites, grava a visão macro única em `CLISPEC.md` no contrato de `docs/spec.md` e cria as specs iniciais com `spec new` |
-| [`termfy-spec`](termfy-spec/SKILL.md) | registrar cada evolução | entrevista por evolução e grava `specs/NNNN-slug.md` com `changes`, Goal, Behavior, Design, Tasks e Tests; `spec check` valida contra o código e `spec close` incorpora a spec ao `CLISPEC.md` |
-| [`termfy-api-import`](termfy-api-import/SKILL.md) | transformar a documentação de uma API em CLI | lê OpenAPI, Postman, página ou texto, propõe commands por recurso, tools, settings e credenciais, e grava em `changes.add` de uma spec para `termfy-api` e `termfy-command-set` implementarem |
+| [`termfy-clispec`](termfy-clispec/SKILL.md) | descrever o binário como um todo | entrevista sobre problema, públicos, modos, capacidades e limites, grava a visão macro única em `CLISPEC.md`, em Markdown puro, e cria os arquivos das specs iniciais em `specs/` |
+| [`termfy-spec`](termfy-spec/SKILL.md) | registrar cada evolução | entrevista por evolução e grava à mão `specs/NNNN-slug.md` com status, Goal, Behavior, Design, Surface, Tasks e Tests; a conferência manual compara com o código e o fechamento aplica a Surface ao `CLISPEC.md` |
+| [`termfy-api-import`](termfy-api-import/SKILL.md) | transformar a documentação de uma API em CLI | lê OpenAPI, Postman, página ou texto, propõe commands por recurso, tools, settings e credenciais, e grava na seção Surface de uma spec para `termfy-api` e `termfy-command-set` implementarem |
 | [`termfy-config`](termfy-config/SKILL.md) | settings e credenciais | declara keys no `SETTINGS_SCHEMA`, consome credenciais com `getCredential()`, cuida da master key e da rotação |
 | [`termfy-api`](termfy-api/SKILL.md) | integrar um serviço externo | cria o client HTTP com timeout, retries limitados, token do cofre e base URL tipada; testa com `Bun.serve` local |
 | [`termfy-database`](termfy-database/SKILL.md) | guardar dados entre execuções, só quando a pessoa pede | SQLite em `~/.<bin>/data.db` com `bun:sqlite`, migrations embutidas no binário, repositórios usados por CLI, MCP e TUI e testes com banco em memória |
@@ -45,8 +45,9 @@ O guia do framework tem um capítulo só sobre isso
 5. `termfy-config`, `termfy-api`, `termfy-database` (só quando a spec pede
    armazenamento), `termfy-cli` ou `termfy-command-set`, `termfy-mcp` e
    `termfy-tui`, uma entrega por vez, com `termfy-test` cobrindo cada uma.
-6. `termfy-review` e `termfy-docs` ao fechar a spec, seguidas de
-   `bun run dev -- spec close <id>`.
+6. `termfy-review` e `termfy-docs` ao fechar a spec; com todos os itens
+   marcados, a `termfy-spec` aplica a Surface ao `CLISPEC.md` e marca a
+   spec como `done`.
 7. `termfy-release` e, para uso com agentes, `termfy-mcp-client`.
 
 ## Forma comum

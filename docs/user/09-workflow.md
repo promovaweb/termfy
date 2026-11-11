@@ -9,8 +9,9 @@ fora e a superfície já entregue. Cada evolução ganha uma spec em
 `specs/NNNN-slug.md`, com as mudanças na superfície, como o binário vai
 funcionar (Behavior), como o código deve ser feito (Design), as tarefas e
 os testes de aceite. A spec nasce na entrevista, recebe as marcas das
-skills de implementação e, concluída, é incorporada ao `CLISPEC.md` por
-`spec close`.
+skills de implementação e, concluída, tem a superfície copiada para o
+`CLISPEC.md` pelo agente. Os dois documentos são Markdown puro, escritos à
+mão pelo agente; o binário não os lê.
 
 ## Visão geral
 
@@ -27,7 +28,7 @@ termfy ────────────────────────�
   │   │   termfy-mcp ─► termfy-tui                                     │
   │   │   └─► termfy-test                                              │
   │   ├─► termfy-review ─► termfy-docs                                 │
-  │   └─► spec close                                                   │
+  │   └─► fechamento                                                   │
   └─► termfy-release ─► termfy-mcp-client                              │
                                                                        │
   (identidade → termfy-brand; propósito → termfy-clispec;              │
@@ -68,9 +69,8 @@ Uma vez no começo, e de novo quando o propósito, os públicos ou os limites
 mudarem. `termfy-clispec` entrevista a pessoa para entender o que o binário
 precisa fazer (problema, públicos e modos, capacidades, dados e
 integrações, limites) e grava a visão macro no `CLISPEC.md`. Com a pessoa,
-monta a lista de specs iniciais, uma por capacidade entregável, e cria cada
-uma com `spec new`. Um `CLISPEC.md` no contrato antigo é convertido por
-`spec migrate`.
+monta a lista de specs iniciais, uma por capacidade entregável, e grava
+cada uma em `specs/` como `draft`, com a linha correspondente no índice.
 
 Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope e o
 índice das specs iniciais em `draft`.
@@ -78,17 +78,17 @@ Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope e o
 ## 4. Especificar cada evolução: `termfy-spec` ou `termfy-api-import`
 
 Antes de cada evolução. `termfy-spec` entrevista em blocos curtos e escreve
-a spec: `changes` com as entradas da superfície, Goal, Behavior, Design,
+a spec: Goal, Behavior, Design, Surface com as mudanças na superfície,
 Tasks e Tests. Quando o ponto de partida é a documentação de uma API
 (OpenAPI, Postman, página ou texto), `termfy-api-import` lê a documentação,
-propõe commands por recurso, tools, settings e credenciais, e grava em
-`changes.add` de uma spec criada com `spec new`. Em ambos os casos, o
-fechamento é `bun run dev -- spec check`: erros de contrato são corrigidos
-na hora; o que a spec planeja e o código ainda não tem é o trabalho da
+propõe commands por recurso, tools, settings e credenciais, e grava tudo
+em Surface de uma spec nova. Em ambos os casos, a spec segue o contrato
+antes de sair de `draft`: Goal, Behavior e Design com texto e ao menos uma
+tarefa. O que a spec planeja e o código ainda não tem é o trabalho da
 evolução.
 
-Deixa pronto: uma tarefa com `{#id}` e tag de skill por entrega e um teste
-de aceite por resultado esperado.
+Deixa pronto: uma tarefa com a tag da skill responsável por entrega e um
+teste de aceite por resultado esperado.
 
 ## 5. Implementar, uma entrega por vez
 
@@ -106,24 +106,24 @@ Ordem para um recurso novo:
    de marcar o item.
 
 Cada skill lê a spec aberta antes de tocar no código, segue o Behavior e o
-Design e, ao concluir e testar, marca o item com
-`bun run dev -- spec done <id> <item>`. O `CLISPEC.md` não muda nessa
-etapa: o código à frente dele aparece como `pending` em `spec check`. Se o
-código ganhou algo que nenhuma spec previa, crie uma spec de adoção e rode
-`bun run dev -- spec sync --write --spec <id>`: as entradas entram no
-`changes.add` dela e chegam ao `CLISPEC.md` no `spec close`. A aba Specs da
-TUI mostra o progresso de cada spec.
+Design e, ao concluir e testar, marca `[x]` no item da spec. O
+`CLISPEC.md` não muda nessa etapa: o código fica à frente dele até o
+fechamento. Se o código ganhou algo que nenhuma spec previa, crie uma spec
+de adoção e descreva o que já existe em Surface; essas entradas chegam ao
+`CLISPEC.md` quando ela fechar.
 
-## 6. Fechar a spec: `termfy-review`, `termfy-docs` e `spec close`
+## 6. Fechar a spec: `termfy-review`, `termfy-docs` e `termfy-spec`
 
-`termfy-review` audita a entrega contra o Behavior e o Design da spec e as
+`termfy-review` audita a entrega contra o Behavior e o Design da spec,
+confere à mão o `CLISPEC.md` e as specs contra o código e confere as
 regras (segredos, stdout do MCP, exit codes, descriptions, cores, docs,
 idioma), diz se a spec pode ser fechada e devolve uma lista por gravidade,
 sem editar. Corrigido o que ela apontou, `termfy-docs` relê
 `bun run dev -- --skill` como um agente leria, corrige a cobertura apontada
 por `bun run docs:check` e regenera `docs/opencli.json`. Com todos os itens
-marcados, `bun run dev -- spec close <id>` aplica `changes` ao `CLISPEC.md`
-e marca a spec como `done`. A próxima spec da lista volta à etapa 4.
+marcados, o agente fecha a spec pelo fluxo de `termfy-spec`: aplica Surface
+às tabelas do `CLISPEC.md`, troca o status para `done` na spec e no índice
+e registra a data nas Notes do `CLISPEC.md`. A próxima spec da lista volta à etapa 4.
 
 ## 7. Publicar e ligar aos agentes: `termfy-release` e `termfy-mcp-client`
 
@@ -136,8 +136,8 @@ OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 ## Quando sair da ordem
 
 - Pedido pequeno em um command existente: `termfy-spec` escreve uma spec
-  curta com `changes.update`, uma tarefa e um teste; depois `termfy-cli`,
-  `termfy-test` e `spec close`.
+  curta com a alteração em Surface, uma tarefa e um teste; depois
+  `termfy-cli`, `termfy-test` e o fechamento da spec.
 - Só mudar texto da documentação: `termfy-docs` direto.
 - Só mudar cores ou créditos: `termfy-brand` direto.
 - Só revisar antes de um merge: `termfy-review` direto.

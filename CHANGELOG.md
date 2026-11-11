@@ -2,6 +2,23 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.9.0] - 2026-11-11
+
+### Alterado
+
+- `CLISPEC.md` e `specs/NNNN-slug.md` passam a ser Markdown puro, sem front
+  matter YAML nem `{#id}`, criados e editados pelo agente. O contrato fica
+  em `skills/termfy-spec/references/spec-contract.md`, com a seção
+  `## Surface` no lugar de `changes` e conferência manual no lugar de
+  `spec check`.
+- Todas as skills e o guia deixam de citar o command `spec`, as tools MCP
+  de spec, a aba Specs e `spec:check`. Compatível com o starter kit 0.9.0.
+- Ebook 0.9.0.
+
+### Removido
+
+- Status `blocked` das specs; a pausa fica registrada em Notes.
+
 ## [0.8.1] - 2026-11-11
 
 ### Alterado

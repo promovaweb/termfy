@@ -50,8 +50,10 @@ iniciais. Depois, a skill `termfy-spec` entrevista você a cada evolução e
 grava uma spec em `specs/`: commands com arguments e options, forma do
 `--json`, screens, tools, keys de configuração e credenciais, como o
 binário vai funcionar e como o código deve ser feito, com tarefas e testes.
-As demais skills leem a spec aberta antes de implementar e, ao final,
-`spec close` incorpora a evolução ao `CLISPEC.md`. Sem spec, o agente
+Os dois arquivos são Markdown puro, escritos pelo agente; o binário não os
+lê. As demais skills leem a spec aberta antes de implementar e marcam as
+tarefas concluídas. Ao fechar a spec, o agente copia as mudanças de
+superfície para o `CLISPEC.md`. Sem spec, o agente
 adivinha; com spec, ele constrói o que foi combinado.
 
 ## Atualizar as skills pelo agente
@@ -76,10 +78,10 @@ bun run validate
 ```
 
 O comando encadeia typecheck, `bun test`, conferência das skills instaladas,
-conferência de `docs/opencli.json`, `spec:check` e build em `dist/`.
-O que uma spec aberta planeja e o código ainda não tem não gera erro; o
-código à frente do `CLISPEC.md` aparece como `pending`. Termine as
-entregas e feche a spec com `spec close` antes de publicar.
+conferência de `docs/opencli.json`, da documentação embutida e build em
+`dist/`. Ele não lê o `CLISPEC.md` nem as specs: a conferência desses
+documentos com o código é feita pelo agente na revisão. Termine as entregas
+e feche a spec antes de publicar.
 
 ## Primeiro commit
 
