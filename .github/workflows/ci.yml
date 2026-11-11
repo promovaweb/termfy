@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configurar Bun
+        if: steps.acesso.outputs.disponivel == 'true'
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -40,13 +41,28 @@ jobs:
     defaults:
       run:
         working-directory: termfy
+    env:
+      STARTER_KIT_TOKEN: ${{ secrets.STARTER_KIT_TOKEN }}
     steps:
+      - name: Conferir acesso ao starter kit
+        id: acesso
+        working-directory: .
+        run: |
+          if [ -n "$STARTER_KIT_TOKEN" ]; then
+            echo "disponivel=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Secret STARTER_KIT_TOKEN ausente; a conferência com o starter kit privado foi pulada. Rode bun run skills:check-paths localmente."
+            echo "disponivel=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Obter framework
+        if: steps.acesso.outputs.disponivel == 'true'
         uses: actions/checkout@v4
         with:
           path: termfy
 
       - name: Obter starter kit
+        if: steps.acesso.outputs.disponivel == 'true'
         uses: actions/checkout@v4
         with:
           repository: promovaweb/termfy-starter-kit
@@ -55,12 +71,15 @@ jobs:
           persist-credentials: false
 
       - name: Configurar Bun
+        if: steps.acesso.outputs.disponivel == 'true'
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: Testar checagem de compatibilidade
+        if: steps.acesso.outputs.disponivel == 'true'
         run: bun test scripts/check-skills-against-starter-kit.test.ts
 
       - name: Conferir caminhos e scripts
+        if: steps.acesso.outputs.disponivel == 'true'
         run: bun run skills:check-paths ../termfy-starter-kit

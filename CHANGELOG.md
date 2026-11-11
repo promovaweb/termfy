@@ -2,6 +2,13 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.9.1] - 2026-11-11
+
+### Corrigido
+
+- O workflow de release chamava `bun run validar`, script inexistente, e não publicava a GitHub Release desde a 0.8.1. Agora roda `skills:validate` e `ebook:verify`.
+- O CI falhava sem o secret `STARTER_KIT_TOKEN`. A conferência com o starter kit privado passa a ser pulada com aviso quando o secret não existe.
+
 ## [0.9.0] - 2026-11-11
 
 ### Alterado

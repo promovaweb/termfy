@@ -30,7 +30,7 @@ jobs:
           sudo apt-get install -y libxml2-utils poppler-utils unzip
 
       - name: Validar
-        run: bun run validar
+        run: bun run skills:validate && bun run ebook:verify
 
       - name: Extrair notas do changelog
         run: |
