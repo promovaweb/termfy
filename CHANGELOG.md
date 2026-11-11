@@ -2,6 +2,18 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.9.3] - 2026-11-11
+
+### Corrigido
+
+- O primeiro `CLISPEC.md` de um projeto derivado passa a registrar em
+  Surface o que o esqueleto já entrega (commands, screens, tools,
+  resources, prompts e settings lidos do código). Sem isso, a conferência
+  manual acusava o esqueleto inteiro como não declarado. Ajustados
+  `termfy-clispec`, o contrato em `spec-contract.md`, o fluxo de `termfy`
+  e o capítulo 9 do guia.
+- Ebook 0.9.1.
+
 ## [0.9.2] - 2026-11-11
 
 ### Corrigido

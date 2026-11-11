@@ -72,8 +72,9 @@ integrações, limites) e grava a visão macro no `CLISPEC.md`. Com a pessoa,
 monta a lista de specs iniciais, uma por capacidade entregável, e grava
 cada uma em `specs/` como `draft`, com a linha correspondente no índice.
 
-Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope e o
-índice das specs iniciais em `draft`.
+Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope, a
+Surface do que o esqueleto já entrega e o índice das specs iniciais em
+`draft`.
 
 ## 4. Especificar cada evolução: `termfy-spec` ou `termfy-api-import`
 
