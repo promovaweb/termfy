@@ -36,7 +36,7 @@ este guia, publicado em PDF e EPUB.
 
 **Projeto derivado.** O que você cria a partir do starter kit. Ele renomeia o
 executável, acrescenta comandos, telas e tools, e recebe atualizações das
-skills com `bun run skills:update`.
+skills pela manutenção conduzida por `termfy-init`.
 
 ## Escolhas que o framework já fez
 

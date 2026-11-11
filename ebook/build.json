@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.4.0",
-  "edition": "v0.4.0",
-  "generated_at": "2026-11-10T14:03:22Z",
-  "source_sha256": "46da0d9e1d8c54920eea568e322ce52281dacf7ae6048efd87b42cc23ee6398c",
+  "version": "0.8.0",
+  "edition": "v0.8.0",
+  "generated_at": "2026-11-11T02:08:12Z",
+  "source_sha256": "683353eb691b1c4e644c12bc849c3ee73f56c52a3fb76cbb87a3ae815a60c0dc",
   "sources": [
     ".ebook/assets/logo.png",
     ".ebook/build-ebook.mjs",
@@ -27,12 +27,12 @@
   ],
   "artifacts": {
     "pdf": {
-      "file": "Termfy-Guia-do-Framework-v0.4.0.pdf",
-      "sha256": "03b18187715dda19f709eb52bfdde6099c3abe83c48014ac169a11b0cfc4b57a"
+      "file": "Termfy-Guia-do-Framework-v0.8.0.pdf",
+      "sha256": "729cf9114754dd1b7d4a24425b8903fe208e4ff12a516fa66edf34877a77b644"
     },
     "epub": {
-      "file": "Termfy-Guia-do-Framework-v0.4.0.epub",
-      "sha256": "a081eb658d8bdf3393cf9e4b7d141a049a71622800c61a34a5d0518b521f2c3f"
+      "file": "Termfy-Guia-do-Framework-v0.8.0.epub",
+      "sha256": "7e9b5d41d834808b6824d198df81f8474266a2ba8f247e235d5df8f44f0ec25e"
     }
   }
 }

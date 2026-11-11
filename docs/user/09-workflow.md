@@ -1,7 +1,16 @@
 # Sequência de uso das skills
 
-As dezesseis skills cobrem o ciclo de um binário, da frase da pessoa à
+As dezoito skills cobrem o ciclo de um binário, da frase da pessoa à
 release. A ordem importa: cada uma deixa algo que a seguinte lê.
+
+O trabalho gira em torno de dois documentos. O `CLISPEC.md`, único por
+binário, guarda a visão macro: o que o binário é, para quem, o que fica de
+fora e a superfície já entregue. Cada evolução ganha uma spec em
+`specs/NNNN-slug.md`, com as mudanças na superfície, como o binário vai
+funcionar (Behavior), como o código deve ser feito (Design), as tarefas e
+os testes de aceite. A spec nasce na entrevista, recebe as marcas das
+skills de implementação e, concluída, é incorporada ao `CLISPEC.md` por
+`spec close`.
 
 ## Visão geral
 
@@ -9,103 +18,146 @@ release. A ordem importa: cada uma deixa algo que a seguinte lê.
 frase da pessoa
       │
       ▼
-termfy-build ─────────────────────────────────────────────────────────┐
+termfy ─────────────────────────────────────────────────────────┐
   ├─► termfy-init ─► termfy-brand                                      │
-  ├─► termfy-spec  (ou termfy-api-import, quando há doc de API)        │
-  ├─► por entrega: termfy-config ─► termfy-api ─► termfy-cli /         │
-  │                termfy-command-set ─► termfy-mcp ─► termfy-tui      │
-  │                └─► termfy-test                                     │
-  ├─► termfy-review ─► termfy-docs                                     │
+  ├─► termfy-clispec  (CLISPEC.md e specs iniciais)                    │
+  ├─► por spec: termfy-spec  (ou termfy-api-import)                    │
+  │   ├─► por entrega: termfy-config ─► termfy-api ─►                  │
+  │   │   termfy-database ─► termfy-cli / termfy-command-set ─►        │
+  │   │   termfy-mcp ─► termfy-tui                                     │
+  │   │   └─► termfy-test                                              │
+  │   ├─► termfy-review ─► termfy-docs                                 │
+  │   └─► spec close                                                   │
   └─► termfy-release ─► termfy-mcp-client                              │
                                                                        │
-  (identidade mudou → termfy-brand; nova rodada → termfy-spec) ◄───────┘
+  (identidade → termfy-brand; propósito → termfy-clispec;              │
+   nova evolução → termfy-spec) ◄──────────────────────────────────────┘
 ```
 
-## 0. Entrar: `termfy-build`
+## 0. Entrar: `termfy`
 
 Quando a pessoa descreve o que quer em linguagem natural e não nomeia uma
-skill. `termfy-build` diagnostica o estágio do repositório, confirma nome,
+skill. `termfy` diagnostica o estágio do repositório, confirma nome,
 propósito e públicos em uma única mensagem e chama as demais skills na
-ordem abaixo. Para só duas vezes: na aprovação da spec e antes da release.
+ordem abaixo. Para só duas vezes: na aprovação do `CLISPEC.md` com a
+primeira spec e antes da release.
 
 ## 1. Criar: `termfy-init`
 
-Uma vez, logo depois de clicar em **Use this template**. Dá a identidade
-inicial com `bun run init`, atualiza as skills instaladas, chama
-`termfy-spec` para a primeira spec, confere `--version`, `about --json` e
-`mcp --list`, roda `bun run validate` e prepara o primeiro commit.
+No setup, logo depois de clicar em **Use this template**, peça ao agente
+para usar `termfy-init`. Ela aplica a identidade, mantém as skills e passa
+para `termfy-clispec`, confere `--version`, `about --json` e `mcp --list` e
+roda `bun run validate`.
+
+Em um projeto existente, use a mesma skill no modo de manutenção para
+instalar, atualizar ou reparar as skills, preservando a identidade, o
+`CLISPEC.md` e as specs. O agente executa os comandos internos de cada modo.
 
 ## 2. Apresentar: `termfy-brand`
 
 Quando o nome, o título, a descrição, o autor, os links, a licença, os
 créditos ou as cores mudarem. Cuida do que o `init` não toca: créditos,
-paleta, painel "Standards" da aba About, `CLISPEC.md`. Confere as
+paleta, painel "Standards" da aba About, campos de identidade do
+`CLISPEC.md`. Confere as
 superfícies: `--version`, `about`, aba About, `info` do OpenCLI e nome do
 servidor MCP.
 
-## 3. Especificar: `termfy-spec` ou `termfy-api-import`
+## 3. Descrever o binário: `termfy-clispec`
 
-Antes de cada rodada de implementação. `termfy-spec` entrevista em blocos
-curtos e grava ou revisa `CLISPEC.md`. Quando o ponto de partida é a
-documentação de uma API (OpenAPI, Postman, página ou texto),
-`termfy-api-import` lê a documentação, propõe commands por recurso, tools,
-settings e credenciais, e grava na spec. Em ambos os casos, o fechamento é
-`bun run dev -- spec check`: erros de contrato são corrigidos na hora;
-avisos sobre o que ainda não existe no código são o trabalho da rodada.
+Uma vez no começo, e de novo quando o propósito, os públicos ou os limites
+mudarem. `termfy-clispec` entrevista a pessoa para entender o que o binário
+precisa fazer (problema, públicos e modos, capacidades, dados e
+integrações, limites) e grava a visão macro no `CLISPEC.md`. Com a pessoa,
+monta a lista de specs iniciais, uma por capacidade entregável, e cria cada
+uma com `spec new`. Um `CLISPEC.md` no contrato antigo é convertido por
+`spec migrate`.
 
-Deixa pronto: um item de checklist com `{#id}` por entrega.
+Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope e o
+índice das specs iniciais em `draft`.
 
-## 4. Implementar, uma entrega por vez
+## 4. Especificar cada evolução: `termfy-spec` ou `termfy-api-import`
+
+Antes de cada evolução. `termfy-spec` entrevista em blocos curtos e escreve
+a spec: `changes` com as entradas da superfície, Goal, Behavior, Design,
+Tasks e Tests. Quando o ponto de partida é a documentação de uma API
+(OpenAPI, Postman, página ou texto), `termfy-api-import` lê a documentação,
+propõe commands por recurso, tools, settings e credenciais, e grava em
+`changes.add` de uma spec criada com `spec new`. Em ambos os casos, o
+fechamento é `bun run dev -- spec check`: erros de contrato são corrigidos
+na hora; o que a spec planeja e o código ainda não tem é o trabalho da
+evolução.
+
+Deixa pronto: uma tarefa com `{#id}` e tag de skill por entrega e um teste
+de aceite por resultado esperado.
+
+## 5. Implementar, uma entrega por vez
 
 Ordem para um recurso novo:
 
 1. `termfy-config` declara a key e a credencial que o recurso usa.
 2. `termfy-api` cria o client do serviço externo, quando houver.
-3. `termfy-cli` cria um command avulso; `termfy-command-set` gera a família
+3. `termfy-database` cria as tabelas por migration e os repositórios, só
+   quando a spec pede que o binário guarde dados entre execuções.
+4. `termfy-cli` cria um command avulso; `termfy-command-set` gera a família
    `recurso list|show|create|update|delete` de uma vez, com tools e screen.
-4. `termfy-mcp` espelha o que faltou em tools, reutilizando as funções.
-5. `termfy-tui` dá uma aba ao recurso, com `listPanel` quando for lista.
-6. `termfy-test` cobre a entrega nos três modos antes de marcar o item.
+5. `termfy-mcp` espelha o que faltou em tools, reutilizando as funções.
+6. `termfy-tui` dá uma aba ao recurso, com `listPanel` quando for lista.
+7. `termfy-test` escreve os testes de aceite da spec nos três modos antes
+   de marcar o item.
 
-Cada skill lê a entrada da spec antes de tocar no código e, ao concluir e
-testar, marca o item da checklist pelo `{#id}` e avança `updatedAt`. Se o
-código ganhou algo que a spec não previa, `bun run dev -- spec sync --write`
-traz as entradas como rascunho para revisão.
+Cada skill lê a spec aberta antes de tocar no código, segue o Behavior e o
+Design e, ao concluir e testar, marca o item com
+`bun run dev -- spec done <id> <item>`. O `CLISPEC.md` não muda nessa
+etapa: o código à frente dele aparece como `pending` em `spec check`. Se o
+código ganhou algo que nenhuma spec previa, crie uma spec de adoção e rode
+`bun run dev -- spec sync --write --spec <id>`: as entradas entram no
+`changes.add` dela e chegam ao `CLISPEC.md` no `spec close`. A aba Specs da
+TUI mostra o progresso de cada spec.
 
-## 5. Fechar a rodada: `termfy-review` e `termfy-docs`
+## 6. Fechar a spec: `termfy-review`, `termfy-docs` e `spec close`
 
-`termfy-review` audita a entrega contra a spec e as regras (segredos, stdout
-do MCP, exit codes, descriptions, cores, docs, idioma) e devolve uma lista
-por gravidade, sem editar. Corrigido o que ela apontou, `termfy-docs` relê
+`termfy-review` audita a entrega contra o Behavior e o Design da spec e as
+regras (segredos, stdout do MCP, exit codes, descriptions, cores, docs,
+idioma), diz se a spec pode ser fechada e devolve uma lista por gravidade,
+sem editar. Corrigido o que ela apontou, `termfy-docs` relê
 `bun run dev -- --skill` como um agente leria, corrige a cobertura apontada
-por `bun run docs:check` e regenera `docs/opencli.json`.
+por `bun run docs:check` e regenera `docs/opencli.json`. Com todos os itens
+marcados, `bun run dev -- spec close <id>` aplica `changes` ao `CLISPEC.md`
+e marca a spec como `done`. A próxima spec da lista volta à etapa 4.
 
-## 6. Publicar e ligar aos agentes: `termfy-release` e `termfy-mcp-client`
+## 7. Publicar e ligar aos agentes: `termfy-release` e `termfy-mcp-client`
 
-`termfy-release` avança a versão, escreve o changelog, valida, cria commit e
-tag, e confere a release com binários e checksums gerada pelo workflow.
+`termfy-release` publica depois que as specs da versão foram fechadas.
+Avança a versão, escreve o changelog (que pode citar os IDs das specs
+fechadas), valida, cria commit e tag, e confere a release com binários e checksums gerada pelo workflow.
 `termfy-mcp-client` configura o binário em Claude Code, Codex, Cursor,
 OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 
 ## Quando sair da ordem
 
-- Pedido pequeno em um command existente: `termfy-spec` só revisa a entrada
-  e o item da checklist; depois `termfy-cli` e `termfy-test`.
+- Pedido pequeno em um command existente: `termfy-spec` escreve uma spec
+  curta com `changes.update`, uma tarefa e um teste; depois `termfy-cli`,
+  `termfy-test` e `spec close`.
 - Só mudar texto da documentação: `termfy-docs` direto.
 - Só mudar cores ou créditos: `termfy-brand` direto.
 - Só revisar antes de um merge: `termfy-review` direto.
 - Atualizar as skills para uma versão nova do framework:
-  `bun run skills:update` e `bun run skills:check`; se a faixa de
+  `termfy-init` no modo de manutenção das skills; se a faixa de
   compatibilidade mudou, leia o `CHANGELOG.md` do framework antes da próxima
   rodada.
 
 ## O que cada skill não faz
 
-- `termfy-build` não implementa; orquestra.
-- `termfy-init` não escreve a spec do produto; chama `termfy-spec`.
+- `termfy` não implementa; orquestra.
+- `termfy-init` não escreve o `CLISPEC.md` do produto; passa para
+  `termfy-clispec`.
+- `termfy-clispec` não planeja tarefas; descreve o binário e cria as specs
+  iniciais.
 - `termfy-spec` e `termfy-api-import` não implementam; descrevem e conferem.
-- As skills de implementação não inventam requisitos; o que falta vai para
-  `## Notes` da spec.
+- `termfy-database` não entra sem pedido; o padrão é não guardar dados além
+  de settings e credenciais.
+- As skills de implementação não inventam requisitos nem marcam itens no
+  `CLISPEC.md`; o que falta vai para `## Notes` da spec.
 - `termfy-review` não edita; relata.
 - `termfy-docs` não documenta o framework nem as skills; documenta o
   binário.

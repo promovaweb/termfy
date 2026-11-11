@@ -8,34 +8,28 @@
 - Um terminal com cores de 24 bits para a TUI. A CLI e o MCP funcionam em
   qualquer terminal ou pipe.
 
-## Criar o repositório
+## Preparar o projeto com o agente
 
-No GitHub, abra `promovaweb/termfy-starter-kit` e clique em **Use this
-template**. Dê o nome do seu binário ao repositório novo. Clone e instale:
+Crie o repositório pelo botão **Use this template** do
+`promovaweb/termfy-starter-kit` e abra o clone no seu agente. As skills já
+acompanham o template. Para fazer o setup, escreva:
 
-```bash
-git clone https://github.com/promovaweb/mycli
-cd mycli
-bun install
-```
+> Use a skill termfy-init para preparar este projeto. O executável será
+> mycli, com o título My CLI, para consultar e atualizar pedidos da loja.
+> O autor é Promovaweb e o repositório é `https://github.com/promovaweb/mycli`.
 
-## Dar identidade ao binário
+A skill instala as dependências, aplica a identidade e confere as skills.
+Também regenera a descrição OpenCLI e encaminha a descrição do produto
+para `termfy-clispec`. O agente executa os comandos internos e mostra os
+arquivos alterados e o resultado das verificações.
 
-```bash
-bun run init -- --name mycli --title "My CLI" \
-  --description "Query and update shop orders." \
-  --author "Promovaweb" --repository https://github.com/promovaweb/mycli
-```
+O nome escolhido define a pasta `~/.mycli/`, as variáveis `MYCLI_HOME` e
+`MYCLI_MASTER_KEY` e o esquema das URIs MCP `mycli://`. Para alterar a
+identidade de um produto existente, use `termfy-brand`.
 
-O script reescreve `package.json`, `.env.example`, `README.md`, `AGENTS.md`,
-`CHANGELOG.md` e os workflows. Ele não toca em `src/` nem em `docs/`, porque
-esses leem a identidade do manifesto em tempo de execução. O nome define a
-pasta de dados `~/.mycli/`, o prefixo das variáveis `MYCLI_HOME` e
-`MYCLI_MASTER_KEY` e o esquema das URIs MCP `mycli://`.
-
-O bootstrap não reescreve `CLISPEC.md` nem regenera `docs/opencli.json`.
-Rode `bun run opencli` e atualize `bin` e `description` da spec para
-coincidirem com `package.json` antes da validação completa.
+Para desenvolver a ferramenta inteira, descreva o produto ao agente
+usando `termfy`. Ela chama `termfy-init` durante o setup e
+continua pelas skills de especificação e implementação.
 
 ## Conferir os três modos
 
@@ -49,24 +43,31 @@ bun run dev                   # abre a TUI; q sai
 
 ## Especificar antes de implementar
 
-Peça ao agente para rodar a skill `termfy-spec`. Ela entrevista você e grava
-`CLISPEC.md` na raiz: propósito, públicos, commands com arguments e options,
-forma do `--json`, screens, tools, keys de configuração e credenciais. As
-demais skills leem esse arquivo antes de implementar. Sem spec, o agente
+Peça ao agente para rodar a skill `termfy-clispec`. Ela entrevista você
+para entender o que o binário precisa fazer e grava o `CLISPEC.md` na raiz:
+propósito, públicos e modos, o que fica de fora e a lista de specs
+iniciais. Depois, a skill `termfy-spec` entrevista você a cada evolução e
+grava uma spec em `specs/`: commands com arguments e options, forma do
+`--json`, screens, tools, keys de configuração e credenciais, como o
+binário vai funcionar e como o código deve ser feito, com tarefas e testes.
+As demais skills leem a spec aberta antes de implementar e, ao final,
+`spec close` incorpora a evolução ao `CLISPEC.md`. Sem spec, o agente
 adivinha; com spec, ele constrói o que foi combinado.
 
-## Atualizar as skills
+## Atualizar as skills pelo agente
 
-O starter kit traz as skills do framework em `.agents/skills/termfy-*`,
-registradas em `skills-lock.json`. Quando o framework publicar uma versão
-nova:
+Para manter as skills de um projeto existente, escreva:
 
-```bash
-bun run skills:update
-```
+> Use termfy-init no modo de manutenção para atualizar as skills do Termfy
+> deste projeto e conferir a compatibilidade com o starter kit.
 
-Se a pasta sumir ou o lock corromper, `bun run skills:install` refaz a
-instalação. Não edite as skills no projeto; mudanças acontecem no framework.
+O agente confere a instalação, executa a atualização e verifica o lock e os
+links dos agentes. Se faltarem arquivos, a mesma skill pode reparar a
+instalação. Nesse modo, ela preserva o nome do produto, o `CLISPEC.md` e
+as specs, sem repetir o setup.
+
+As alterações nas skills são feitas no framework. O projeto derivado recebe
+as versões distribuídas pela manutenção conduzida pelo agente.
 
 ## Validar
 
@@ -76,9 +77,9 @@ bun run validate
 
 O comando encadeia typecheck, `bun test`, conferência das skills instaladas,
 conferência de `docs/opencli.json`, `spec:check` e build em `dist/`.
-Uma spec com referências a funcionalidades futuras gera erros até que
-elas sejam implementadas, mesmo com `status: draft`. Termine as entregas
-antes de publicar; não trate esses erros como uma validação aprovada.
+O que uma spec aberta planeja e o código ainda não tem não gera erro; o
+código à frente do `CLISPEC.md` aparece como `pending`. Termine as
+entregas e feche a spec com `spec close` antes de publicar.
 
 ## Primeiro commit
 

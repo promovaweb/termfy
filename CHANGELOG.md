@@ -2,6 +2,48 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.8.0] - 2026-11-10
+
+### Adicionado
+
+- `termfy-clispec`: entrevista a pessoa para entender o que o binário
+  precisa fazer e mantém o `CLISPEC.md`, a visão macro única (propósito,
+  públicos, limites, superfície entregue e índice das specs). Monta com a
+  pessoa a lista de specs iniciais.
+- `termfy-database`: SQLite somente quando a pessoa pede, com o banco em
+  `~/.<bin>/data.db`, schema gerido por migrations embutidas no binário
+  (uma por arquivo, nunca editadas depois da release), repositórios
+  compartilhados por CLI, MCP e TUI e testes com banco em memória.
+
+### Alterado
+
+- `termfy-build` passa a se chamar `termfy`: o nome do framework marca a
+  skill de entrada, a primeira a chamar em qualquer projeto.
+- As skills editam specs pelo binário: `spec start`, `spec task add`,
+  `spec test add` e `spec done`, sem YAML ou checkbox à mão.
+- `termfy-database` e `termfy-spec` declaram as tabelas em
+  `storage.tables`, conferidas contra as migrations; o stub de banco faz
+  backup antes de migrar.
+- `termfy-spec` exige que cada entrada de `changes` seja citada por uma
+  tarefa ou um teste, e adota código existente com `spec sync --spec`.
+- `termfy-spec` passa a escrever uma spec por evolução em
+  `specs/NNNN-slug.md`, em entrevista: `changes` da superfície, Behavior
+  (como o binário vai funcionar), Design (como o código deve ser feito),
+  Tasks e Tests. Referências novas: `spec-contract.md` e
+  `behavior-design.md`.
+- As skills de implementação leem a spec aberta, seguem Behavior e Design,
+  marcam os itens na spec e fecham o ciclo com `spec close`.
+- Compatibilidade com o starter kit 0.8.x (contrato CLISPEC 2.0.0).
+- `termfy-tui` ampliada com contrato de screen, layout e conteúdo, teclado e
+  formulários, operações assíncronas e ciclo de vida, gráficos, solução de
+  problemas, fontes do OpenTUI e exemplo de screen assíncrona.
+- `termfy-mcp` ampliada com stdio e ciclo de vida, resources e prompts,
+  paginação e resultados, segurança e efeitos, compatibilidade, solução de
+  problemas e exemplos de servidor, tools e testes.
+- Guia: a atualização das skills nos projetos derivados passa pela
+  manutenção conduzida por `termfy-init`, no lugar de `skills:update`.
+- Ebook 0.8.0.
+
 ## [0.7.1] - 2026-11-10
 
 ### Corrigido

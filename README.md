@@ -15,30 +15,34 @@ Este repositório guarda o método. O código do binário vive no starter kit.
 
 ## Começar um binário
 
-1. No GitHub, **Use this template** em `promovaweb/termfy-starter-kit`.
-2. No clone:
+Crie o repositório com **Use this template** em
+`promovaweb/termfy-starter-kit` e abra o clone no agente. Peça:
 
-   ```bash
-   bun install
-   bun run init -- --name mycli --title "My CLI" --description "Query and update shop orders." --author "Promovaweb" --repository https://github.com/promovaweb/mycli
-   bun run opencli
-   ```
+> Use termfy-init para fazer o setup deste projeto. O executável será
+> mycli e servirá para consultar e atualizar pedidos da loja.
 
-3. Rode `termfy-spec` com o agente para atualizar `CLISPEC.md`, inclusive
-   `bin` e `description`, que `init` não altera. Implemente as entregas
-   planejadas e rode `bun run validate` antes de publicar. O agente lê
-   `AGENTS.md` e as skills em `.agents/skills/termfy-*`.
+O agente conduz a instalação, a identidade e as verificações. Para seguir
+até a implementação do produto, use `termfy` com a descrição da
+ferramenta. Para ajustar uma identidade existente, use `termfy-brand`.
 
-Atualize as skills no projeto derivado com `bun run skills:update`.
+Peça ao agente para usar `termfy-init` no modo de manutenção das skills.
+Ela instala, atualiza ou repara as cópias do Termfy e confere o lock, os
+links dos agentes e a compatibilidade, preservando a identidade, o
+`CLISPEC.md` e as specs.
 
 ## Skills
 
 | Skill | Quando usar |
 | --- | --- |
-| [`termfy-spec`](skills/termfy-spec/SKILL.md) | especificar o produto e revisar o contrato CLISPEC |
-| [`termfy-build`](skills/termfy-build/SKILL.md) | porta de entrada do vibecoding: descreva a ferramenta e ela conduz o ciclo |
-| [`termfy-init`](skills/termfy-init/SKILL.md) | personalizar o starter kit e preparar o primeiro commit |
+| [`termfy`](skills/termfy/SKILL.md) | porta de entrada do vibecoding: descreva a ferramenta e ela conduz o ciclo |
+| [`termfy-init`](skills/termfy-init/SKILL.md) | setup do starter kit e manutenção das skills |
 | [`termfy-brand`](skills/termfy-brand/SKILL.md) | nome, título, descrição, autor, links, créditos e paleta |
+| [`termfy-clispec`](skills/termfy-clispec/SKILL.md) | entrevista sobre o que o binário precisa fazer e visão macro única em `CLISPEC.md` |
+| [`termfy-spec`](skills/termfy-spec/SKILL.md) | uma spec por evolução em `specs/`, com Behavior, Design, Tasks e Tests |
+| [`termfy-api-import`](skills/termfy-api-import/SKILL.md) | documentação de uma API convertida em `changes.add` de uma spec |
+| [`termfy-api`](skills/termfy-api/SKILL.md) | client HTTP de serviço externo com token do cofre |
+| [`termfy-database`](skills/termfy-database/SKILL.md) | SQLite em `~/.<bin>/data.db`, só quando a pessoa pede, com migrations embutidas |
+| [`termfy-command-set`](skills/termfy-command-set/SKILL.md) | família `recurso verbo` com tools e screen |
 | [`termfy-cli`](skills/termfy-cli/SKILL.md) | comandos, opções, saída texto/JSON, códigos de saída, `--skill` e OpenCLI |
 | [`termfy-tui`](skills/termfy-tui/SKILL.md) | telas, componentes, tema modern unix e testes por frame |
 | [`termfy-mcp`](skills/termfy-mcp/SKILL.md) | tools, resources, prompts, stdio e testes com o Client do SDK |
@@ -49,11 +53,9 @@ Atualize as skills no projeto derivado com `bun run skills:update`.
 | [`termfy-release`](skills/termfy-release/SKILL.md) | versão, changelog, tag e release com binários |
 | [`termfy-mcp-client`](skills/termfy-mcp-client/SKILL.md) | configuração nos clientes de agente |
 
-Instalação em qualquer projeto:
-
-```bash
-npx skills add https://github.com/promovaweb/termfy
-```
+Em outro projeto, peça ao agente para instalar as skills do repositório
+`https://github.com/promovaweb/termfy` e abrir `termfy-init`. O agente
+precisa ter acesso de leitura ao repositório privado.
 
 ## Guia e ebook
 
@@ -73,6 +75,7 @@ Requer Pandoc, WeasyPrint, ImageMagick, xmllint, poppler-utils e unzip.
 
 | Framework | Starter kit |
 | --- | --- |
+| 0.8.0 | 0.8.x |
 | 0.7.0 | 0.7.x |
 | 0.6.0 | 0.6.x |
 | 0.5.0 | 0.5.x |
@@ -111,7 +114,7 @@ campos de dados nem comportamento; revise esses pontos contra o código.
 ## Estrutura
 
 ```text
-skills/        seis skills, cada uma com SKILL.md e references/
+skills/        dezoito skills, cada uma com SKILL.md e references/
 docs/user/     guia do framework, fonte do ebook
 ebook/         PDF, EPUB, aliases, VERSION e build.json
 .ebook/        pipeline do ebook (Pandoc + WeasyPrint), CSS e template

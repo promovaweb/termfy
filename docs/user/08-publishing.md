@@ -43,7 +43,8 @@ Nenhum runtime precisa estar instalado na máquina de destino.
 3. Rode `bun run ebook` quando o guia mudou e `bun run validate`.
 4. Commit `release: Termfy vX.Y.Z`, tag e push.
 5. O workflow publica a release com o PDF e o EPUB do guia.
-6. Nos projetos derivados, `bun run skills:update` traz as skills novas.
+6. Nos projetos derivados, peça ao agente para usar `termfy-init` no modo
+   de manutenção das skills para receber a versão publicada.
 
 ## No Hub da Promovaweb
 
