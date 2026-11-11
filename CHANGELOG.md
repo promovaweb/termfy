@@ -2,6 +2,13 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.9.2] - 2026-11-11
+
+### Corrigido
+
+- O job de validação do CI pulava a instalação do Bun por uma condição que
+  pertence só ao job de compatibilidade.
+
 ## [0.9.1] - 2026-11-11
 
 ### Corrigido
