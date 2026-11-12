@@ -1,10 +1,10 @@
 # Visão geral
 
-Uma ferramenta de terminal costuma nascer para uma pessoa digitar comandos.
+Uma ferramenta de terminal costuma começar para uma pessoa digitar comandos.
 Com o tempo, um script passa a chamá-la e precisa de saída estruturada. Depois
-um agente de IA precisa operá-la e quer descobrir sozinho o que ela faz. Três
-públicos, três formas de uso, e quase sempre três bases de código que se
-desencontram.
+um agente de IA precisa operá-la e quer descobrir sozinho o que ela faz. São três
+públicos e três formas de uso. Sem um framework, viram três bases de
+código que se desencontram.
 
 O Termfy resolve isso com um único executável que atende os três:
 
@@ -29,14 +29,14 @@ duplicar texto.
 framework instaladas em `.agents/skills/`.
 
 **Framework.** O repositório
-[`promovaweb/termfy`](https://github.com/promovaweb/termfy) guarda as seis
-skills que ensinam um agente a criar e evoluir um projeto derivado, as
+[`promovaweb/termfy`](https://github.com/promovaweb/termfy) guarda as
+18 skills que ensinam um agente a criar e evoluir um projeto derivado, as
 referências que elas usam (documentação do OpenTUI, da OpenCLI, do MCP) e
 este guia, publicado em PDF e EPUB.
 
 **Projeto derivado.** O que você cria a partir do starter kit. Ele renomeia o
-executável, acrescenta comandos, telas e tools, e recebe atualizações das
-skills pela manutenção conduzida por `termfy-init`.
+executável e acrescenta comandos, telas e tools. As atualizações das
+skills chegam pela manutenção conduzida por `termfy-init`.
 
 ## Escolhas que o framework já fez
 
@@ -54,7 +54,7 @@ skills pela manutenção conduzida por `termfy-init`.
   comentários, commands, options, keys e campos do `--json`. Documentação,
   guia e skills em português do Brasil, com os termos técnicos em inglês.
 
-## Para quem é
+## Público do guia
 
 Para a equipe da Promovaweb e para alunos que constroem ferramentas internas,
 integrações com APIs e utilitários para agentes. O guia assume familiaridade

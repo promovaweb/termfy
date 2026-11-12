@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "0.9.1",
-  "edition": "v0.9.1",
-  "generated_at": "2026-11-11T10:25:02Z",
-  "source_sha256": "4cdc57983d58ef5b50737cd14e7f07db024763aecd19c3e89234bdef348b04a3",
+  "version": "0.10.0",
+  "edition": "v0.10.0",
+  "generated_at": "2026-11-12T09:35:10Z",
+  "source_sha256": "24a29ce41978a40acc0042d7715fe5de4625bc435bf3b5afce565da1329aafeb",
   "sources": [
     ".ebook/assets/logo.png",
     ".ebook/build-ebook.mjs",
@@ -21,18 +21,41 @@
     "docs/user/07-skills.md",
     "docs/user/08-publishing.md",
     "docs/user/09-workflow.md",
+    "docs/user/10-describe-and-specify.md",
+    "docs/user/11-integrate-an-api.md",
+    "docs/user/12-store-data.md",
+    "docs/user/13-test-review-release.md",
+    "docs/user/14-glossary-and-troubleshooting.md",
     "docs/user/README.md",
     "docs/user/reading-order.txt",
+    "docs/user/skills/termfy-api-import.md",
+    "docs/user/skills/termfy-api.md",
+    "docs/user/skills/termfy-brand.md",
+    "docs/user/skills/termfy-cli.md",
+    "docs/user/skills/termfy-clispec.md",
+    "docs/user/skills/termfy-command-set.md",
+    "docs/user/skills/termfy-config.md",
+    "docs/user/skills/termfy-database.md",
+    "docs/user/skills/termfy-docs.md",
+    "docs/user/skills/termfy-init.md",
+    "docs/user/skills/termfy-mcp-client.md",
+    "docs/user/skills/termfy-mcp.md",
+    "docs/user/skills/termfy-release.md",
+    "docs/user/skills/termfy-review.md",
+    "docs/user/skills/termfy-spec.md",
+    "docs/user/skills/termfy-test.md",
+    "docs/user/skills/termfy-tui.md",
+    "docs/user/skills/termfy.md",
     "ebook/VERSION"
   ],
   "artifacts": {
     "pdf": {
-      "file": "Termfy-Guia-do-Framework-v0.9.1.pdf",
-      "sha256": "3d856a469095341bca8a4fb56247de6724bf312e1fcbfecd45e84f1ca543635a"
+      "file": "Termfy-Guia-do-Framework-v0.10.0.pdf",
+      "sha256": "0a582744b0fc9ec4a6eeabfb1d51b266b95e85abee056acd65b9dcb49a10855a"
     },
     "epub": {
-      "file": "Termfy-Guia-do-Framework-v0.9.1.epub",
-      "sha256": "b1e0f9894671fea83fc4273ec620c5e88fd23b15c73a3c8dda241ff37c15ecab"
+      "file": "Termfy-Guia-do-Framework-v0.10.0.epub",
+      "sha256": "60b31974a9785d4af4dc8633157a79011d6fc3f62b8210636cb8f0346ae11669"
     }
   }
 }

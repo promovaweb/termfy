@@ -37,8 +37,8 @@ continua no CLI. A confirmação depende do comando: `credentials clear`
 pede confirmação, enquanto `config set` e `credentials rotate-key` não.
 
 `mycli mcp --list` enumera tudo sem abrir o transporte. O servidor mantém um
-catálogo durante o registro, então a lista e o que o cliente vê nunca
-divergem.
+catálogo durante o registro, então a lista e o que o cliente vê são
+iguais.
 
 ## Regras para tools
 
@@ -68,7 +68,7 @@ passivos.
 3. Acrescente ao `catalog.tools` e registre em `registerAll`
    (`src/mcp/server.ts`).
 4. Teste em `tests/mcp.test.ts`, que sobe o binário e conversa pelo `Client`
-   do SDK, e manualmente com `npx @modelcontextprotocol/inspector bun run src/main.ts mcp`.
+   do SDK. Para testar à mão, use `npx @modelcontextprotocol/inspector bun run src/main.ts mcp`.
 5. Atualize a tabela em `docs/mcp.md`.
 
 A skill `termfy-mcp` traz o contrato de tool, o guia de testes e a

@@ -79,11 +79,11 @@ export function createListOrders(fetchOrders: FetchOrders): Command {
 
 Os exemplos usam imports relativos a `src/cli/commands/`. Ao reuni-los
 em `src/cli/commands/orders.ts`, mantenha cada import uma só vez. Implemente
-`fetchOrders` no projeto, lançando `error.network()` quando a API falhar,
-e registre `createOrdersCommand(createListOrders(fetchOrders))`.
+`fetchOrders` no projeto, lançando `error.network()` quando a API falhar.
+Depois, registre `createOrdersCommand(createListOrders(fetchOrders))`.
 
 `data` é o que sai em `--json`; `text` é o que sai para pessoas. A camada
-de entrada decide qual usar. O comando nunca chama `process.exit` nem monta
+de entrada decide qual usar. O comando não chama `process.exit` nem monta
 JSON à mão: ele devolve dados e lança `AppError` quando algo previsto falha.
 
 ## Saída em texto e em JSON
@@ -105,8 +105,8 @@ em stderr. Uma exceção gera este envelope:
 `doctor` devolve o diagnóstico em `data` e pode sair com 3 mantendo
 `ok: true` no envelope. Nesse caso, consulte `data.ok`.
 
-`output.format = json` em settings.json torna o JSON padrão. `--json` sempre
-vence.
+`output.format = json` em settings.json torna o JSON padrão. `--json` tem
+prioridade sobre essa key.
 
 ## Códigos de saída
 
@@ -131,7 +131,7 @@ reutilizam.
 ## Commands de apoio
 
 `<bin> doctor` confere Bun, TTY, pasta de dados, settings, master key, cofre,
-versão e plataforma, com ✓, ! ou ✗ por item, e sai com 3 quando algo falha.
+versão e plataforma, com ✓, ! ou ✗ por item. Sai com 3 quando algo falha.
 O retorno é `{ checks, ok }`; cada check tem `name`, `status` e `detail`.
 Avisos não mudam a saída para 3. A mesma coleta está na tool MCP `doctor`. `<bin> completion bash|zsh|fish`
 gera o script de autocompletar a partir do registry, com subcommands,

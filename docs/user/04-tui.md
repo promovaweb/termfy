@@ -52,15 +52,15 @@ branco.
 - Rótulos à esquerda, apagados, alinhados pela maior chave; valores à direita
   em cor plena. Títulos de seção em negrito.
 - Uma cor de acento para o que está ativo; uma secundária para links e
-  origens externas. Verde, âmbar e vermelho só para estado, sempre com texto
-  ao lado.
+  origens externas. Verde, âmbar e vermelho só para estado, com texto ao
+  lado.
 - Barra de status com teclas em blocos invertidos.
 - Nada pisca, nada rola sozinho. A tela atualiza quando há dado novo.
 - Glifos de uma célula. Emoji fora, porque a largura varia por terminal.
 
 As cores vivem em `src/tui/theme.ts`, em duas paletas (`night`, derivada do
-Tokyo Night, e `day`), com nomes de papel: `accent`, `textDim`, `border`,
-`ok`, `warn`, `error`. Uma tela nunca escreve um hexadecimal.
+Tokyo Night; `day`, clara), com nomes de papel: `accent`, `textDim`, `border`,
+`ok`, `warn`, `error`. Uma tela não escreve hexadecimal: usa os nomes de papel.
 
 ## Componentes
 
@@ -87,7 +87,7 @@ nesse arquivo e fica disponível para todas as telas.
 ## Testar sem terminal
 
 O OpenTUI tem um renderer de teste. `tests/tui.test.ts` monta a interface em
-memória, pressiona teclas e confere o frame como texto:
+memória, envia teclas e confere o frame como texto:
 
 ```ts
 import { expect } from "bun:test";

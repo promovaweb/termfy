@@ -8,7 +8,7 @@ Tudo que o binário persiste fica em `~/.mycli/`:
 | `credentials.json` | envelope AES-256-GCM com os segredos | 0600 |
 | `master.key` | chave mestra em hexadecimal, criada na primeira gravação | 0600 |
 
-A pasta nasce com 0700. `MYCLI_HOME` troca a raiz, o que isola testes e CI.
+A pasta é criada com 0700. `MYCLI_HOME` troca a raiz, o que isola testes e CI.
 
 ## settings.json
 
@@ -29,7 +29,7 @@ um `enum` com código 3. Chaves fora do esquema são aceitas como texto, para
 dar espaço a extensões; para ganhar tipo, padrão e documentação, a chave
 entra no esquema.
 
-Segredos nunca entram em settings.json.
+Segredos ficam fora do settings.json: o lugar deles é o cofre.
 
 ## credentials.json
 
@@ -53,7 +53,7 @@ mycli credentials status
 mycli credentials remove shop.token
 ```
 
-O valor nunca passa por argumento de linha de comando. Em terminal, a
+O valor não passa por argumento de linha de comando. Em terminal, a
 digitação é oculta; em pipe, vem pela primeira linha do stdin. Assim ele não
 entra no histórico do shell nem na lista de processos.
 
@@ -83,8 +83,8 @@ Protege contra leitura casual do arquivo, cópia em backup ou sincronização de
 pasta e varredura do disco por ferramentas que procuram tokens em texto
 claro.
 
-Não protege contra outro processo da mesma conta, que lê `master.key` e
-decifra, nem contra quem tem root, nem contra a memória do processo enquanto
+Não protege contra outro processo do mesmo usuário do sistema, que lê
+`master.key` e decifra, nem contra um usuário root, nem contra a memória do processo enquanto
 o valor está em uso. Para esses casos, injete a chave por variável a partir
 de um gerenciador de segredos.
 

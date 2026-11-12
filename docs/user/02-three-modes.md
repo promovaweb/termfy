@@ -36,7 +36,7 @@ papel, mensagens de erro com o código entre colchetes.
 
 **CLI em JSON** quando um script, um pipeline ou um agente lê. Envelope
 estável `{ ok, command, data }` em sucesso e `{ ok, command, error }` em
-exceções, sempre em stdout. Nessas exceções, o exit code corresponde a
+exceções, em stdout nos dois casos. Nessas exceções, o exit code corresponde a
 `error.code`. `doctor` também pode devolver `data.ok: false` com envelope `ok: true` e
 saída 3. Confira o exit code além do envelope.
 `--opencli` imprime JSON próprio, sem esse envelope.
@@ -59,4 +59,3 @@ e pelo comando `mycli skill [topic]`. Os tópicos são `cli`, `tui`, `mcp`,
 `config`, `exit-codes` e `reference`. Este último devolve apenas a
 referência gerada do registro. O texto completo inclui as páginas importadas
 em `src/skill/index.ts`, não todos os arquivos presentes em `docs/`.
-

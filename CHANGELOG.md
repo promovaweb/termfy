@@ -2,6 +2,33 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.10.0] - 2026-11-12
+
+### Adicionado
+
+- Guia reescrito em três partes, com exemplos no texto. Fundamentos traz a
+  visão geral, o começo com saídas reais do starter kit, os três modos, as
+  skills e a sequência. Construir cobre especificar (entrevista,
+  `CLISPEC.md`, spec e ciclo), integrar uma API com o exemplo da uazapi
+  (admintoken no cofre, instância por `--instance`), guardar dados em
+  SQLite e testar, revisar e publicar. Referência traz CLI, TUI, MCP,
+  configuração, publicação e o novo glossário com problemas comuns.
+- Uma página por skill em `docs/user/skills/`: quando usar, como pedir, o
+  que faz, exemplo, regras, entrega e próxima skill.
+- Ebook 0.10.0.
+
+### Corrigido
+
+- Visão geral dizia "seis skills"; são 18.
+- `08-publishing.md` mandava `git push origin main --tags`; agora envia só
+  a tag da versão, como a `termfy-release` exige.
+- `termfy-release`: categorias do changelog em português (Adicionado,
+  Alterado, Corrigido), como no starter kit.
+- `termfy-database`: nome do arquivo de migration em kebab-case e `name`
+  em snake_case, como no stub.
+- `termfy-tui`: OpenTUI 0.8.4 e contrato da screen a partir da v0.9.0.
+- `termfy-mcp-client`: compatibilidade a partir da v0.9.0.
+
 ## [0.9.3] - 2026-11-11
 
 ### Corrigido

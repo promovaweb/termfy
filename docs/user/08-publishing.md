@@ -8,7 +8,8 @@ Isso vale para o binário derivado e para o framework.
 1. Atualize `version` em `package.json`.
 2. Registre a mudança em `CHANGELOG.md`, no formato Keep a Changelog.
 3. Rode `bun run validate`.
-4. Commit `release: mycli vX.Y.Z`, tag `vX.Y.Z`, `git push origin main --tags`.
+4. Commit `release: mycli vX.Y.Z` e tag `vX.Y.Z`. Envie a `main` e só
+   essa tag: `git push origin main vX.Y.Z`.
 5. O workflow `release.yml` compila os binários para linux-x64, linux-arm64,
    darwin-x64, darwin-arm64 e windows-x64, gera `SHA256SUMS` e publica a
    GitHub Release com as notas do changelog.

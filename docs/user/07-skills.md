@@ -61,12 +61,12 @@ deve ser feito), `Surface` (o que entra, muda ou sai da superfície),
 As skills de implementação leem a spec aberta, seguem o Behavior e o Design
 e marcam `[x]` em cada tarefa e teste concluídos. Cada item de `Surface`
 precisa aparecer em uma tarefa ou um teste. Enquanto a spec está aberta, o
-código fica à frente do `CLISPEC.md`, e isso é esperado. Com todos os itens
+código fica à frente do `CLISPEC.md`. Isso é esperado. Com todos os itens
 marcados, o agente fecha a spec: aplica `Surface` às tabelas do
 `CLISPEC.md`, troca o status para `done` na spec e no índice e registra a
 data em `Notes`.
 
-O banco de dados é opcional. O esqueleto não tem banco, e um binário só
+O banco de dados é opcional. O esqueleto não tem banco. Um binário só
 ganha um quando a pessoa pede para guardar dados entre execuções. Nesse
 caso, `termfy-database` cria `~/.<bin>/data.db` com SQLite, muda o schema
 só por migrations embutidas no binário, faz backup antes de migrar e lista
@@ -98,8 +98,8 @@ pronto para a seguinte, está no capítulo
   especificação MCP (conceitos de servidor, transporte stdio, tools,
   resources, prompts, segurança local, Inspector e depuração).
 - `termfy-config`: modelo de segurança do cofre e declaração de chaves.
-- `termfy-brand`: mapa da identidade (onde cada dado vive e quem o lê) e os
-  papéis da paleta.
+- `termfy-brand`: onde cada campo da identidade fica e que superfícies o
+  leem, mais os papéis da paleta.
 - `termfy-docs`: checklist de cobertura e forma da documentação embutida e o
   guia de escrita para pessoas e agentes.
 - `termfy-init`: checklist do bootstrap.

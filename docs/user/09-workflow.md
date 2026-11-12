@@ -4,11 +4,11 @@ As dezoito skills cobrem o ciclo de um binário, da frase da pessoa à
 release. A ordem importa: cada uma deixa algo que a seguinte lê.
 
 O trabalho gira em torno de dois documentos. O `CLISPEC.md`, único por
-binário, guarda a visão macro: o que o binário é, para quem, o que fica de
+binário, guarda a visão macro: o que o binário é, a que públicos serve, o que fica de
 fora e a superfície já entregue. Cada evolução ganha uma spec em
 `specs/NNNN-slug.md`, com as mudanças na superfície, como o binário vai
 funcionar (Behavior), como o código deve ser feito (Design), as tarefas e
-os testes de aceite. A spec nasce na entrevista, recebe as marcas das
+os testes de aceite. A spec começa na entrevista, recebe as marcas das
 skills de implementação e, concluída, tem a superfície copiada para o
 `CLISPEC.md` pelo agente. Os dois documentos são Markdown puro, escritos à
 mão pelo agente; o binário não os lê.
@@ -57,7 +57,7 @@ instalar, atualizar ou reparar as skills, preservando a identidade, o
 ## 2. Apresentar: `termfy-brand`
 
 Quando o nome, o título, a descrição, o autor, os links, a licença, os
-créditos ou as cores mudarem. Cuida do que o `init` não toca: créditos,
+créditos ou as cores mudarem. Cuida do que o `init` não altera: créditos,
 paleta, painel "Standards" da aba About, campos de identidade do
 `CLISPEC.md`. Confere as
 superfícies: `--version`, `about`, aba About, `info` do OpenCLI e nome do
@@ -65,11 +65,11 @@ servidor MCP.
 
 ## 3. Descrever o binário: `termfy-clispec`
 
-Uma vez no começo, e de novo quando o propósito, os públicos ou os limites
+Uma vez no começo. De novo quando o propósito, os públicos ou os limites
 mudarem. `termfy-clispec` entrevista a pessoa para entender o que o binário
 precisa fazer (problema, públicos e modos, capacidades, dados e
 integrações, limites) e grava a visão macro no `CLISPEC.md`. Com a pessoa,
-monta a lista de specs iniciais, uma por capacidade entregável, e grava
+monta a lista de specs iniciais, uma por capacidade entregável. Grava
 cada uma em `specs/` como `draft`, com a linha correspondente no índice.
 
 Deixa pronto: o `CLISPEC.md` com Purpose, Audiences, Out of scope, a
@@ -82,7 +82,7 @@ Antes de cada evolução. `termfy-spec` entrevista em blocos curtos e escreve
 a spec: Goal, Behavior, Design, Surface com as mudanças na superfície,
 Tasks e Tests. Quando o ponto de partida é a documentação de uma API
 (OpenAPI, Postman, página ou texto), `termfy-api-import` lê a documentação,
-propõe commands por recurso, tools, settings e credenciais, e grava tudo
+propõe commands por recurso, tools, settings e credenciais. Grava tudo
 em Surface de uma spec nova. Em ambos os casos, a spec segue o contrato
 antes de sair de `draft`: Goal, Behavior e Design com texto e ao menos uma
 tarefa. O que a spec planeja e o código ainda não tem é o trabalho da
@@ -106,7 +106,7 @@ Ordem para um recurso novo:
 7. `termfy-test` escreve os testes de aceite da spec nos três modos antes
    de marcar o item.
 
-Cada skill lê a spec aberta antes de tocar no código, segue o Behavior e o
+Cada skill lê a spec aberta antes de mexer no código, segue o Behavior e o
 Design e, ao concluir e testar, marca `[x]` no item da spec. O
 `CLISPEC.md` não muda nessa etapa: o código fica à frente dele até o
 fechamento. Se o código ganhou algo que nenhuma spec previa, crie uma spec
@@ -130,7 +130,8 @@ e registra a data nas Notes do `CLISPEC.md`. A próxima spec da lista volta à e
 
 `termfy-release` publica depois que as specs da versão foram fechadas.
 Avança a versão, escreve o changelog (que pode citar os IDs das specs
-fechadas), valida, cria commit e tag, e confere a release com binários e checksums gerada pelo workflow.
+fechadas), valida e cria commit e tag. Depois confere a release que o workflow
+gera, com binários e checksums.
 `termfy-mcp-client` configura o binário em Claude Code, Codex, Cursor,
 OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 
@@ -145,7 +146,7 @@ OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 - Atualizar as skills para uma versão nova do framework:
   `termfy-init` no modo de manutenção das skills; se a faixa de
   compatibilidade mudou, leia o `CHANGELOG.md` do framework antes da próxima
-  rodada.
+  etapa.
 
 ## O que cada skill não faz
 
@@ -162,4 +163,5 @@ OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 - `termfy-review` não edita; relata.
 - `termfy-docs` não documenta o framework nem as skills; documenta o
   binário.
-- Só `termfy-release` faz commit, tag e release, e só quando a pessoa pede.
+- Só `termfy-release` faz commit, tag e release. Ela faz isso quando a
+  pessoa pede.
