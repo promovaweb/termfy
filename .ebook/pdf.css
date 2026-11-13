@@ -73,7 +73,7 @@ html, body {
   background: var(--pdf-white);
   color: var(--pdf-black);
 }
-.cover-mark { width: 220px; height: auto; }
+.cover-mark { width: 260px; height: auto; }
 .cover-title { margin-top: 30mm; }
 .cover-kicker { font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .cover h1 { margin: 12px 0 16px; font: 800 38pt/1.05 var(--pdf-font-title); letter-spacing: -.02em; }

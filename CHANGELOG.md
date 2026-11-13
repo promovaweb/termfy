@@ -2,6 +2,25 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.11.0] - 2026-11-13
+
+### Adicionado
+
+- Nova identidade visual: ícone e logotipo "terminal com conector", uma
+  janela de terminal com o prompt e um conector lima na lateral, que
+  representa o servidor MCP ao lado da TUI e da CLI.
+- Kit de marca em `brand/`: variações do logo para fundo claro e escuro,
+  favicons, paleta com acento lima (`#A3E635` no escuro, `#4D7C0F` no
+  claro), tokens, `global.css`, tema Tailwind, tipografia, fontes Inter e
+  Manrope, relatório de contraste, manifesto com hashes e guia visual.
+
+### Alterado
+
+- README abre com o logo do Termfy e a linha "Um projeto da Promovaweb".
+- Capa do ebook usa o logo do Termfy no lugar do logo da Promovaweb, com a
+  Promovaweb citada nos dados da edição. Ebook 0.11.0.
+- `.markdownlint.json` libera os elementos HTML do cabeçalho do README.
+
 ## [0.10.0] - 2026-11-12
 
 ### Adicionado

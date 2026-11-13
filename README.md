@@ -1,4 +1,17 @@
-# Termfy
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="brand/logo/logo-dark.png">
+    <img alt="Termfy" src="brand/logo/logo-light.png" width="360">
+  </picture>
+</p>
+
+<h1 align="center">Termfy</h1>
+
+<p align="center">
+  Skills para construir binários de terminal em Bun com TUI, CLI e servidor MCP no mesmo executável.
+</p>
+
+<p align="center">Um projeto da <a href="https://promovaweb.com">Promovaweb</a></p>
 
 Framework de skills da Promovaweb para construir ferramentas de terminal em
 [Bun](https://bun.sh) com três modos no mesmo executável: TUI para pessoas,
@@ -102,7 +115,13 @@ docs/user/     guia do framework, fonte do ebook
 ebook/         PDF, EPUB, aliases, VERSION e build.json
 .ebook/        pipeline do ebook (Pandoc + WeasyPrint), CSS e template
 scripts/       validate-skills.ts e check-skills-against-starter-kit.ts
+brand/         logo, paleta, tokens, fontes e guia visual do Termfy
 ```
+
+## Marca
+
+O logo, a paleta com o lima do conector MCP, os tokens e as fontes ficam em
+[`brand/`](brand/README.md). Use os arquivos de lá sem redesenhá-los.
 
 ## Licença
 
