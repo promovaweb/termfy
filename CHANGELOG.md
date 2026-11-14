@@ -2,6 +2,21 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.11.1] - 2026-11-13
+
+### Corrigido
+
+- `docs/user/08-publishing.md`: o comando que instala os pacotes nativos de
+  todos os alvos passa a ser
+  `bun install --frozen-lockfile --os="*" --cpu="*" --libc="*"`. Com
+  `@opentui/core` no comando, o Bun 1.4 deixa
+  `@opentui/core-linux-arm64-musl` de fora e o alvo linux-arm64 falha.
+- `docs/user/14-glossary-and-troubleshooting.md`: a linha de falha no build
+  cita o comando completo, com lockfile e `--libc`.
+- Workflows do CI e da release usam `actions/checkout@v5`, que roda no
+  Node.js 24 e remove o aviso de Node.js 20 descontinuado.
+- Ebook regenerado na edição 0.11.1.
+
 ## [0.11.0] - 2026-11-13
 
 ### Adicionado

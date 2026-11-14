@@ -28,7 +28,9 @@ bun run build:all    # dist/mycli-<plataforma> para todas
 `bun build --compile` embute a biblioteca nativa do OpenTUI, a documentação
 de `docs/` e o `package.json`. Para compilar para outra plataforma, instale
 antes os pacotes nativos de todos os alvos:
-`bun install --os="*" --cpu="*" @opentui/core`.
+`bun install --frozen-lockfile --os="*" --cpu="*" --libc="*"`. O comando não
+cita pacote de propósito: com `@opentui/core` no lugar, o Bun 1.4 não instala
+`@opentui/core-linux-arm64-musl` e o alvo linux-arm64 falha.
 
 ## Instalar o binário
 

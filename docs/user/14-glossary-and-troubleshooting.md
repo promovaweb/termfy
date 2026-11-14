@@ -83,6 +83,6 @@ npx @modelcontextprotocol/inspector bun run src/main.ts mcp
 
 | Sintoma | Causa provável | O que fazer |
 | --- | --- | --- |
-| o workflow falha no build | pacotes nativos de outros alvos ausentes | o workflow instala com `bun install --os="*" --cpu="*"`; reproduza localmente com `bun run build:all` |
+| o workflow falha no build | pacotes nativos de outros alvos ausentes | o workflow instala com `bun install --frozen-lockfile --os="*" --cpu="*" --libc="*"`; reproduza localmente com `bun run build:all` |
 | a tag já existe | versão repetida | escolha a próxima versão; tag publicada não se move |
 | o binário baixado mostra outra versão | `package.json` não foi atualizado antes da tag | publique uma versão nova com o número certo |

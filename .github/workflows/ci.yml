@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Obter código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configurar Bun
         uses: oven-sh/setup-bun@v2
@@ -56,13 +56,13 @@ jobs:
 
       - name: Obter framework
         if: steps.acesso.outputs.disponivel == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: termfy
 
       - name: Obter starter kit
         if: steps.acesso.outputs.disponivel == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: promovaweb/termfy-starter-kit
           token: ${{ secrets.STARTER_KIT_TOKEN }}
