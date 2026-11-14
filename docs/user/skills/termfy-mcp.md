@@ -129,7 +129,7 @@ Uma chamada com `{ "limit": 2 }` devolve o mesmo objeto nos dois campos:
 ```
 
 Sem a credencial `shop.token`, a falha volta como resultado, não como
-exceção. O agente lê a orientação e pede que a pessoa grave o token:
+exceção. O agente lê a orientação e solicita que você grave o token:
 
 ```json
 {
@@ -168,7 +168,7 @@ test("orders_list reports a missing token as isError", async () => {
   `credentials_status` mostra nomes e metadados, sem valores.
 - **Efeito declarado.** Tool que grava diz isso na descrição e aceita
   `dryRun` quando couber. Um `confirm: true` vindo do modelo não comprova
-  que uma pessoa aprovou.
+  sua aprovação.
 - **Anotação não é permissão.** `readOnlyHint` e `openWorldHint` informam o
   cliente. A verificação de acesso fica no código.
 - **Catálogo e descoberta conferidos.** A tool entra em `catalog.tools`,

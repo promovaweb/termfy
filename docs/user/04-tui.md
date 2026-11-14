@@ -24,7 +24,7 @@ um arquivo em `src/tui/screens/` que exporta um objeto `Screen` com `id`,
 
 O starter kit traz duas abas. **Overview** mostra ambiente, estado da
 configuração e do cofre, configuração em vigor e próximos passos. **About**
-mostra binário, projeto, créditos e padrões seguidos, com os mesmos dados do
+mostra binário, projeto, créditos e padrões seguidos, com os mesmos campos do
 comando `about`.
 
 ## Teclas
@@ -55,7 +55,7 @@ branco.
   origens externas. Verde, âmbar e vermelho só para estado, com texto ao
   lado.
 - Barra de status com teclas em blocos invertidos.
-- Nada pisca, nada rola sozinho. A tela atualiza quando há dado novo.
+- A tela atualiza ao receber um resultado novo, com rolagem controlada pelo teclado.
 - Glifos de uma célula. Emoji fora, porque a largura varia por terminal.
 
 As cores vivem em `src/tui/theme.ts`, em duas paletas (`night`, derivada do

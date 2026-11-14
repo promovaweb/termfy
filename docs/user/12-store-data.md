@@ -1,9 +1,9 @@
 # Guardar dados
 
-O esqueleto não tem banco. Preferências ficam em `settings.json` e
-segredos no cofre. Um binário ganha banco SQLite só quando a spec pede que
-ele lembre informações entre execuções: um histórico, um cache, uma fila,
-registros próprios. Este capítulo mostra esse caminho com a tabela de
+O esqueleto guarda preferências em `settings.json` e segredos no cofre.
+Um banco SQLite entra quando a spec descreve registros que precisam
+continuar disponíveis entre execuções, como notas criadas pelo CLI.
+Este capítulo mostra esse caminho com a tabela de
 notas que o starter kit traz como stub em `template/db/`.
 
 ## Quando pedir um banco
@@ -86,7 +86,7 @@ export const migrations: readonly Migration[] = checkMigrations([createNotes]);
 quando o módulo carrega. Um erro desses quebra todos os testes na hora,
 antes de chegar à release.
 
-Três regras valem para o schema:
+O schema evolui com migrations e backup do arquivo existente:
 
 - **Migration publicada não muda.** Precisa de uma coluna nova? Crie a
   `0002` com `ALTER TABLE`.
@@ -138,7 +138,7 @@ run: (ctx) => {
 ```
 
 `openDatabase()` abre `~/.<bin>/data.db`, liga foreign keys, usa WAL e
-aplica as migrations pendentes. A pessoa não precisa rodar nenhum passo
+aplica as migrations pendentes. Você não precisa rodar nenhum passo
 de instalação: o primeiro command que abre o banco cria o arquivo.
 
 Se a spec pedir, a skill também copia o command `db`, com `db status`

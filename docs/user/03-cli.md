@@ -18,9 +18,10 @@ export function createOrdersCommand(listOrders: Command): Command {
 }
 ```
 
-O registro descreve nome, aliases, argumentos, opções, subcomandos, exemplos,
-códigos de saída e a função `run`. Entre os consumidores do mesmo
-objeto estão:
+O registro reúne a definição do comando e a função `run`, que executa seu
+comportamento. A definição inclui os nomes e argumentos aceitos, as opções
+e os subcomandos. Ela também documenta exemplos e códigos de saída para os
+consumidores abaixo:
 
 | Consumidor | Arquivo | Saída |
 | --- | --- | --- |
@@ -82,13 +83,14 @@ em `src/cli/commands/orders.ts`, mantenha cada import uma só vez. Implemente
 `fetchOrders` no projeto, lançando `error.network()` quando a API falhar.
 Depois, registre `createOrdersCommand(createListOrders(fetchOrders))`.
 
-`data` é o que sai em `--json`; `text` é o que sai para pessoas. A camada
-de entrada decide qual usar. O comando não chama `process.exit` nem monta
-JSON à mão: ele devolve dados e lança `AppError` quando algo previsto falha.
+`data` contém o resultado usado em `--json` e `text` formata esse resultado
+para você ler no terminal. A camada de entrada escolhe o formato da saída.
+O comando devolve o resultado e lança `AppError` quando algo previsto falha,
+deixando a montagem do JSON e o encerramento do processo para essa camada.
 
 ## Saída em texto e em JSON
 
-Em texto, dados vão para stdout e erros para stderr, em uma linha com o
+Em texto, o resultado vai para stdout e os erros para stderr, em uma linha com o
 código e o nome entre colchetes:
 
 ```text
@@ -130,22 +132,26 @@ reutilizam.
 
 ## Commands de apoio
 
-`<bin> doctor` confere Bun, TTY, pasta de dados, settings, master key, cofre,
-versão e plataforma, com ✓, ! ou ✗ por item. Sai com 3 quando algo falha.
-O retorno é `{ checks, ok }`; cada check tem `name`, `status` e `detail`.
-Avisos não mudam a saída para 3. A mesma coleta está na tool MCP `doctor`. `<bin> completion bash|zsh|fish`
+`<bin> doctor` verifica o runtime e o terminal, além dos arquivos de
+configuração e do cofre. O diagnóstico também identifica a versão e a
+plataforma, mostrando ✓, ! ou ✗ em cada item. Uma falha resulta no código
+3, mas os avisos mantêm a saída 0. O retorno é `{ checks, ok }`, com
+`name`, `status` e `detail` em cada check, e está disponível também pela
+tool MCP `doctor`.
+
+`<bin> completion bash|zsh|fish`
 gera o script de autocompletar a partir do registry, com subcommands,
 options e valores enumerados. Para instalar na sessão Zsh com saída
 texto, use `eval "$(mycli completion zsh)"`; no Fish,
 `mycli completion fish | source`. Se `output.format` for `json`, restaure
 `text` ou extraia `data.script` antes de carregar o script.
 `<bin> --skill reference` devolve só a referência gerada do registry, para
-agentes que já conhecem o método e querem economizar contexto.
+agentes que já conhecem o método e querem economizar a janela de contexto do modelo.
 
 ## OpenCLI
 
 A OpenCLI Specification descreve a interface de um CLI em JSON para que
-pessoas e máquinas saibam invocá-lo sem ler o código. `mycli --opencli`
+você e seus scripts saibam invocá-lo sem ler o código. `mycli --opencli`
 gera o documento a partir do registro; `bun run opencli` grava
 `docs/opencli.json`; `bun run opencli:check` falha quando o arquivo diverge
 do registro. Um agente pode preferir esse JSON ao `--help`: nomes, aliases,

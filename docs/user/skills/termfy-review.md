@@ -17,7 +17,7 @@ Use esta skill nestas situações:
 - a spec tem todos os itens `[x]` e você precisa saber se ela pode fechar;
 - você suspeita que um segredo, como `shop.token`, aparece em alguma saída.
 
-Não use para corrigir. A revisão só relata. As correções voltam para a
+Use a revisão para obter o relatório das falhas e encaminhe as correções à
 skill da área: [termfy-cli](termfy-cli.md), [termfy-mcp](termfy-mcp.md),
 [termfy-tui](termfy-tui.md) ou [termfy-config](termfy-config.md). Para
 escrever testes que faltam, use a [termfy-test](termfy-test.md). Para

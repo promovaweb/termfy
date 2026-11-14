@@ -1,10 +1,10 @@
 # Visão geral
 
-Uma ferramenta de terminal costuma começar para uma pessoa digitar comandos.
-Com o tempo, um script passa a chamá-la e precisa de saída estruturada. Depois
-um agente de IA precisa operá-la e quer descobrir sozinho o que ela faz. São três
-públicos e três formas de uso. Sem um framework, viram três bases de
-código que se desencontram.
+Você pode usar uma ferramenta de terminal digitando comandos, chamando-a
+por um script ou conectando um agente de IA. O script precisa de saída
+estruturada e o agente precisa descobrir as funções disponíveis. O Termfy
+reúne essas formas de uso no mesmo projeto para compartilhar as funções
+entre os três modos.
 
 O Termfy resolve isso com um único executável que atende os três:
 
@@ -14,8 +14,9 @@ O Termfy resolve isso com um único executável que atende os três:
 | pessoa, script, agente | CLI | `mycli <comando> [opções]`, texto ou `--json` |
 | agente de IA | MCP | `mycli mcp`, servidor Model Context Protocol via stdio |
 
-Os três modos leem a mesma identidade, a mesma configuração, o mesmo cofre de
-credenciais e a mesma tabela de códigos de saída. Um comando novo aparece no
+Os três modos compartilham a configuração e a identidade do binário.
+Também usam o mesmo cofre de credenciais e os mesmos códigos de saída.
+Um comando novo aparece no
 `--help`, no `--json`, na descrição OpenCLI e na documentação embutida sem
 duplicar texto.
 
@@ -34,8 +35,8 @@ framework instaladas em `.agents/skills/`.
 referências que elas usam (documentação do OpenTUI, da OpenCLI, do MCP) e
 este guia, publicado em PDF e EPUB.
 
-**Projeto derivado.** O que você cria a partir do starter kit. Ele renomeia o
-executável e acrescenta comandos, telas e tools. As atualizações das
+**Projeto derivado.** É o repositório que você cria a partir do starter kit,
+renomeando o executável e acrescentando comandos, telas e tools. As atualizações das
 skills chegam pela manutenção conduzida por `termfy-init`.
 
 ## Escolhas que o framework já fez
@@ -56,7 +57,8 @@ skills chegam pela manutenção conduzida por `termfy-init`.
 
 ## Público do guia
 
-Para a equipe da Promovaweb e para alunos que constroem ferramentas internas,
-integrações com APIs e utilitários para agentes. O guia assume familiaridade
-com terminal e TypeScript. Ele não ensina Bun nem MCP do zero; aponta a
-documentação oficial quando ela é a melhor fonte.
+O guia se destina aos desenvolvedores da Promovaweb e aos alunos que
+constroem ferramentas internas, integrações com APIs e utilitários para
+agentes. Você precisa ter familiaridade com terminal e TypeScript para
+acompanhar os exemplos. Para estudar Bun ou MCP do início, consulte a
+documentação oficial indicada pelas skills.

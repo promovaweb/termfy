@@ -1,9 +1,10 @@
 # termfy
 
 A skill `termfy` é a porta de entrada do framework. Você descreve a
-ferramenta em uma frase e ela conduz o ciclo inteiro: identidade,
-`CLISPEC.md`, specs, implementação, testes, revisão, documentação e
-release. A skill não escreve código sozinha. Ela escolhe a ordem,
+ferramenta em uma frase e ela conduz o projeto desde o setup e a
+especificação até a publicação. Cada evolução passa pela implementação,
+pelos testes e pela revisão, com a documentação atualizada ao fechar a
+spec. Para realizar esse trabalho, ela escolhe a ordem,
 chama as outras skills e para em dois checkpoints para você aprovar. No
 fim, você tem um binário com specs fechadas, os três modos conferidos e um
 resumo de como instalar e rodar.
@@ -47,7 +48,7 @@ Para uma evolução que atravessa CLI e MCP:
 ## O que a skill faz
 
 1. Confirma a identidade em uma única mensagem: nome do executável, uma
-   frase de propósito e os públicos (a pessoa que digita, o script que
+   frase de propósito e os públicos (você no terminal, o script que
    roda, o agente). O resto vem das entrevistas das outras skills.
 2. Faz o diagnóstico do repositório com `git status --short`,
    `bun run dev -- --version` e `bun run skills:check`. Lê o

@@ -14,7 +14,7 @@ Use esta skill nestas situações:
 
 - a release v0.7.0 do `mycli` saiu e você quer usar a tool `orders_list`
   no Claude Code;
-- a equipe precisa da mesma entrada no projeto, num `.mcp.json`
+- os desenvolvedores precisam da mesma entrada no projeto, num `.mcp.json`
   compartilhado;
 - você está desenvolvendo e quer que o Cursor rode `src/main.ts` direto,
   sem compilar a cada mudança;
@@ -67,7 +67,7 @@ Para diagnosticar uma falha:
 
 ## Exemplo
 
-O `mycli` 0.7.0 está instalado em `/usr/local/bin/mycli`. A equipe quer a
+O `mycli` 0.7.0 está instalado em `/usr/local/bin/mycli`. Você quer a
 entrada no projeto, então a skill usa o escopo de projeto do Claude Code
 com o caminho absoluto:
 
@@ -91,7 +91,7 @@ O comando grava esta entrada em `.mcp.json`, na raiz do projeto:
 
 Repare no que não está ali: nenhum `shop.token`, nenhuma master key, nenhum
 `env` com segredo. O servidor lê o token do cofre com `getCredential()`.
-Antes, a pessoa grava a credencial pelo CLI, com o mesmo usuário que roda o
+Antes, você grava a credencial pela CLI, com o mesmo usuário que roda o
 cliente:
 
 ```bash

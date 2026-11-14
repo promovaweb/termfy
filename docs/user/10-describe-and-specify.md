@@ -1,8 +1,8 @@
 # Descrever e especificar
 
-Antes de escrever código, o agente precisa saber o que construir. O Termfy
-registra isso em dois documentos em Markdown puro. O `CLISPEC.md`, único,
-descreve o binário inteiro. Cada arquivo de `specs/` descreve uma evolução.
+O Termfy registra o que construir em dois documentos em Markdown puro:
+o `CLISPEC.md` descreve o binário inteiro e cada arquivo de `specs/`
+detalha uma evolução que o agente vai implementar.
 Neste capítulo você acompanha as duas entrevistas do `mycli` e vê os
 documentos que elas gravam.
 
@@ -11,9 +11,9 @@ documentos que elas gravam.
 | `CLISPEC.md` | um, na raiz | o que o binário é, a que públicos serve, o que já entrega | [termfy-clispec](skills/termfy-clispec.md) |
 | `specs/NNNN-slug.md` | um por evolução | o que muda agora, como funciona, como o código deve ser feito | [termfy-spec](skills/termfy-spec.md) |
 
-O binário não lê nenhum dos dois. Eles servem ao agente e a você. O
-agente consulta a spec antes de mexer no código e marca o que entregou.
-Você confere o trabalho lendo a spec.
+Esses documentos são escritos para você e para o agente, sem leitura pelo
+binário. O agente consulta a spec antes de mexer no código e marca o que
+entregou, para você conferir cada tarefa e teste no próprio arquivo.
 
 ## 1. A entrevista do CLISPEC
 
@@ -118,7 +118,7 @@ tudo o que o esqueleto entrega, lido do código: os commands do registry,
 as screens de `src/tui/screens/index.ts`, o que aparece em `mcp --list` e
 as keys de `SETTINGS_SCHEMA`. Assim a Surface começa igual ao código.
 
-Repare em três regras do documento:
+Observe como o documento registra a superfície e a identidade:
 
 - **Surface descreve só o que já existe.** O command `orders list` ainda
   não aparece nela, porque nenhuma spec foi fechada. Trabalho pendente
@@ -137,8 +137,9 @@ Peça ao agente:
 
 > Use a skill termfy-spec para detalhar a spec 0001.
 
-A entrevista segue a ordem objetivo, comportamento, superfície, dados e
-integrações, desenho do código e aceite. As perguntas agora são
+A entrevista registra o objetivo e o comportamento esperado, depois
+detalha a superfície, o armazenamento e as integrações. Por fim, define
+como implementar e testar a evolução. As perguntas agora são
 concretas: que options o command aceita, que campos vão no `--json`, que
 exit code sai quando o token falta, qual arquivo guarda o client HTTP.
 
@@ -213,9 +214,8 @@ Cada seção tem um papel:
 | `Tests` | um teste de aceite por linha, como comando e resultado | a [termfy-test](skills/termfy-test.md) |
 | `Notes` | dúvidas e combinados, com data | todos |
 
-Cada item de Surface aparece pelo nome em ao menos uma tarefa ou teste.
-Essa regra garante que nada da superfície fique sem entrega nem sem
-verificação.
+Cada item de Surface aparece pelo nome em ao menos uma tarefa ou teste,
+para relacionar a alteração prevista à sua implementação ou verificação.
 
 ## 5. O ciclo de uma spec
 

@@ -40,8 +40,9 @@ front matter. O agente cria e edita os dois à mão; o binário não os lê nem
 os embute.
 
 **`CLISPEC.md`**, um por binário, na raiz, guarda a visão macro. A skill
-`termfy-clispec` entrevista a pessoa em blocos curtos (problema, públicos e
-modos, capacidades, dados e integrações, limites) e grava a identidade, as
+`termfy-clispec` entrevista você sobre o problema que a ferramenta resolve
+e os públicos que ela atende. A conversa detalha as capacidades e os
+limites, incluindo armazenamento e integrações, para registrar a identidade e as
 seções `Purpose`, `Audiences`, `Out of scope`, `Surface`, `Specs` e
 `Notes`. `Surface` descreve em tabelas o que já foi entregue: commands,
 screens, MCP, settings, credenciais e, quando há banco, as tabelas SQLite
@@ -50,8 +51,9 @@ título e status. O `CLISPEC.md` não tem checklist: ele descreve o binário,
 não o trabalho pendente.
 
 **`specs/NNNN-slug.md`**, um por evolução, guarda o que muda. A skill
-`termfy-spec` entrevista a pessoa a cada evolução (objetivo, comportamento,
-superfície, dados e integrações, desenho do código, aceite) e grava a linha
+`termfy-spec` entrevista você para descrever o comportamento esperado e
+como implementá-lo. A spec registra a superfície alterada e relaciona as
+tarefas aos testes de aceite. O agente também grava a linha
 `Status:` (`draft`, `in_progress`, `done` ou `archived`) e as seções
 `Goal`, `Behavior` (como o binário vai funcionar), `Design` (como o código
 deve ser feito), `Surface` (o que entra, muda ou sai da superfície),
@@ -66,8 +68,8 @@ marcados, o agente fecha a spec: aplica `Surface` às tabelas do
 `CLISPEC.md`, troca o status para `done` na spec e no índice e registra a
 data em `Notes`.
 
-O banco de dados é opcional. O esqueleto não tem banco. Um binário só
-ganha um quando a pessoa pede para guardar dados entre execuções. Nesse
+O esqueleto guarda preferências e credenciais em arquivos. Você pode
+acrescentar um banco para preservar registros entre execuções. Nesse
 caso, `termfy-database` cria `~/.<bin>/data.db` com SQLite, muda o schema
 só por migrations embutidas no binário, faz backup antes de migrar e lista
 as tabelas em `Surface`, que chegam a `### Storage` quando a spec fecha.
@@ -140,7 +142,7 @@ na mesma janela e as duas versões sobem juntas.
 
 Quando um projeto derivado tem um domínio próprio (uma API, um formato de
 arquivo, um fluxo de aprovação), vale escrever uma skill do projeto, em
-`skills/` do próprio repositório ou em um repositório de skills da equipe.
+`skills/` do próprio repositório ou em uma biblioteca mantida pelos desenvolvedores.
 Siga a mesma forma: frontmatter com `name` e `description`, leitura prévia,
 regras, passos, marcos e saída. Texto em prosa direta, verbos no imperativo,
 sem clichês de abertura ou fechamento. Valide a estrutura com um script como

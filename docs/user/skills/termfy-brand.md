@@ -1,8 +1,9 @@
 # termfy-brand
 
 A skill `termfy-brand` ajusta a identidade do binário depois do setup:
-nome do executável, título, descrição, autor, site, repositório, licença,
-créditos, cores e glifo da TUI. A identidade tem uma fonte só. A skill
+nome do executável e os campos que o apresentam no terminal e nos agentes.
+Ela também altera os créditos e a aparência da TUI, usando os arquivos
+responsáveis por cada campo. A tabela deste guia mostra essas origens. A skill
 mantém essa fonte em ordem para que `--version`, `about`, a aba About, o
 OpenCLI e o servidor MCP mostrem os mesmos valores. No fim, você tem os
 campos novos aplicados, as superfícies conferidas e o `bun run validate`
@@ -76,7 +77,7 @@ esta tabela de origens:
 | créditos | `credits` em `src/app/manifest.ts` | `about`, aba About, tool MCP `about` |
 | paleta | `themes` em `src/tui/theme.ts` | toda a TUI |
 
-Para a cor de marca do primeiro pedido, a skill altera só os papéis de
+Para a cor de marca do primeiro exemplo, a skill altera só os papéis de
 destaque nas duas paletas de `src/tui/theme.ts`:
 
 ```ts
@@ -162,7 +163,7 @@ A skill relata:
 - os campos alterados, com o valor anterior e o novo;
 - os arquivos alterados;
 - as superfícies conferidas;
-- o lembrete do rename da pasta `~/.<bin>/` quando o `bin` mudou.
+- o aviso do rename da pasta `~/.<bin>/` quando o `bin` mudou.
 
 Arquivos que podem mudar: `package.json`, `src/app/manifest.ts`,
 `src/tui/theme.ts`, `src/tui/screens/about.ts` (painel "Standards"),

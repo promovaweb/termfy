@@ -138,8 +138,8 @@ Com os testes verdes, a skill marca o item:
   pasta temporária e `NO_COLOR=1`. O teste vê o binário como a pessoa vê,
   sem cores que atrapalham a comparação.
 - **Exit code antes da saída.** Cada chamada, inclusive as de preparo, tem o
-  code conferido com `ExitCode`. Um JSON bonito com code errado ainda é
-  falha.
+  code conferido com `ExitCode`, pois um retorno JSON válido também precisa
+  informar o código previsto pelo contrato.
 - **Contrato público, não implementação.** As assertions conferem `data`,
   `text` e o envelope. Copiar a lógica do command no teste só prova que o
   código é igual a ele mesmo.

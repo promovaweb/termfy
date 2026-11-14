@@ -58,8 +58,8 @@ O OpenMCP, padrão para converter APIs web em servidores MCP, formaliza algo
 que vale para qualquer servidor: o agente lê todas as descrições de tool a
 cada conversa, então cada palavra a mais custa em todas as chamadas. O
 Termfy aplica isso com uma tool de descoberta (`skill`) em vez de dezenas de
-tools de documentação, descrições de duas frases e resources para dados
-passivos.
+tools de documentação, descrições de duas frases e resources para consultar
+conteúdo sem executar ações.
 
 ## Adicionar uma tool
 

@@ -12,8 +12,8 @@ asset baixado responde `--version` com o número publicado.
 Use esta skill nestas situações:
 
 - as specs 0002 e 0003 do `mycli` estão `done` e você quer publicar o
-  `orders list` para a equipe;
-- um bug corrigido precisa chegar às pessoas que já instalaram o binário;
+  `orders list` para os operadores da loja;
+- um bug corrigido precisa chegar às instalações existentes do binário;
 - o workflow de uma versão anterior falhou e a correção precisa de uma
   versão nova;
 - você quer só preparar a versão (número, changelog, validação) sem
@@ -141,16 +141,15 @@ A última linha imprime `mycli 0.7.0`.
 - **Changelog em português, Keep a Changelog.** Versões anteriores ficam
   como estão. A data é a da publicação real.
 - **Validação antes do envio.** Sem `bun run validate` com exit code 0, não
-  há commit de release. O workflow roda a mesma validação. Falhar lá custa
-  uma versão.
+  há commit de release. O workflow repete essa validação e uma falha após
+  a publicação da tag exige outra versão para a correção.
 - **Specs fechadas primeiro.** Uma spec `in_progress` com código no
   repositório indica entrega incompleta. Se ela não puder fechar, a skill
   pergunta se a versão sai parcial e registra isso no changelog.
 - **Commit só da versão.** Nada de `git add .` sem revisão. Mudanças de
   outras tarefas ficam fora.
 - **Tag publicada não se mexe.** Sem mover, apagar ou recriar tag e sem
-  force push. A pessoa que baixou a v0.7.0 precisa receber o mesmo
-  arquivo amanhã.
+  force push. Cada download da v0.7.0 precisa entregar o mesmo arquivo.
   Correção ganha outra versão, mesmo depois de workflow falho.
 - **Push da tag específica.** `git push origin "$release_tag"` envia só a
   tag da versão, sem levar tags de outras entregas.

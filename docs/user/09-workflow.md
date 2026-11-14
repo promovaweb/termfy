@@ -1,7 +1,7 @@
 # Sequência de uso das skills
 
-As dezoito skills cobrem o ciclo de um binário, da frase da pessoa à
-release. A ordem importa: cada uma deixa algo que a seguinte lê.
+As dezoito skills cobrem o ciclo de um binário, da sua descrição inicial à
+release. Cada etapa produz os arquivos que a seguinte consulta para continuar.
 
 O trabalho gira em torno de dois documentos. O `CLISPEC.md`, único por
 binário, guarda a visão macro: o que o binário é, a que públicos serve, o que fica de
@@ -37,8 +37,8 @@ termfy ────────────────────────�
 
 ## 0. Entrar: `termfy`
 
-Quando a pessoa descreve o que quer em linguagem natural e não nomeia uma
-skill. `termfy` diagnostica o estágio do repositório, confirma nome,
+Use `termfy` para descrever o que você quer em linguagem natural quando
+ainda não souber qual skill chamar. Ela diagnostica o estágio do repositório, confirma nome,
 propósito e públicos em uma única mensagem e chama as demais skills na
 ordem abaixo. Para só duas vezes: na aprovação do `CLISPEC.md` com a
 primeira spec e antes da release.
@@ -65,10 +65,11 @@ servidor MCP.
 
 ## 3. Descrever o binário: `termfy-clispec`
 
-Uma vez no começo. De novo quando o propósito, os públicos ou os limites
-mudarem. `termfy-clispec` entrevista a pessoa para entender o que o binário
-precisa fazer (problema, públicos e modos, capacidades, dados e
-integrações, limites) e grava a visão macro no `CLISPEC.md`. Com a pessoa,
+Use `termfy-clispec` no início do projeto e retome a entrevista quando o
+propósito, os públicos ou os limites mudarem. A skill entrevista você para
+entender o problema que o binário resolve e os modos que precisa atender.
+Ela detalha as capacidades, as integrações e o armazenamento necessário
+para gravar a visão macro no `CLISPEC.md`. Com você,
 monta a lista de specs iniciais, uma por capacidade entregável. Grava
 cada uma em `specs/` como `draft`, com a linha correspondente no índice.
 
@@ -78,7 +79,7 @@ Surface do que o esqueleto já entrega e o índice das specs iniciais em
 
 ## 4. Especificar cada evolução: `termfy-spec` ou `termfy-api-import`
 
-Antes de cada evolução. `termfy-spec` entrevista em blocos curtos e escreve
+Para cada evolução, `termfy-spec` entrevista em blocos curtos e escreve
 a spec: Goal, Behavior, Design, Surface com as mudanças na superfície,
 Tasks e Tests. Quando o ponto de partida é a documentação de uma API
 (OpenAPI, Postman, página ou texto), `termfy-api-import` lê a documentação,
@@ -98,7 +99,7 @@ Ordem para um recurso novo:
 1. `termfy-config` declara a key e a credencial que o recurso usa.
 2. `termfy-api` cria o client do serviço externo, quando houver.
 3. `termfy-database` cria as tabelas por migration e os repositórios, só
-   quando a spec pede que o binário guarde dados entre execuções.
+   quando a spec descreve registros que o binário guarda entre execuções.
 4. `termfy-cli` cria um command avulso; `termfy-command-set` gera a família
    `recurso list|show|create|update|delete` de uma vez, com tools e screen.
 5. `termfy-mcp` espelha o que faltou em tools, reutilizando as funções.
@@ -115,10 +116,11 @@ de adoção e descreva o que já existe em Surface; essas entradas chegam ao
 
 ## 6. Fechar a spec: `termfy-review`, `termfy-docs` e `termfy-spec`
 
-`termfy-review` audita a entrega contra o Behavior e o Design da spec,
-confere à mão o `CLISPEC.md` e as specs contra o código e confere as
-regras (segredos, stdout do MCP, exit codes, descriptions, cores, docs,
-idioma), diz se a spec pode ser fechada e devolve uma lista por gravidade,
+`termfy-review` compara a entrega com o Behavior e o Design da spec e
+confere o `CLISPEC.md` e as specs contra o código. A revisão também procura
+segredos expostos e saída indevida no stdout do MCP. Ela verifica os
+contratos de saída, a documentação e os padrões de interface do framework.
+O relatório indica se a spec pode fechar e classifica as falhas por gravidade,
 sem editar. Corrigido o que ela apontou, `termfy-docs` relê
 `bun run dev -- --skill` como um agente leria, corrige a cobertura apontada
 por `bun run docs:check` e regenera `docs/opencli.json`. Com todos os itens
@@ -137,7 +139,7 @@ OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 
 ## Quando sair da ordem
 
-- Pedido pequeno em um command existente: `termfy-spec` escreve uma spec
+- Alteração pequena em um command existente: `termfy-spec` escreve uma spec
   curta com a alteração em Surface, uma tarefa e um teste; depois
   `termfy-cli`, `termfy-test` e o fechamento da spec.
 - Só mudar texto da documentação: `termfy-docs` direto.
@@ -156,12 +158,12 @@ OpenCode ou Gemini CLI e valida com `mcp --list` e o Inspector.
 - `termfy-clispec` não planeja tarefas; descreve o binário e cria as specs
   iniciais.
 - `termfy-spec` e `termfy-api-import` não implementam; descrevem e conferem.
-- `termfy-database` não entra sem pedido; o padrão é não guardar dados além
-  de settings e credenciais.
+- `termfy-database` só entra quando você solicita armazenamento local;
+  o esqueleto guarda apenas settings e credenciais.
 - As skills de implementação não inventam requisitos nem marcam itens no
   `CLISPEC.md`; o que falta vai para `## Notes` da spec.
 - `termfy-review` não edita; relata.
 - `termfy-docs` não documenta o framework nem as skills; documenta o
   binário.
 - Só `termfy-release` faz commit, tag e release. Ela faz isso quando a
-  pessoa pede.
+  você solicita a publicação.

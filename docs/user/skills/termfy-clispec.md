@@ -15,7 +15,7 @@ Use a `termfy-clispec` nestas situações:
 - O projeto acabou de passar pela [termfy-init](termfy-init.md) e ainda
   não tem `CLISPEC.md`. O starter kit não traz esse arquivo.
 - O propósito do `mycli` mudou: além de consultar pedidos, ele passa a
-  atender o time de expedição.
+  atender os operadores da expedição.
 - Um público novo chegou, como um agente que vai operar o binário pelo MCP.
 - Um limite mudou: algo que estava fora do escopo passa a entrar.
 - Você quer uma visão geral escrita do que o binário é.

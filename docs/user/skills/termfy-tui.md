@@ -1,8 +1,10 @@
 # termfy-tui
 
 A skill `termfy-tui` cria e revisa as screens da TUI do seu binário com a
-API imperativa do OpenTUI Core. Ela cuida do layout em células, do teclado,
-do foco, das listas, do carregamento assíncrono e da liberação de recursos.
+API imperativa do OpenTUI Core. Ela monta o layout em células e trata a
+navegação por teclado, mantendo o foco no item selecionado. Nas telas que
+consultam serviços, também trata o carregamento assíncrono e libera os
+recursos ao sair da aba.
 No fim, você tem uma screen registrada como aba, com estados de carregando,
 vazio, erro e pronto, testada por frames e conferida nos temas `night` e
 `day`.

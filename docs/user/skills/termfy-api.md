@@ -63,7 +63,7 @@ autoriza `GET /instance/all`, que lista as instâncias com `name`, `token` e
 admintoken vai para o cofre. O token da instância é resolvido em memória
 pelo nome recebido em `--instance <nome>`.
 
-A setting entra em `SETTINGS_SCHEMA`. A pessoa grava a URL real com
+A setting entra em `SETTINGS_SCHEMA`. Você grava a URL real com
 `mycli config set uazapi.baseUrl https://minhaloja.uazapi.com`.
 
 ```ts
@@ -182,8 +182,7 @@ error Credential "uazapi.admintoken" not found. Save it with: mycli credentials 
   literal. Token por argument, option ou campo de tool fica no histórico do
   shell e no log do agente.
 - **Erro de credencial preservado.** O `AppError` de código 4 sobe intacto
-  porque a pessoa precisa saber que falta gravar a credencial, não que a
-  rede caiu.
+  para que você receba a orientação de gravar a credencial ausente.
 - **URL validada antes do token.** O protocolo e a origem são conferidos
   antes do envio. HTTP fica restrito ao loopback dos testes, para o token
   não trafegar em texto claro.

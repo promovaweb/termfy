@@ -51,8 +51,8 @@ Para cumprir as tarefas da spec:
    travaria: conceito sem explicação, command sem exemplo, exit code sem
    causa, key sem padrão.
 3. Corrige primeiro as faltas do `docs:check`. Cada entrada do registry
-   ganha linha na tabela da seção certa. Um conceito novo ganha também um
-   parágrafo.
+  ganha linha na tabela da seção certa, com um parágrafo de explicação
+  quando introduzir um conceito novo.
 4. Reescreve as seções fracas seguindo a forma de cada seção (o que é,
    exemplo, tabela, falhas, como estender). Prefere cortar a inflar.
 5. Roda `bun run opencli` se o registry mudou e repete `bun run docs:check`.
@@ -115,10 +115,10 @@ mudou, a skill roda `bun run opencli`. O `docs:check` termina com:
   de configuração aparecem na tabela da seção certa. É o que o
   `docs:check` confere.
 - **Cada seção responde a uma pergunta.** O que é, como entrar, o que sai, o
-  que pode falhar e com qual exit code. É isso que a pessoa e o agente
-  procuram ao abrir a página.
-- **Exemplos executáveis.** Cada exemplo começa pelo nome do binário e cabe
-  em uma linha. Um exemplo que não roda ensina errado.
+  que pode falhar e com qual exit code. Essas informações orientam você e o
+  agente durante o uso do binário.
+- **Exemplos executáveis.** Cada exemplo começa pelo nome do binário, cabe
+  em uma linha e precisa funcionar para orientar a execução pelo agente.
 - **Placeholders no lugar de nomes.** `{{bin}}`, `{{title}}`, `{{version}}`
   e `{{BIN}}` mantêm `docs/` válido depois do `bun run init`.
 - **Código em inglês, prosa no idioma do projeto.** Nomes de commands, keys
@@ -126,11 +126,10 @@ mudou, a skill roda `bun run opencli`. O `docs:check` termina com:
 - **`opencli.json` não se edita à mão.** Ele é regenerado com
   `bun run opencli` a cada mudança do registry.
 - **`docs/` fala do binário.** O framework e as skills ficam no guia do
-  Termfy, para o executável não carregar texto que a pessoa que usa não
-  precisa.
-- **Cortar antes de inflar.** Um topic acima de 200 linhas pede divisão ou
-  corte. Agentes pagam por token. Uma seção que só repete a referência
-  gerada sai.
+  Termfy, para o executável carregar apenas as instruções de uso do binário.
+- **Texto por tópico.** Um topic acima de 200 linhas deve ser dividido ou
+  revisto para remover repetições. Repetir a referência gerada aumenta o
+  consumo de tokens sem acrescentar instruções ao agente.
 
 ## O que ela entrega
 

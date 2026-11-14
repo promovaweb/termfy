@@ -156,8 +156,8 @@ $ bun run dev -- config path
   `CHANGELOG.md` próprio. O histórico do template não pertence ao seu
   binário.
 - **Manutenção preserva o produto.** Ela não roda o bootstrap, não
-  renomeia o binário e não recria o `CLISPEC.md` nem as specs. A pessoa
-  que pediu uma atualização de skills não espera ver o produto mudar.
+  renomeia o binário e não recria o `CLISPEC.md` nem as specs. Assim, você
+  recebe as instruções atualizadas sem alterar o produto.
 - **Compatibilidade conferida, não presumida.** A skill só declara a
   instalação compatível depois de ler os avisos do `skills:check`.
 - **Setup não publica.** Commit, push, tag e GitHub Release ficam com a

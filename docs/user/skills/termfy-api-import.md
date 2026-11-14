@@ -3,9 +3,10 @@
 A skill `termfy-api-import` recebe a documentação de uma API (OpenAPI ou
 Swagger, coleção Postman, página de referência, PDF ou texto colado) e a
 converte em uma spec de evolução em `specs/NNNN-slug.md`. Ela lê a
-documentação inteira, propõe a forma do CLI e grava commands por recurso,
-tools MCP, settings e credenciais na `## Surface` da spec, com Behavior,
-Design, Tasks e Tests. O resultado não é código. No fim, você tem uma spec
+documentação inteira e propõe a forma da CLI, com commands agrupados por
+recurso. A `## Surface` registra os comandos e as tools, incluindo as
+settings e credenciais que eles usam. As demais seções explicam o
+comportamento esperado e relacionam a implementação aos testes. No fim, você tem uma spec
 pronta para a `termfy-api` criar o client e para a `termfy-command-set`
 gerar os commands.
 
@@ -84,7 +85,7 @@ A proposta que a skill mostra antes de gravar:
 | `messages send` | `POST /send/text` | `--instance`, `--number`, `--text` | `uazapi.admintoken` |
 
 O mapeamento sugere `uazapi.api_key` para uma API key em header. Neste
-exemplo, a pessoa escolheu `uazapi.admintoken`, o nome do header na
+exemplo, foi escolhido `uazapi.admintoken`, o nome do header na
 documentação. A skill registrou a escolha. Trechos da spec gravada em
 `specs/0004-uazapi-whatsapp.md`:
 

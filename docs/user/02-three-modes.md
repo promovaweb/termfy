@@ -1,6 +1,6 @@
 # Três modos
 
-## A regra de despacho
+## Despacho dos três modos
 
 `src/main.ts` decide o modo em três linhas:
 
@@ -27,12 +27,13 @@ nem `mycli-mcp`.
 
 ## Quando usar cada modo
 
-**TUI** quando a pessoa quer olhar, navegar e decidir com o que vê: estado do
-ambiente, listas, detalhes. A TUI não substitui o CLI; ela mostra o que o
-CLI faz e sugere os comandos.
+**TUI** quando você quer navegar pelo estado do ambiente ou consultar uma
+lista e abrir os detalhes de um item. A interface apresenta os resultados
+das funções do binário e sugere os comandos correspondentes da CLI.
 
-**CLI em texto** quando a pessoa digita e lê. Tabelas alinhadas, cores por
-papel, mensagens de erro com o código entre colchetes.
+**CLI em texto** quando você digita comandos e lê o resultado no terminal.
+A saída usa tabelas alinhadas e cores por papel, com o código entre
+colchetes nas mensagens de erro.
 
 **CLI em JSON** quando um script, um pipeline ou um agente lê. Envelope
 estável `{ ok, command, data }` em sucesso e `{ ok, command, error }` em
@@ -41,8 +42,8 @@ exceções, em stdout nos dois casos. Nessas exceções, o exit code corresponde
 saída 3. Confira o exit code além do envelope.
 `--opencli` imprime JSON próprio, sem esse envelope.
 
-**MCP** quando um agente conversa por protocolo. Tools para ação, resources
-para leitura passiva, prompts para orientar a conversa. A tool `skill`
+**MCP** quando um agente conversa por protocolo, usando tools para executar
+funções, resources para leitura e prompts para orientar a conversa. A tool `skill`
 devolve a mesma documentação do `--skill`, então o agente descobre o
 binário sem sair do protocolo.
 

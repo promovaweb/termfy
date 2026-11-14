@@ -26,7 +26,7 @@ no modo certo. O starter kit já traz um exemplo de cada padrão em
 
 ### CLI num subprocesso
 
-O teste roda `src/main.ts` como a pessoa rodaria e confere exit code,
+O teste roda `src/main.ts` como você rodaria e confere exit code,
 stdout e stderr. A variável `<BIN>_HOME` aponta para uma pasta
 temporária. Assim o teste não mexe no seu `~/.mycli/`:
 

@@ -85,8 +85,9 @@ preenche a spec com o que encontrou. Ela não implementa nada: o resultado
   `network`.
 ```
 
-Repare que `messages send` não tem tool. Enviar mensagem tem efeito fora
-da máquina. O MCP do Termfy fica na leitura: a pessoa envia pela CLI.
+Neste exemplo, `messages send` fica restrito à CLI, porque o envio altera
+um serviço externo. As tools MCP apenas consultam as instâncias e você
+executa o envio pelo comando.
 
 ## 2. URL e token
 
@@ -102,7 +103,7 @@ A [termfy-config](skills/termfy-config.md) declara a key em
 },
 ```
 
-A pessoa grava o token uma vez, sem que ele passe por argumento nem fique
+Você grava o token uma vez, sem que ele passe por argumento nem fique
 no histórico do shell:
 
 ```bash
@@ -115,11 +116,11 @@ CI, use `--stdin` com o segredo vindo do ambiente.
 
 ## 3. O client HTTP
 
-A [termfy-api](skills/termfy-api.md) cria `src/api/uazapi.ts`. Ele é o
+A [termfy-api](skills/termfy-api.md) cria `src/api/uazapi.ts` como o
 único arquivo que chama `fetch`. Commands, tools e a tela chamam as
 funções dele, então os três modos falam com a API do mesmo jeito.
 
-A base é uma função de request com as regras do contrato do client:
+A base é uma função de request que aplica o contrato do client:
 timeout por tentativa, retry só para leitura e erro sem segredo.
 
 ```ts
@@ -235,10 +236,10 @@ const status: Command = {
 ```
 
 O command não sabe nada de HTTP. Ele valida a entrada, chama o client e
-devolve `data` para o `--json` e `text` para a pessoa. O registry cuida
+devolve `data` para o `--json` e `text` para o terminal. O registry cuida
 do envelope, da ajuda e do exit code.
 
-Na prática, a pessoa usa assim:
+Você lista as instâncias e usa o nome escolhido nas chamadas seguintes:
 
 ```bash
 mycli instances list
@@ -305,7 +306,7 @@ server.registerTool(
 A [termfy-tui](skills/termfy-tui.md) monta a aba Instances com
 `listPanel`, carregando a lista no `onEnter` e mostrando o status da
 instância selecionada. Ao criar a aba, a skill acrescenta `instances` aos
-valores aceitos de `tui.initialTab`, para que a pessoa possa abrir a TUI
+valores aceitos de `tui.initialTab`, para que você possa abrir a TUI
 direto nela.
 
 ## 6. Testar sem a API real
@@ -343,4 +344,4 @@ request (`sends === 1`), sem reenvio.
 
 Com as tarefas e os testes marcados, a spec fecha e o `CLISPEC.md` ganha
 a superfície nova. O capítulo [Guardar dados](12-store-data.md) mostra o
-caso de um binário que precisa lembrar informações entre execuções.
+caso de um binário que precisa guardar informações entre execuções.

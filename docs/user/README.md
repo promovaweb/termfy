@@ -2,10 +2,11 @@
 
 Este guia ensina você a construir uma ferramenta de terminal com o Termfy,
 o framework da Promovaweb para binários em Bun. Cada binário é um único
-executável com três modos. A TUI é operada pelo teclado. A CLI atende
-pessoas, scripts e agentes. O servidor MCP atende agentes de IA. Você não
-escreve esse código sozinho: descreve ao agente o que precisa. As 18
-skills do Termfy conduzem cada etapa, da entrevista inicial à release.
+executável com três modos: você navega pela TUI usando o teclado, executa
+comandos pela CLI e conecta agentes de IA pelo servidor MCP. A CLI também
+atende scripts e agentes com saída estruturada. Você descreve ao agente o
+que precisa construir e as 18 skills do Termfy conduzem cada etapa, da
+entrevista inicial à release.
 
 Os exemplos do guia usam o `mycli`, um binário que consulta os pedidos de
 uma loja. O capítulo de integração usa a API de WhatsApp da uazapi. As saídas
@@ -32,8 +33,8 @@ orientam o agente.
 
 ### Parte 2. Construir
 
-O caminho de uma evolução, da descrição ao binário publicado, com os
-pedidos ao agente, os documentos gravados e o código que ele escreve.
+A Parte 2 acompanha uma evolução desde a descrição ao agente até a
+publicação do binário, mostrando os documentos e o código de cada etapa.
 
 | Capítulo | O que você aprende |
 | --- | --- |
@@ -56,7 +57,7 @@ pedidos ao agente, os documentos gravados e o código que ele escreve.
 ### Uma página por skill
 
 Cada página diz quando usar a skill, como pedir, o que ela faz, um exemplo
-do que ela produz, as regras que segue e para onde o fluxo vai depois.
+do que ela produz, os contratos que segue e para onde o fluxo vai depois.
 
 | Etapa | Skills |
 | --- | --- |

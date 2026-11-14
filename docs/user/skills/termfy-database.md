@@ -13,7 +13,7 @@ repositório.
 Use esta skill quando a spec aberta descrever informações que precisam
 sobreviver ao fim do processo:
 
-- um histórico de consultas que a pessoa quer rever depois;
+- um histórico de consultas que você quer rever depois;
 - um cache local de pedidos baixados da API da loja;
 - uma fila de tarefas que o binário processa aos poucos;
 - notas ou registros próprios, criados pelo CLI e lidos pela TUI.
@@ -23,7 +23,7 @@ Não use para preferências nem para segredos. Preferência é key de
 senha vão para o cofre, também pela `termfy-config`. Se a necessidade de
 guardar registros aparecer no meio de outra tarefa, volte à
 [termfy-spec](termfy-spec.md) para registrar a mudança antes de implementar.
-O esqueleto não tem banco. Ele só entra com pedido explícito.
+O esqueleto recebe o banco apenas quando você solicita esse armazenamento.
 
 ## Como pedir
 
@@ -162,33 +162,33 @@ do `CLISPEC.md` quando a spec fecha:
 
 ## Regras que a skill segue
 
-- **Sem pedido, sem banco.** A pasta `src/db/` só aparece quando a spec fala
-  em guardar registros. Assim o binário não carrega peso que ninguém pediu.
+- **Banco previsto na spec.** A pasta `src/db/` só aparece quando a spec
+  descreve os registros a preservar, mantendo SQLite opcional no projeto.
 - **Um arquivo por binário.** O banco fica em `~/.<bin>/data.db`, obtido por
   `databasePath()`. Com `<BIN>_HOME`, testes e CI usam uma pasta
   descartável.
 - **Schema muda só por migration.** Uma migration por arquivo, versões a
   partir de 1, em sequência. Migration publicada não é editada, porque
   bancos já instalados aplicaram a versão antiga.
-- **Import estático.** O registro importa cada arquivo. O build embute o
-  SQL. O binário compilado roda onde o repositório não existe, então ler
+- **Import estático.** O registro importa cada arquivo para o build embutir
+  o SQL. O binário compilado roda onde o repositório não existe, então ler
   `.sql` do disco quebraria a instalação.
 - **`openDatabase()` aplica as pendentes.** Ele liga foreign keys, usa WAL
   e aplica cada migration na sua transação. Um banco mais novo que o
   binário é recusado com exit code 3, para que uma versão antiga não grave
   sobre um schema que ela não conhece.
-- **`bun:sqlite`, sem ORM.** O driver vem com o Bun. Nenhuma dependência
-  entra no `package.json`. O executável leva o driver junto.
+- **`bun:sqlite`, sem ORM.** O driver incluído no Bun entra no executável,
+  dispensando uma dependência adicional no `package.json`.
 - **SQL só no repositório.** Commands, tools e screens chamam as mesmas
   funções. Os três modos leem e gravam do mesmo jeito.
 - **Segredo fica no cofre.** Token lido por `getCredential()` não vai para
   tabela, porque `data.db` não é cifrado.
 - **Erros viram `AppError`.** CONFIG (3) para banco ilegível ou schema
   incompatível, PERMISSION (7) para pasta sem acesso, NOT_FOUND (6) para
-  linha ausente. A pessoa vê uma mensagem, não o stack trace do driver.
+  linha ausente. Você recebe uma mensagem correspondente à falha.
 - **Backup no lugar de rollback.** Não há migration de volta. Por isso
   `migrate()` copia o arquivo com `VACUUM INTO` antes de mudar um schema
-  existente. Para voltar, a pessoa fecha o binário e troca `data.db` pelo
+  existente. Para voltar, você fecha o binário e troca `data.db` pelo
   backup.
 - **Tabelas na superfície.** Nenhum script compara o schema com a spec. A
   skill confere lendo as migrations. A `termfy-review` repete a leitura.

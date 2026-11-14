@@ -39,8 +39,8 @@ Abra o agente na pasta `mycli` e escreva:
 > orders." O autor é Promovaweb e o repositório é
 > `https://github.com/<seu-usuario>/mycli`.
 
-A descrição fica em inglês porque aparece no `--help`. Todo texto do
-binário é em inglês. A conversa com o agente continua em português.
+A descrição aparece no `--help` e fica em inglês, assim como os demais
+textos do binário. Você continua conversando com o agente em português.
 
 A skill confirma os campos que faltarem e executa estes passos:
 
@@ -66,7 +66,7 @@ Done. Check with: bun run dev -- --version && bun run dev -- --help
 Then run: bun run validate
 ```
 
-O nome que você escolheu vai além do `package.json`. Ele define a pasta
+O nome que você escolheu no `package.json` também define a pasta
 `~/.mycli/`, onde ficam preferências e segredos. Define também as
 variáveis de ambiente `MYCLI_HOME` e `MYCLI_MASTER_KEY` e o prefixo
 `mycli://` das URIs que o servidor MCP publica. Por isso o nome aceita só
@@ -197,7 +197,7 @@ bun run dev -- doctor
 ✓ platform: linux-x64
 ```
 
-Os itens com `!` são avisos. O `doctor` termina com exit code `0`. Num
+Os itens com `!` são avisos que mantêm o exit code `0` do `doctor`. Num
 projeto recém-criado, a pasta `~/.mycli/` ainda não existe, porque o
 binário só a cria quando precisa gravar algo. Faça o teste: grave uma
 preferência e guarde uma credencial.
@@ -214,11 +214,11 @@ bun run dev -- credentials get shop.token
 shp_************ef
 ```
 
-A pasta passou a existir, com permissão `0700`. O `settings.json` guarda
-a preferência em texto. O token foi cifrado com AES-256-GCM em
+A gravação cria a pasta com permissão `0700` e salva a preferência em
+texto no `settings.json`. O token é cifrado com AES-256-GCM em
 `credentials.json`, com a master key gerada em `~/.mycli/master.key`. O
-`get` mostra o valor mascarado: para ver o valor inteiro, a pessoa precisa
-pedir `--reveal`. O capítulo
+`get` mostra o valor mascarado: para ver o valor inteiro, você precisa
+usar `--reveal`. O capítulo
 [Configuração e credenciais](06-configuration-and-credentials.md) explica
 o cofre.
 
@@ -253,8 +253,8 @@ Prompts:
 ```
 
 As tools do esqueleto só leem. Nenhuma devolve o valor de uma credencial
-nem grava arquivos. A gravação fica na CLI, onde uma pessoa confirma o que
-acontece. O capítulo [MCP](05-mcp.md) mostra como acrescentar tools.
+nem grava arquivos. Você grava pela CLI, com a confirmação prevista por
+cada comando. O capítulo [MCP](05-mcp.md) mostra como acrescentar tools.
 
 ### TUI
 

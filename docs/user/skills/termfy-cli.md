@@ -136,7 +136,7 @@ test("orders show without the token exits with 4", async () => {
   valores aceitos e o padrão. O mesmo texto aparece no `--help`, no
   `--skill` e no `--opencli`.
 - **`run` devolve `{ data, text }`.** `data` é serializável e estável para
-  scripts. `text` é para pessoas e não carrega JSON montado à mão.
+  scripts. `text` formata o resultado para leitura no terminal.
 - **Falha prevista lança `AppError`.** `error.usage`, `error.config`,
   `error.credentials`, `error.network`, `error.notFound` e
   `error.permission` levam ao código certo. O command não chama
