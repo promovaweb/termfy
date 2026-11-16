@@ -2,6 +2,45 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.14.0] - 2026-11-16
+
+### Adicionado
+
+- `termfy-tui/references/screen-patterns.md`: cinco padrões de tela (lista
+  e detalhe, painel de status, formulário por diálogos, visualizador de
+  documento e tela de progresso), com componentes, teclas, composição em
+  `wide`, `medium` e `compact` e testes.
+- `termfy-tui/references/quality-checklist.md`: checklist de qualidade de
+  TUI (foco visível, estados vazio, carregando e erro, layout compacto,
+  paleta, confirmação, toasts, status, contraste, segredos fora do frame,
+  `watch` e timers parados).
+- Regras da `termfy-tui` para `ctx.layout()`, diálogos, paleta de
+  comandos, foco por `Tab`, `watch()`, `onPause` e `onResume`,
+  `tui.motion` e os componentes `table`, `stateView`, `spinner`,
+  `progressBar` e `link`.
+
+### Alterado
+
+- `termfy-command-set`: a screen da família segue o padrão lista e
+  detalhe, com criação por `ctx.prompt` e remoção confirmada.
+- `termfy-review` aplica o checklist de qualidade. `termfy-test` cobre
+  frames em 60×16, 80×24 e 120×32, diálogos, paleta e segredos fora do
+  frame.
+- `termfy-brand` cuida do título da janela e do logotipo opcional em ASCII
+  art na aba About.
+- Contrato de tela em `screen-contract.md` com layout, diálogos, status,
+  `watch` e pausa.
+- Guia: capítulos 01, 04, 06 e 14 e as páginas das skills `termfy-tui` e
+  `termfy-command-set` com a interface nova, as abas Settings,
+  Credentials e Docs e a paleta.
+- Compatibilidade de `termfy-tui`, `termfy-command-set`, `termfy-review`,
+  `termfy-test` e `termfy-brand`: Starter Kit a partir da v0.12.0.
+- Ebook 0.14.0.
+
+### Corrigido
+
+- URL solta em `termfy-cli/references/opencli.md`.
+
 ## [0.13.0] - 2026-11-16
 
 ### Adicionado

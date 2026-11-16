@@ -4,8 +4,8 @@ A skill `termfy-command-set` entrega uma família de commands de uma vez:
 `orders list`, `show`, `create`, `update` e `delete`, ou só os verbos que a
 spec aberta prevê. Ela extrai as operações para funções compartilhadas e
 cria os três adaptadores: o command no CLI, a tool espelhada no MCP e a
-screen de lista na TUI. No fim, você tem um recurso disponível nos três
-modos, com testes em cada um e os itens da spec marcados.
+screen de lista e detalhe na TUI. No fim, você tem um recurso disponível nos
+três modos, com testes em cada um e os itens da spec marcados.
 
 ## Quando usar
 
@@ -51,8 +51,10 @@ Para verbos de gravação:
    chama `registerOrdersTools` em `registerAll`, no `src/mcp/server.ts`.
 5. Cria `src/tui/screens/orders.ts` a partir de
    `template/screen/example.ts` e registra a screen em
-   `src/tui/screens/index.ts`. Se ela puder abrir primeiro, acrescenta
-   `orders` em `tui.initialTab` e em `--tab`.
+   `src/tui/screens/index.ts`. A tela segue o padrão lista e detalhe, com
+   `table`, `stateView`, os diálogos da edição e as ações `n`, `Enter`, `d`
+   e `r`. Se ela puder abrir primeiro, acrescenta `orders` em
+   `tui.initialTab` e em `--tab`.
 6. Escreve os testes: CLI em subprocesso, MCP com `Client` e TUI com
    `createTestRenderer` e `mountTui`.
 7. Atualiza `docs/cli.md`, `docs/mcp.md` e `docs/tui.md`. Roda
@@ -134,10 +136,12 @@ export function registerOrdersTools({ server, catalog }: Registrar): void {
 }
 ```
 
-Na screen `orders`, `mount` devolve um container síncrono. A carga roda em
-`onEnter` e recria o `listPanel` quando a resposta chega, porque ele não tem
-método para trocar os items. A geração descarta respostas que chegam depois
-de `onLeave`.
+Na screen `orders`, `mount` devolve um container síncrono com a `table` e o
+painel de detalhe. A carga roda em `onEnter` e atualiza a tabela com
+`setRows`. A geração descarta respostas que chegam depois de `onLeave`. As
+ações são `n` criar pelo `ctx.prompt`, `Enter` abrir o detalhe, `d` apagar
+com `ctx.confirm` e `danger`, `r` recarregar. Em `compact` a tela mostra
+uma visão por vez.
 
 A saída nos dois formatos do CLI:
 
@@ -178,6 +182,10 @@ Use "mycli orders list --help".
   na própria tool, porque um agente não responde a prompt de terminal.
 - **Falha não vira lista vazia.** Erro aparece como erro no CLI, como
   `isError: true` na tool e como estado de erro na screen.
+- **Tela em lista e detalhe.** A screen usa `table` para a coleção e
+  `keyValueTable` no detalhe, com `stateView` para vazio, carregando e
+  erro. `n` cria pelo `ctx.prompt`, `Enter` abre o detalhe, `d` apaga com
+  `ctx.confirm` e `danger`, `r` recarrega.
 - **Mesma expectativa nos testes.** Os três modos usam a mesma fonte local
   controlada, sem rede real nem o cofre da pessoa.
 
@@ -193,7 +201,7 @@ os nomes das tools e um frame da screen.
 | `src/cli/commands.ts` | `ordersCommand` nos `subcommands` da raiz |
 | `src/mcp/tools/orders.ts` | `registerOrdersTools` com as tools |
 | `src/mcp/server.ts` | chamada em `registerAll` |
-| `src/tui/screens/orders.ts` | screen de lista |
+| `src/tui/screens/orders.ts` | screen de lista e detalhe |
 | `src/tui/screens/index.ts` | screen na lista de abas |
 | `tests/` e `docs/` | testes dos três modos e capítulos atualizados |
 | `docs/opencli.json` | regenerado por `bun run opencli` |

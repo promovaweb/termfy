@@ -14,8 +14,11 @@ A pasta é criada com 0700. `MYCLI_HOME` troca a raiz, o que isola testes e CI.
 
 Chaves em notação de ponto, com esquema tipado em `SETTINGS_SCHEMA`
 (`src/config/settings.ts`). O starter kit reconhece `output.format`,
-`output.colors`, `tui.initialTab`, `tui.theme`, `tui.icons`, `tui.mouse` e
-`telemetry.enabled`.
+`output.colors`, `tui.initialTab`, `tui.theme`, `tui.icons`, `tui.motion`,
+`tui.mouse` e `telemetry.enabled`.
+
+`tui.initialTab` aceita `overview` (padrão), `settings`, `credentials`,
+`docs` ou `about`.
 
 `tui.theme` aceita `terminal` (padrão), `night` ou `day`. O `terminal` herda
 as cores do tema do terminal. `night` e `day` são paletas fixas em RGB.
@@ -23,7 +26,9 @@ as cores do tema do terminal. `night` e `day` são paletas fixas em RGB.
 `tui.icons` aceita `auto` (padrão), `nerd`, `unicode` ou `ascii`. O `auto`
 usa `nerd` no Ghostty, no Kitty, no WezTerm e no Omarchy, `ascii` no console
 Linux e `unicode` nos demais terminais. `tui.mouse` é boolean, com `true`
-padrão; `false` devolve a seleção de texto ao terminal.
+padrão; `false` devolve a seleção de texto ao terminal. `tui.motion` também
+é boolean, com `true` padrão; `false` desliga as animações curtas de
+diálogos e toasts.
 
 ```bash
 mycli config list
@@ -39,6 +44,25 @@ dar espaço a extensões; para ganhar tipo, padrão e documentação, a chave
 entra no esquema.
 
 Segredos ficam fora do settings.json: o lugar deles é o cofre.
+
+## Editar pela TUI
+
+A aba **Settings** mostra uma tabela com key, valor e padrão e um painel com
+a descrição, o tipo e os valores aceitos. `Enter` ou `e` edita a key
+selecionada pelo controle do tipo: `enum` abre o diálogo de escolha,
+boolean alterna entre os dois valores e texto ou número abre um campo com
+validação. `x` ou `Delete` volta ao padrão depois de uma confirmação. `r`
+recarrega.
+
+A gravação é a mesma de `config set` e `config unset`. Uma key `tui.*` vale
+na próxima abertura da TUI; a tela avisa no toast. `tui.motion` e
+`tui.theme` seguem a mesma regra.
+
+A aba **Credentials** lista só os nomes do cofre. Os valores ficam fora da
+tela. O painel ao lado mostra o arquivo, a origem da master key e o total
+de credenciais. `a` adiciona um nome e depois o valor secreto. `Enter` ou `e` troca o valor. `d` ou
+`Delete` remove com confirmação. `r` recarrega. O valor digitado não entra
+no frame, no toast nem no resumo da barra.
 
 ## credentials.json
 

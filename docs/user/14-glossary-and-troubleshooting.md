@@ -16,7 +16,10 @@
 | envelope | a forma do `--json`: `{ ok, command, data }` ou `{ ok, command, error }` |
 | exit code | número com que o processo termina; cada família de falha tem um fixo |
 | screen | uma aba da TUI, registrada em `src/tui/screens/index.ts` |
-| action | comando de uma screen, com tecla, descrição, ícone e a função que roda; aparece na barra inferior, no help e no clique |
+| action | comando de uma screen, com tecla, descrição, ícone e a função que roda; aparece na barra inferior, no help, na paleta e no clique |
+| paleta de comandos | busca de ações de todas as abas, aberta com `Ctrl+K` ou `:`; executa pela tecla ou pelo clique |
+| toast | mensagem curta no canto inferior direito, empilhada até três, que some em 4 segundos ou com um clique |
+| layout responsivo | composição da tela por faixa de largura: `wide` a partir de 120 colunas, `medium` a partir de 80 e `compact` abaixo de 80 |
 | Nerd Font | fonte com glifos de ícone; o conjunto `nerd` da TUI depende dela |
 | tool | função que o servidor MCP oferece ao agente, com schema Zod |
 | resource | conteúdo que o agente lê pelo MCP sem efeito, como `mycli://skill` |
@@ -83,6 +86,11 @@ npx @modelcontextprotocol/inspector bun run src/main.ts mcp
 | a tecla da tela não responde | a ação não está em `actions`, ou `onKey` devolve `false` | declare a ação em `actions` com `run`, ou devolva `true` quando a tela consumir a tecla |
 | o ícone aparece como quadrado | a fonte do terminal não tem Nerd Font | use `tui.icons unicode` ou instale uma Nerd Font |
 | o mouse não seleciona texto | o mouse da TUI está ligado | use `Shift` e arraste, ou `tui.mouse false` |
+| "Terminal too small" aparece | a janela está abaixo de 60×16 | aumente a janela ou reduza o zoom do terminal; a tela volta ao crescer |
+| o link não abre ou a cópia da URL falha | o terminal não suporta OSC 8 nem OSC 52 | use o command equivalente no CLI; o link mostra a URL no texto |
+| o ponteiro não vira mão sobre o clicável | o terminal não aceita formato de ponteiro | siga pela tecla; a ação funciona igual |
+| o toast some antes da leitura | a duração é fixa em 4 segundos | repita a ação; o toast não recebe teclado |
+| Tab muda de aba em vez de mudar o foco | a tela está com a versão antiga do shell | atualize o starter kit; `Tab` move o foco entre painéis |
 
 ### Release
 

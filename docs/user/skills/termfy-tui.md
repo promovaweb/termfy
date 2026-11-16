@@ -7,8 +7,8 @@ telas que consultam serviços, também trata o carregamento assíncrono e libera
 os recursos ao sair da aba.
 No fim, você tem uma screen registrada como aba, com número e ícone, com
 estados de carregando, vazio, erro e pronto, testada por teclas, por clique
-e por frames. A conferência visual cobre os temas `terminal`, `night` e
-`day`.
+e por frames nas três faixas de largura. A conferência visual cobre os temas
+`terminal`, `night` e `day`.
 
 ## Quando usar
 
@@ -50,17 +50,42 @@ Para revisar uma tela existente:
 3. Lê `src/tui/index.ts`, `src/tui/screen.ts`, `src/tui/components.ts`,
    `src/tui/theme.ts` e `src/tui/screens/index.ts`. Mostra um plano curto
    com arquivos, comportamentos e verificações.
-4. Escolhe uma receita em `references/examples/` e adapta só o necessário.
-5. Cria `src/tui/screens/<id>.ts`, declara `icon` e as `actions` da tela e
+4. Escolhe um dos cinco padrões de `references/screen-patterns.md` e adapta
+   só o necessário: lista e detalhe, painel de status, formulário por
+   diálogos, visualizador de documento e tela de progresso.
+5. Cria `src/tui/screens/<id>.ts`, compõe para `wide`, `medium` e
+   `compact` com `ctx.layout()`, declara `icon` e as `actions` da tela e
    registra a screen em `src/tui/screens/index.ts`. Para abrir direto na
    aba, acrescenta o id em `tui.initialTab` de `src/config/settings.ts` e em
    `--tab` de `src/cli/commands/tui.ts`.
-6. Liga cada comando a uma ação, com tecla e clique na mesma função. Testa a
-   lógica isolada, depois a screen com `createTestRenderer` e por fim a
-   navegação com `mountTui`, com tecla e com clique.
-7. Confere `terminal`, `night` e `day` em 80×24, 110×30 e 160×40, além de
-   40×12.
-8. Atualiza `docs/tui.md`, roda `bun run validate` e marca `[x]` nos itens.
+6. Liga cada comando a uma ação, com tecla, clique e entrada na paleta na
+   mesma função. Testa a lógica isolada, depois a screen com
+   `createTestRenderer` e por fim a navegação com `mountTui`, com tecla,
+   clique e diálogos.
+7. Confere `terminal`, `night` e `day` em 60×16, 80×24 e 120×32.
+8. Passa a `references/quality-checklist.md` linha a linha, atualiza
+   `docs/tui.md`, roda `bun run validate` e marca `[x]` nos itens.
+
+## Padrões de tela e checklist
+
+`references/screen-patterns.md` traz cinco composições. Cada uma descreve
+quando usar, os componentes, as teclas, a composição em `wide`, `medium` e
+`compact` e como testar.
+
+| Padrão | Uso |
+| --- | --- |
+| lista e detalhe | coleção com seleção e painel de leitura, com `table` e `keyValueTable` |
+| painel de status | resumo de saúde, versão ou configuração atual |
+| formulário por diálogos | poucos campos, editados com `confirm`, `prompt` e `choose` |
+| visualizador de documento | aba de documentação com índice e `Markdown` |
+| tela de progresso | operação longa com `spinner` e `progressBar` |
+
+`references/quality-checklist.md` é a conferência antes de declarar a tela
+pronta: foco visível, estados vazio, carregando e erro, layout a partir de
+60×16, ação com tecla, clique e paleta, confirmação antes de apagar, toast
+no resultado, resumo em `ctx.status`, contraste nos três temas, glifo só em
+`icons.ts`, segredo fora do frame, `watch` para arquivo lido e timers
+parados em `onLeave` e `onPause`.
 
 ## Exemplo
 
@@ -185,12 +210,20 @@ try {
   Solid, porque o host já entrega renderer e tema prontos.
 - **Uma screen por arquivo, com factory.** Estado no escopo do módulo vaza
   seleção entre duas montagens ou dois testes.
-- **Componentes compartilhados.** `panel`, `keyValueTable`, `list`,
-  `heading`, `dim`, `spacer` e `listPanel` mantêm o visual igual entre abas.
+- **Componentes compartilhados.** `panel`, `table`, `listPanel`,
+  `stateView`, `spinner`, `progressBar`, `link`, `keyValueTable`, `heading`,
+  `dim` e `spacer` mantêm o visual igual entre abas.
   `spacer(renderer, height)` não recebe tema.
-- **Ação única para tecla e clique.** Cada comando é uma `ScreenAction` com
-  `keys`, `description`, `icon` e `run`. O botão e a linha de lista chamam a
-  mesma função.
+- **Ação única para tecla, clique e paleta.** Cada comando é uma
+  `ScreenAction` com `keys`, `description`, `icon` e `run`. O botão, a linha
+  de tabela ou de lista e a entrada da paleta chamam a mesma função.
+- **Layout por faixa.** A tela lê `ctx.layout()` e compõe para `wide`,
+  `medium` e `compact`. O shell remonta a tela quando a faixa muda.
+- **Diálogo no lugar de formulário.** Um ou dois campos usam `ctx.prompt`,
+  `ctx.choose` e `ctx.confirm`. Efeito destrutivo usa `danger` e valor oculto
+  usa `secret`.
+- **Resumo e toast.** `ctx.status` mostra o resumo da tela e `ctx.notify`
+  mostra o resultado de cada ação.
 - **Ícones de `ctx.icons`.** Nenhum glifo de papel fixo na screen; a key
   `tui.icons` troca o conjunto `nerd`, `unicode` ou `ascii`.
 - **Mouse e teclado no mesmo efeito.** O clique, o hover e a roda passam
@@ -199,9 +232,12 @@ try {
   tema `terminal`, cada cor é uma referência à paleta do terminal.
 - **`mount` síncrono.** `mount` cria os nós. O trabalho ativo começa em
   `onEnter` e para em `onLeave`.
-- **Cleanup também no `destroy`.** A versão atual de `mountTui` não chama
-  `onLeave` ao encerrar a aplicação, então a screen escuta o evento
-  `destroy` do renderer.
+- **Arquivo observado.** `watch()` lista os arquivos que a tela lê. O shell
+  recarrega a tela quando outro processo muda um deles e avisa no toast.
+- **Pausa no foco.** `onPause` para timers e `onResume` retoma. `ctx.motion`
+  governa a animação curta de diálogos e toasts.
+- **Cleanup em `onLeave`.** O shell chama `onLeave` na troca de aba e no
+  encerramento, então pare timers, assinaturas e consultas ali.
 - **A aplicação é dona do renderer.** A screen sai com `ctx.quit()`, sem
   `process.exit()`, sem outro renderer e sem escrever em stdout.
 - **`onKey` devolve `true` só para tecla consumida.** Assim `q`, `?`, `Tab`,

@@ -5,55 +5,140 @@
 Esquema ilustrativo da disposição, com rótulos traduzidos para leitura:
 
 ```text
-▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.        linux-x64 • Bun 1.4.4 
-───────────────────────────────────────────────────────────────────────────────────────
-  1 ⌂ Overview    2 ℹ About
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
- ╭─ Ambiente ──────────────────────────────╮╭─ Estado ──────────────────────────────╮
- │ Binário     mycli v<version>               ││ settings.json     • padrões           │
- │ Runtime     Bun 1.4.4                   ││ credentials.json  • vazio             │
- ╰─────────────────────────────────────────╯╰───────────────────────────────────────╯
-  ←/→  aba   1-9  ir   ?  ajuda   q  sair
+ ▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.     linux-x64 • Bun 1.4.4
+ ────────────────────────────────────────────────────────────────────────────────
+   1 ⌂ Overview   2 ⚙ Settings   3 ◈ Credentials   4 ≡ Docs   5 ℹ About
+ ╭─ Ambiente ──────────────────────────────╮╭─ Estado ───────────────────────────╮
+ │ Binário     mycli v<version>            ││ settings.json     • padrões        │
+ │ Runtime     Bun 1.4.4                   ││ credentials.json  • vazio          │
+ ╰─────────────────────────────────────────╯╰────────────────────────────────────╯
+  settings: padrões · cofre: 0    r recarregar   ? ajuda   q sair      ^K commands
 ```
 
 `src/tui/index.ts` monta quatro faixas: cabeçalho de uma linha, barra de
-abas com número e ícone, conteúdo da aba ativa e barra de teclas. Cada aba
+abas com número e ícone, conteúdo da aba ativa e barra de status. Cada aba
 é um arquivo em `src/tui/screens/` que exporta um objeto `Screen` com `id`,
 `title`, `icon`, `description`, `actions` e `mount(ctx)` e, quando precisa,
-`onEnter`, `onLeave` e `onKey`.
+`watch`, `onEnter`, `onLeave`, `onPause`, `onResume` e `onKey`.
 
-O starter kit traz duas abas. **Overview** mostra ambiente, estado da
-configuração e do cofre, configuração em vigor e próximos passos. **About**
-mostra binário, projeto, créditos e padrões seguidos, com os mesmos campos do
-comando `about`.
+O starter kit traz cinco abas:
+
+| Aba | Conteúdo |
+| --- | --- |
+| **Overview** | ambiente, estado da configuração e do cofre, configuração em vigor e próximos passos |
+| **Settings** | tabela com key, valor e padrão, com painel de detalhe; edita cada key pelo controle do tipo |
+| **Credentials** | nomes do cofre, origem da master key e total de credenciais; valores não aparecem |
+| **Docs** | índice dos tópicos da documentação embutida e o documento em Markdown |
+| **About** | binário, projeto, créditos, padrões seguidos e links, com os mesmos campos do comando `about` |
 
 ## Teclas
 
 | Tecla | Ação |
 | --- | --- |
 | `←` `→` `[` `]` | aba anterior ou seguinte |
-| `Tab` `Shift+Tab` | próxima aba ou aba anterior |
+| `Tab` `Shift+Tab` | próximo painel ou painel anterior da tela |
 | `1` … `9` | ir para a aba de mesmo número |
+| `Ctrl+K` `:` | abrir a paleta de comandos |
 | `?` | mostrar ou esconder a ajuda |
-| `Esc` | fechar a ajuda; com a ajuda fechada, sair |
+| `Esc` | fechar o diálogo ou a ajuda; sem modal aberto, sair |
 | `q` `Ctrl+C` | sair |
 
+Dentro de um campo de texto, letras e números vão para o campo e `Esc` sai
+do campo. Fora dele, `Tab` e `Shift+Tab` movem o foco entre os painéis da
+tela, sem trocar de aba. O painel em foco usa a borda de destaque.
+
 A tela declara os próprios comandos em `actions`: tecla, descrição, ícone e
-a função que roda. Eles aparecem na barra inferior antes das globais e no
-help. O clique no item da barra roda a mesma ação. O renderer é destruído em
-toda saída, devolvendo o terminal ao shell.
+a função que roda. Eles aparecem na barra inferior antes das globais, no
+help e na paleta. O clique no item da barra roda a mesma ação. O renderer é
+destruído em toda saída, devolvendo o terminal ao shell.
+
+## Paleta de comandos
+
+`Ctrl+K` ou `:` abre a paleta. Ela busca por nome entre as ações da aba, as
+entradas `Go to <aba>`, as ações das outras abas (troca a aba e executa),
+"Reload this screen", a ajuda e a saída. A busca aceita as letras em
+sequência, sem exigir a palavra inteira.
+
+`↑` `↓` e `j`/`k` movem, `PgUp`/`PgDn` e `Home`/`End` pulam, `Enter`
+executa e `Esc` fecha. A linha responde ao clique. O item `^K commands`, no
+canto direito da barra de status, também abre a paleta.
+
+## Barra de status e toasts
+
+A barra inferior tem o resumo da tela à esquerda (`ctx.status`), as ações da
+tela no meio e `^K commands` à direita. No layout compacto ficam só
+`? help` e `q quit` no meio.
+
+`ctx.notify(message, tone)` mostra um toast no canto inferior direito. No
+máximo três toasts ficam visíveis; o mais antigo fecha primeiro. Cada toast
+some em 4 segundos ou com um clique e não recebe teclado. O tom pode ser
+`info`, `ok`, `warn` ou `error`.
+
+## Diálogos
+
+O shell desenha os diálogos e devolve a resposta à tela:
+
+```ts
+const name = await ctx.prompt({ title: "Add credential", label: "Name" });
+const ok = await ctx.confirm({ title: "Remove", message: `Remove ${name}?`, danger: true });
+const index = await ctx.choose({ title: "Theme", items: ["terminal", "night", "day"] });
+```
+
+| Diálogo | Campos | Interação |
+| --- | --- | --- |
+| `confirm` | `title`, `message`, `confirmLabel?`, `danger?` | `Enter` no botão em foco, `y` e `n`, `←` `→` e `Tab` entre botões, `Esc` cancela |
+| `prompt` | `title`, `label`, `initial?`, `placeholder?`, `secret?`, `validate?` | digitação, paste, `Backspace`, `Ctrl+U` limpa, `Enter` envia por `validate`, `Esc` cancela |
+| `choose` | `title`, `items`, `initial?` | `↑` `↓`, `j`/`k`, `PgUp`/`PgDn`, `Home`/`End`, `Enter`, `Esc` |
+
+`confirm` resolve `true` ao aceitar e `false` ao cancelar. `prompt` resolve
+o texto ou `undefined` no `Esc`. `choose` resolve o índice ou `undefined`.
+`danger` pinta o botão com a cor de erro. `secret` mostra bolinhas e o valor
+não chega ao frame. `validate` devolve uma mensagem para manter o diálogo
+aberto. Um clique fora do diálogo cancela.
+
+Use esses três diálogos em vez de montar uma tela de formulário. A tela não
+ganha layout, foco nem validação próprios para um ou dois campos.
 
 ## Mouse
 
 Com `tui.mouse` em `true`, o padrão, a TUI responde ao mouse. O clique numa
-aba abre a aba, numa linha de lista seleciona e ativa o item, num botão ou
-num item da barra inferior roda a ação. Numa linha do help, roda o comando.
-A roda rola a lista e troca de aba sobre a barra de abas. O item sob o
-ponteiro recebe destaque.
+aba abre a aba, numa linha de tabela ou de lista seleciona e ativa o item,
+num botão, num item da barra, numa linha da paleta ou da ajuda e num botão
+de diálogo roda a mesma ação da tecla. A roda rola listas e troca de aba
+sobre a barra de abas. O item sob o ponteiro recebe destaque e o ponteiro
+vira mão sobre o que é clicável.
 
 Com o mouse ligado, use `Shift` e arraste para selecionar texto no terminal.
 Com `tui.mouse` em `false`, o terminal volta a selecionar com o mouse e a
 TUI fica só com o teclado.
+
+## Layout responsivo
+
+`ctx.layout()` devolve três faixas, medidas em colunas: `wide` a partir de
+120, `medium` a partir de 80 e `compact` abaixo de 80. O shell remonta a
+tela quando a faixa muda, então `mount` precisa funcionar nas três. Em
+`wide` os painéis ficam lado a lado. Em `medium` o painel secundário
+continua ao lado, com menos largura. Em `compact` a tela empilha em uma
+coluna, esconde o conteúdo secundário e a aba inativa mostra só o número e
+o ícone.
+
+Abaixo de 60×16 o shell troca a tela pela mensagem "Terminal too small" até
+o terminal crescer. A screen não repete essa mensagem.
+
+## Arquivos e pausa
+
+`Screen.watch()` devolve os arquivos que a tela lê. Quando outro processo
+muda um deles, o shell recarrega a tela e mostra o toast "Updated from
+disk". Overview, Settings e Credentials observam settings.json,
+credentials.json e master.key.
+
+Quando a janela do terminal perde o foco, o shell chama `onPause`; ao
+recuperar, chama `onResume`. A tela para timers e animações em `onPause`. O
+título da janela mostra `<título> · <aba>`. O teclado Kitty é ligado quando
+o terminal suporta.
+
+A setting `tui.motion` (boolean, padrão `true`) liga as animações curtas de
+diálogos e toasts. Com `false`, a interface fica estática.
 
 ## Ícones
 
@@ -81,7 +166,8 @@ branco.
   origens externas. Verde, âmbar e vermelho só para estado, com texto ao
   lado.
 - Barra de status com teclas em blocos invertidos.
-- A tela atualiza ao receber um resultado novo, com rolagem controlada pelo teclado.
+- A tela atualiza ao receber um resultado novo, com rolagem controlada pelo
+  teclado.
 - Glifos de uma célula. Emoji fora, porque a largura varia por terminal.
 - Ícones de papel vêm de `ctx.icons`, sem glifo fixo na tela.
 
@@ -94,31 +180,57 @@ usa os nomes de papel.
 
 ## Componentes
 
-`src/tui/components.ts` oferece `panel`, `keyValueTable`, `list`,
-`heading`, `dim`, `spacer`, `button` e `listPanel`, uma lista com rolagem
-(`ScrollBoxRenderable`), item selecionado em destaque e navegação por
-`up`, `down`, `j`, `k` e `Enter`. O retorno é
-`{ box, select, selected, move }`: monte `box` e declare as teclas em
-`actions`. `move(delta)` muda o destaque; `select(index)` também chama
-`onSelect`; `selected()` devolve o índice ou -1 na lista vazia.
+`src/tui/components.ts` oferece `panel`, `keyValueTable`, `list`, `heading`,
+`dim`, `spacer`, `button`, `listPanel`, `table`, `stateView`, `spinner`,
+`progressBar` e `link`.
+
+| Componente | Uso |
+| --- | --- |
+| `panel` | caixa com borda, título e `active` para o painel em foco |
+| `keyValueTable` | rótulo apagado e valor alinhados |
+| `table` | cabeçalho que ordena no clique, linha clicável, teclado e `setRows` |
+| `listPanel` | lista com rolagem, seleção e clique na linha |
+| `stateView` | estados de carregando, vazio e erro, com botão opcional |
+| `spinner` | indicador animado com `start`, `stop` e `setLabel` |
+| `progressBar` | barra de 0 a 1 com `set(value, label?)` |
+| `link` | hyperlink OSC 8; o clique copia a URL por OSC 52 |
+
+`table` devolve `{ box, move, select, selected, sortBy, setRows }`. O
+primeiro clique na linha seleciona. O segundo clique ativa, assim como o
+`Enter`. `setRows` troca as linhas e preserva o índice quando ele ainda
+existe. `listPanel` devolve `{ box, move, select, selected }`; `move(delta)`
+muda o destaque sem chamar `onSelect`, `select(index)` também chama e
+`selected()` devolve -1 na lista vazia.
+
 `spacer(renderer, height)` é a exceção que não recebe tema. `button` recebe
 `key`, `label`, `icon` e `onPress`. O clique chama `onPress`. A linha de
-`listPanel` também responde ao clique. Um componente novo entra
-nesse arquivo e fica disponível para todas as telas.
+`listPanel` e a de `table` também respondem ao clique. Para um elemento
+clicável próprio, use `clickable` de `src/tui/pointer.ts`, que também pede o
+ponteiro de mão ao terminal. Um componente novo entra nesse arquivo e fica
+disponível para todas as telas.
 
 ## Criar uma aba
 
 1. Copie `template/screen/example.ts` para `src/tui/screens/<id>.ts`.
 2. Monte o conteúdo com os componentes e informações de `src/config/` ou
-   dos coletores já usados pelo CLI.
+   dos coletores já usados pelo CLI. Leia `ctx.layout()` e componha para as
+   três faixas.
 3. Declare o `icon` da aba e as `actions` da tela, com tecla, descrição e a
    função que roda.
 4. Ligue todo elemento clicável à mesma função de uma ação, com `button` e
-   com a linha de `listPanel`.
-5. Registre em `src/tui/screens/index.ts`. A ordem da lista é a ordem das abas.
-6. Se o `id` puder ser aba inicial, acrescente-o em `tui.initialTab` e em
+   com a linha de `table` ou de `listPanel`.
+5. Use `ctx.status` para o resumo da barra, `ctx.notify` para o resultado de
+   uma ação e `ctx.confirm`, `ctx.prompt` e `ctx.choose` para perguntar.
+6. Declare `watch()` para os arquivos lidos. Inicie trabalho em `onEnter`,
+   pare em `onLeave` e em `onPause`, retome em `onResume`.
+7. Registre em `src/tui/screens/index.ts`. A ordem da lista é a ordem das
+   abas.
+8. Se o `id` puder ser aba inicial, acrescente-o em `tui.initialTab` e em
    `--tab`.
-7. Escreva o teste, com tecla e com clique.
+9. Escreva o teste, com tecla, clique e um frame por faixa de largura.
+
+A skill `termfy-tui` traz os cinco padrões de tela e a checklist de
+qualidade em `skills/termfy-tui/references/`.
 
 ## Testar sem terminal
 
@@ -130,20 +242,25 @@ import { expect } from "bun:test";
 import { createTestRenderer } from "@opentui/core/testing";
 import { mountTui } from "../src/tui/index.ts";
 
-const setup = await createTestRenderer({ width: 110, height: 30 });
+const setup = await createTestRenderer({ width: 120, height: 32 });
 const closed = mountTui(setup.renderer, {});
 await setup.renderOnce();
 expect(setup.captureCharFrame()).toContain("Environment");
 setup.mockInput.pressKey("2");
 await setup.renderOnce();
-expect(setup.captureCharFrame()).toContain("Credits");
+expect(setup.captureCharFrame()).toContain("Settings");
 setup.mockInput.pressKey("q");
 await closed;
 ```
 
+Capture um frame em 60×16, 80×24 e 120×32 para cobrir as três faixas.
 `mountTui` aceita qualquer renderer; `startTui` cria o renderer real.
 Essa separação é o que permite testar a TUI em CI. `setup.mockMouse` envia
 clique, hover e roda, para conferir o caminho de mouse da mesma ação.
 
+Os diálogos também entram no teste: aceite e negue um `confirm`, envie um
+valor recusado por `validate` e capture o frame de um `prompt` com `secret`
+para conferir a ausência do valor.
+
 A skill `termfy-tui` traz o guia de design completo e a documentação do
-OpenTUI 0.8.3 em `references/opentui/`.
+OpenTUI em `references/opentui/`.
