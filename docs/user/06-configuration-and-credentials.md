@@ -16,6 +16,9 @@ Chaves em notação de ponto, com esquema tipado em `SETTINGS_SCHEMA`
 (`src/config/settings.ts`). O starter kit reconhece `output.format`,
 `output.colors`, `tui.initialTab`, `tui.theme` e `telemetry.enabled`.
 
+`tui.theme` aceita `terminal` (padrão), `night` ou `day`. O `terminal` herda
+as cores do tema do terminal. `night` e `day` são paletas fixas em RGB.
+
 ```bash
 mycli config list
 mycli config set output.format json

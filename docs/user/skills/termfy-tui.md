@@ -6,8 +6,8 @@ navegação por teclado, mantendo o foco no item selecionado. Nas telas que
 consultam serviços, também trata o carregamento assíncrono e libera os
 recursos ao sair da aba.
 No fim, você tem uma screen registrada como aba, com estados de carregando,
-vazio, erro e pronto, testada por frames e conferida nos temas `night` e
-`day`.
+vazio, erro e pronto, testada por frames e conferida nos temas `terminal`,
+`night` e `day`.
 
 ## Quando usar
 
@@ -55,7 +55,8 @@ Para revisar uma tela existente:
    `src/cli/commands/tui.ts`.
 6. Testa a lógica isolada, depois a screen com `createTestRenderer` e por
    fim a navegação com `mountTui`.
-7. Confere `night` e `day` em 80×24, 110×30 e 160×40, além de 40×12.
+7. Confere `terminal`, `night` e `day` em 80×24, 110×30 e 160×40, além de
+   40×12.
 8. Atualiza `docs/tui.md`, roda `bun run validate` e marca `[x]` nos itens.
 
 ## Exemplo
@@ -178,7 +179,8 @@ try {
 - **Componentes compartilhados.** `panel`, `keyValueTable`, `list`,
   `heading`, `dim`, `spacer` e `listPanel` mantêm o visual igual entre abas.
   `spacer(renderer, height)` não recebe tema.
-- **Cores de `ctx.theme`.** Cor fixa no código quebra uma das paletas.
+- **Cores de `ctx.theme`.** Cor fixa no código quebra uma das paletas. No
+  tema `terminal`, cada cor é uma referência à paleta do terminal.
 - **`mount` síncrono.** `mount` cria os nós. O trabalho ativo começa em
   `onEnter` e para em `onLeave`.
 - **Cleanup também no `destroy`.** A versão atual de `mountTui` não chama

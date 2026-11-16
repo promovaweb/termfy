@@ -2,6 +2,34 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.12.0] - 2026-11-16
+
+### Adicionado
+
+- Tema `terminal` como padrão de todo binário Termfy. A `termfy-tui` exige
+  que `tui.theme` continue `terminal` nos projetos derivados. Cada token
+  desse tema aponta para um slot ANSI ou para o texto e fundo padrão do
+  terminal, então a TUI herda o tema do Ghostty, do Omarchy, do Termius,
+  do Herdr e de outros terminais.
+- `termfy-review`: verificação de que o tema `terminal` usa só
+  `RGBA.fromIndex`, `RGBA.defaultForeground` e `RGBA.defaultBackground`.
+- Glossário do guia com o verbete "tema `terminal`".
+
+### Alterado
+
+- `termfy-brand`: no tema `terminal`, a cor da marca é a escolha do slot
+  ANSI em `DEFAULT_TERMINAL_SLOTS`. O hex da marca entra em `night` e
+  `day`.
+- `termfy-tui`, `termfy-test` e as referências de telas, gráficos e
+  desenho conferem os temas `terminal`, `night` e `day`. Token novo
+  existe nas três paletas.
+- `termfy-config` alinha `tui.theme` a `THEME_NAMES`.
+- Compatibilidade de `termfy-tui`, `termfy-brand`, `termfy-config`,
+  `termfy-test` e `termfy-review`: Starter Kit a partir da v0.10.0.
+- Guia do usuário (capítulos 04, 06, 10 e 14 e as páginas das skills
+  `termfy-tui`, `termfy-brand` e `termfy-clispec`) com os três temas.
+- Ebook 0.12.0.
+
 ## [0.11.2] - 2026-11-14
 
 ### Corrigido

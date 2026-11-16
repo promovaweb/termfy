@@ -58,9 +58,12 @@ branco.
 - A tela atualiza ao receber um resultado novo, com rolagem controlada pelo teclado.
 - Glifos de uma célula. Emoji fora, porque a largura varia por terminal.
 
-As cores vivem em `src/tui/theme.ts`, em duas paletas (`night`, derivada do
-Tokyo Night; `day`, clara), com nomes de papel: `accent`, `textDim`, `border`,
-`ok`, `warn`, `error`. Uma tela não escreve hexadecimal: usa os nomes de papel.
+As cores vivem em `src/tui/theme.ts`, em três paletas: `terminal` (padrão),
+`night` (derivada do Tokyo Night) e `day` (clara). Os nomes são de papel:
+`accent`, `textDim`, `border`, `ok`, `warn`, `error`. No tema `terminal`,
+cada cor é uma referência à paleta do terminal ou ao texto e fundo padrão,
+então a TUI acompanha o tema do terminal. Uma tela não escreve hexadecimal:
+usa os nomes de papel.
 
 ## Componentes
 

@@ -21,6 +21,7 @@
 | prompt | roteiro que o servidor MCP oferece para guiar uma conversa |
 | efeito | o que uma tool faz: `read`, `write` ou `network` |
 | setting | preferência em `settings.json`, declarada em `SETTINGS_SCHEMA` |
+| tema `terminal` | tema padrão da TUI, que herda as cores do terminal |
 | cofre | `credentials.json`, cifrado com AES-256-GCM |
 | master key | chave do cofre, em `~/.<bin>/master.key` ou em `<BIN>_MASTER_KEY` |
 | OpenCLI | formato JSON que descreve a CLI; o binário gera com `--opencli` |
@@ -75,7 +76,7 @@ npx @modelcontextprotocol/inspector bun run src/main.ts mcp
 
 | Sintoma | Causa provável | O que fazer |
 | --- | --- | --- |
-| cores estranhas | terminal sem cor de 24 bits | use um terminal com truecolor ou `tui.theme day` |
+| cores diferentes do esperado | o tema `terminal` segue o tema do terminal; `night` e `day` pedem cor de 24 bits | troque o tema do terminal ou fixe com `tui.theme night` num terminal com truecolor |
 | a aba nova não abre com `tui.initialTab` | o id não está nos valores da key | acrescente o id em `values` da key no `SETTINGS_SCHEMA` |
 | a tecla da tela não responde | `onKey` devolve `false` | devolva `true` quando a tela consumir a tecla |
 
