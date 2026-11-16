@@ -265,32 +265,32 @@ bun run dev
 ```
 
 ```text
- ▌ My CLI v0.1.0  │  Query and update shop orders.                            linux-x64 • Bun 1.4.4
-  1 ⌂ Overview   2 ⚙ Settings   3 ◈ Credentials   4 ≡ Docs   5 ℹ About
- ──────────────────────────────────────────────────────────────────────────────────────────────────
- ╭─ ❯ Environment ───────────────────────────────╮╭─ ◉ State ─────────────────────────────────────╮
- │ Binary    mycli v0.1.0                        ││ settings.json  • defaults                     │
- │ Runtime   Bun 1.4.4                           ││ Vault          • empty                        │
- │ Platform  linux-x64                           ││ master key     not created                    │
- │ Terminal  100×26  xterm-256color              ││ MCP            mycli mcp                      │
- │ Data      ~/.mycli                            ││                                               │
- ╰───────────────────────────────────────────────╯╰───────────────────────────────────────────────╯
- ╭─ ⚙ Settings in effect ────────────────────────╮╭─ ≡ Next steps ────────────────────────────────╮
- │ output.colors      true                       ││ → mycli --help                                │
- │ output.format      "text"                     ││ → mycli credentials set <name>                │
- │ telemetry.enabled  false                      ││ → mycli config set tui.theme day              │
- │ tui.icons          "auto"                     ││ → mycli --skill                               │
- │ tui.initialTab     "overview"                 ││                                               │
- │ tui.motion         true                       ││ For agents                                    │
- │ tui.mouse          true                       ││ MCP client: { "command": "mycli", "args": [   │
- │ tui.theme          "terminal"                 ││ "mcp"] }                                      │
- │                                               ││  c  ❐ copy MCP config                         │
- │                                               ││  r  ↻ reload                                  │
- │                                               ││                                               │
- │                                               ││                                               │
- ╰───────────────────────────────────────────────╯╰───────────────────────────────────────────────╯
 
- 0 credentials · settings: defaults   r  reload   ?  help   q  quit                    ^K  commands
+   ▌ My CLI  v0.1.0                                                         linux-x64 · Bun 1.4.4
+
+   1 ⌂ Overview    2 ⚙ Settings    3 ◈ Credentials    4 ≡ Docs    5 ℹ About
+   ━━━━━━━━━━━━
+
+   ENVIRONMENT                                      STATE
+   ╭───────────────────────────────────────────╮    ╭───────────────────────────────────────────╮
+   │                                           │    │                                           │
+   │  Binary     mycli v0.1.0                  │    │  Settings     • defaults                  │
+   │  Runtime    Bun 1.4.4                     │    │  Vault        • empty                     │
+   │  Platform   linux-x64                     │    │  Master key   not created                 │
+   │                                           │    │                                           │
+   ╰───────────────────────────────────────────╯    ╰───────────────────────────────────────────╯
+
+   NEXT STEPS
+   ╭────────────────────────────────────────────────────────────────────────────────────────────╮
+   │                                                                                            │
+   │  → mycli --help                                { "command": "mycli",                       │
+   │  → mycli credentials set <name>                  "args": ["mcp"] }                         │
+   │  → mycli --skill                                                                           │
+   │  [c] copy MCP config    [r] reload                                                         │
+   │                                                                                            │
+   ╰────────────────────────────────────────────────────────────────────────────────────────────╯
+
+   0 credentials · defaults  r reload  c copy MCP config  ? help  q quit             ^K commands
 
 ```
 

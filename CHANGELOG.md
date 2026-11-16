@@ -2,6 +2,18 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.15.0] - 2026-11-16
+
+### Alterado
+
+- `termfy-tui`: o design passa a ser o de cartões arejados. A referência
+  `modern-unix-design.md` descreve a estrutura da tela e a tabela de tokens
+  de espaçamento (`ctx.space`). A skill e o checklist de qualidade exigem
+  margens, paddings e gaps vindos dos tokens.
+- Frame da TUI no capítulo "Começar" regenerado do Starter Kit 0.13.0.
+- Compatibilidade da `termfy-tui`: Starter Kit a partir da v0.13.0.
+- Ebook 0.15.0.
+
 ## [0.14.1] - 2026-11-16
 
 ### Alterado
