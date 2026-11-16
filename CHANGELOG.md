@@ -2,6 +2,16 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.14.1] - 2026-11-16
+
+### Alterado
+
+- `termfy-tui`: `scrollPanel` entra nos componentes, com a regra de que
+  nenhum texto cai sobre a borda nem sobrepõe outro. O checklist de
+  qualidade confere transbordo, barra inteira e proporção no layout largo.
+- Frame da TUI no capítulo "Começar" regenerado do Starter Kit 0.12.1.
+- Ebook 0.14.1.
+
 ## [0.14.0] - 2026-11-16
 
 ### Adicionado
