@@ -2,6 +2,32 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.13.0] - 2026-11-16
+
+### Adicionado
+
+- Teclado e mouse em toda a TUI como regra de todo binário Termfy. A
+  `termfy-tui` exige que cada comando de uma tela seja uma `ScreenAction`
+  com tecla, que todo elemento clicável chame a mesma função de uma ação,
+  que as abas mostrem número e ícone e que os ícones venham de `ctx.icons`.
+- `termfy-test` cobre o caminho de mouse com `setup.mockMouse`.
+- `termfy-review` confere tecla em cada ação, clique ligado a uma ação e
+  ausência de glifo fixo fora de `src/tui/icons.ts`.
+- Guia: mouse, teclado, abas numeradas, ícones e as settings `tui.icons` e
+  `tui.mouse` nos capítulos 04, 06 e 14, verbetes "action" e "Nerd Font" e
+  soluções para ícone em quadrado e para seleção de texto com o mouse.
+
+### Alterado
+
+- `termfy-command-set`, `termfy-brand` e as referências de contrato de
+  tela, teclado, desenho, layout e problemas comuns seguem o modelo de
+  ações.
+- Frame da TUI no capítulo "Começar" regenerado do binário real, com abas
+  numeradas, ícones e a barra de ações.
+- Compatibilidade de `termfy-tui`, `termfy-test`, `termfy-review` e
+  `termfy-command-set`: Starter Kit a partir da v0.11.0.
+- Ebook 0.13.0.
+
 ## [0.12.0] - 2026-11-16
 
 ### Adicionado

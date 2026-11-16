@@ -266,33 +266,38 @@ bun run dev
 
 ```text
  ▌ My CLI v0.1.0  │  Query and update shop orders.                            linux-x64 • Bun 1.4.4
+  1 ⌂ Overview   2 ℹ About
  ──────────────────────────────────────────────────────────────────────────────────────────────────
- Overview      About
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬
- ╭─ Environment ────────────────────────────────────╮╭─ State ────────────────────────────────────╮
+ ╭─ ❯ Environment ──────────────────────────────────╮╭─ ◉ State ──────────────────────────────────╮
  │ Binary    mycli v0.1.0                           ││ settings.json     • defaults               │
  │ Runtime   Bun 1.4.4                              ││ credentials.json  • empty                  │
  │ Platform  linux-x64                              ││ master key        not created              │
- │ Terminal  100×24  xterm-256color                 ││ MCP               mycli mcp                │
+ │ Terminal  100×26  xterm-256color                 ││ MCP               mycli mcp                │
  │ Data      ~/.mycli                               ││                                            │
  ╰──────────────────────────────────────────────────╯╰────────────────────────────────────────────╯
- ╭─ Settings in effect ─────────────────────────────╮╭─ Next steps ───────────────────────────────╮
+ ╭─ ⚙ Settings in effect ───────────────────────────╮╭─ ≡ Next steps ─────────────────────────────╮
  │ output.colors      true                          ││ In the terminal                            │
  │ output.format      "text"                        ││ → mycli --help                             │
  │ telemetry.enabled  false                         ││ → mycli credentials set <name>             │
- │ tui.initialTab     "overview"                    ││ → mycli config set tui.theme day           │
- │ tui.theme          "night"                       ││ → mycli --skill                            │
- │                                                  ││                                            │
- │                                                  ││ For agents                                 │
+ │ tui.icons          "auto"                        ││ → mycli config set tui.theme day           │
+ │ tui.initialTab     "overview"                    ││ → mycli --skill                            │
+ │ tui.mouse          true                          ││                                            │
+ │ tui.theme          "terminal"                    ││ For agents                                 │
  │                                                  ││ MCP client: { "command": "mycli", "args":  │
  │                                                  ││ ["mcp"] }                                  │
  │                                                  ││                                            │
+ │                                                  ││  c  ❐ copy MCP config                      │
+ │                                                  ││  r  ↻ reload                               │
+ │                                                  ││                                            │
  ╰──────────────────────────────────────────────────╯╰────────────────────────────────────────────╯
-  ←/→  tab   1-9  go   ?  help   q  quit
+  r  reload   c  copy MCP config   ←/→  tab   ?  help   q  quit
+
 ```
 
-Este frame mostra um projeto sem preferências gravadas. Use `←` e `→`
-para trocar de aba, `?` para ver as teclas e `q` para sair. Num pipe, o
+Este frame mostra um projeto sem preferências gravadas. Cada aba tem número
+e ícone: `2` ou um clique em `About` abre a segunda aba. A barra de baixo
+lista as ações da aba e as teclas globais. Um clique num item executa a
+ação, como a tecla. `?` abre o help com todas as teclas e `q` sai. Num pipe, o
 binário sem argumentos imprime a ajuda e sai com `2`. Já `mycli tui` sai
 com `8` (NO_TTY).
 

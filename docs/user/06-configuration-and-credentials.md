@@ -14,10 +14,16 @@ A pasta é criada com 0700. `MYCLI_HOME` troca a raiz, o que isola testes e CI.
 
 Chaves em notação de ponto, com esquema tipado em `SETTINGS_SCHEMA`
 (`src/config/settings.ts`). O starter kit reconhece `output.format`,
-`output.colors`, `tui.initialTab`, `tui.theme` e `telemetry.enabled`.
+`output.colors`, `tui.initialTab`, `tui.theme`, `tui.icons`, `tui.mouse` e
+`telemetry.enabled`.
 
 `tui.theme` aceita `terminal` (padrão), `night` ou `day`. O `terminal` herda
 as cores do tema do terminal. `night` e `day` são paletas fixas em RGB.
+
+`tui.icons` aceita `auto` (padrão), `nerd`, `unicode` ou `ascii`. O `auto`
+usa `nerd` no Ghostty, no Kitty, no WezTerm e no Omarchy, `ascii` no console
+Linux e `unicode` nos demais terminais. `tui.mouse` é boolean, com `true`
+padrão; `false` devolve a seleção de texto ao terminal.
 
 ```bash
 mycli config list

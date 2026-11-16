@@ -16,6 +16,8 @@
 | envelope | a forma do `--json`: `{ ok, command, data }` ou `{ ok, command, error }` |
 | exit code | número com que o processo termina; cada família de falha tem um fixo |
 | screen | uma aba da TUI, registrada em `src/tui/screens/index.ts` |
+| action | comando de uma screen, com tecla, descrição, ícone e a função que roda; aparece na barra inferior, no help e no clique |
+| Nerd Font | fonte com glifos de ícone; o conjunto `nerd` da TUI depende dela |
 | tool | função que o servidor MCP oferece ao agente, com schema Zod |
 | resource | conteúdo que o agente lê pelo MCP sem efeito, como `mycli://skill` |
 | prompt | roteiro que o servidor MCP oferece para guiar uma conversa |
@@ -78,7 +80,9 @@ npx @modelcontextprotocol/inspector bun run src/main.ts mcp
 | --- | --- | --- |
 | cores diferentes do esperado | o tema `terminal` segue o tema do terminal; `night` e `day` pedem cor de 24 bits | troque o tema do terminal ou fixe com `tui.theme night` num terminal com truecolor |
 | a aba nova não abre com `tui.initialTab` | o id não está nos valores da key | acrescente o id em `values` da key no `SETTINGS_SCHEMA` |
-| a tecla da tela não responde | `onKey` devolve `false` | devolva `true` quando a tela consumir a tecla |
+| a tecla da tela não responde | a ação não está em `actions`, ou `onKey` devolve `false` | declare a ação em `actions` com `run`, ou devolva `true` quando a tela consumir a tecla |
+| o ícone aparece como quadrado | a fonte do terminal não tem Nerd Font | use `tui.icons unicode` ou instale uma Nerd Font |
+| o mouse não seleciona texto | o mouse da TUI está ligado | use `Shift` e arraste, ou `tui.mouse false` |
 
 ### Release
 

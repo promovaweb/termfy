@@ -2,18 +2,20 @@
 
 A skill `termfy-tui` cria e revisa as screens da TUI do seu binário com a
 API imperativa do OpenTUI Core. Ela monta o layout em células e trata a
-navegação por teclado, mantendo o foco no item selecionado. Nas telas que
-consultam serviços, também trata o carregamento assíncrono e libera os
-recursos ao sair da aba.
-No fim, você tem uma screen registrada como aba, com estados de carregando,
-vazio, erro e pronto, testada por frames e conferida nos temas `terminal`,
-`night` e `day`.
+navegação por teclado e por mouse, mantendo o foco no item selecionado. Nas
+telas que consultam serviços, também trata o carregamento assíncrono e libera
+os recursos ao sair da aba.
+No fim, você tem uma screen registrada como aba, com número e ícone, com
+estados de carregando, vazio, erro e pronto, testada por teclas, por clique
+e por frames. A conferência visual cobre os temas `terminal`, `night` e
+`day`.
 
 ## Quando usar
 
 - Você quer uma aba nova, como a screen `orders` com a lista de pedidos.
-- Uma screen existente precisa de navegação por teclado, rolagem ou um
-  campo de formulário.
+- Uma screen existente precisa de navegação por teclado, mouse, rolagem ou
+  um campo de formulário.
+- A tela precisa de ícones de papel e de uma barra de ações clicável.
 - A tela consulta uma API e você precisa tratar carregamento, erro e
   respostas que chegam fora de ordem.
 - Uma screen trava, vaza timers ou deixa o terminal sujo ao sair.
@@ -49,12 +51,13 @@ Para revisar uma tela existente:
    `src/tui/theme.ts` e `src/tui/screens/index.ts`. Mostra um plano curto
    com arquivos, comportamentos e verificações.
 4. Escolhe uma receita em `references/examples/` e adapta só o necessário.
-5. Cria `src/tui/screens/<id>.ts` e registra a screen em
-   `src/tui/screens/index.ts`. Para abrir direto na aba, acrescenta o id em
-   `tui.initialTab` de `src/config/settings.ts` e em `--tab` de
-   `src/cli/commands/tui.ts`.
-6. Testa a lógica isolada, depois a screen com `createTestRenderer` e por
-   fim a navegação com `mountTui`.
+5. Cria `src/tui/screens/<id>.ts`, declara `icon` e as `actions` da tela e
+   registra a screen em `src/tui/screens/index.ts`. Para abrir direto na
+   aba, acrescenta o id em `tui.initialTab` de `src/config/settings.ts` e em
+   `--tab` de `src/cli/commands/tui.ts`.
+6. Liga cada comando a uma ação, com tecla e clique na mesma função. Testa a
+   lógica isolada, depois a screen com `createTestRenderer` e por fim a
+   navegação com `mountTui`, com tecla e com clique.
 7. Confere `terminal`, `night` e `day` em 80×24, 110×30 e 160×40, além de
    40×12.
 8. Atualiza `docs/tui.md`, roda `bun run validate` e marca `[x]` nos itens.
@@ -67,7 +70,7 @@ montagem tem o próprio estado e o teste injeta uma carga local:
 ```ts
 import { BoxRenderable, TextRenderable } from "@opentui/core";
 import { listPanel } from "../components.ts";
-import type { Screen, ScreenContext } from "../screen.ts";
+import type { Screen, ScreenAction, ScreenContext } from "../screen.ts";
 import { listOrders, type Order } from "../../api/shop.ts";
 
 type Load = () => Promise<{ items: Order[] }>;
@@ -104,11 +107,28 @@ export function createOrdersScreen(load: Load = () => listOrders({ limit: 50 }))
     }
   };
 
+  const actions: ScreenAction[] = [
+    { keys: ["up", "k"], label: "↑/k", description: "up", run: () => list?.move(-1) },
+    { keys: ["down", "j"], label: "↓/j", description: "down", run: () => list?.move(1) },
+    {
+      keys: ["return", "enter"],
+      label: "Enter",
+      description: "select",
+      icon: "select",
+      run: () => {
+        const index = list?.selected() ?? -1;
+        if (index >= 0) list?.select(index);
+      },
+    },
+    { keys: ["r"], description: "reload", icon: "refresh", run: (ctx) => { void reload(ctx); } },
+  ];
+
   return {
     id: "orders",
     title: "Orders",
+    icon: "list",
     description: "Shop orders",
-    keys: [{ key: "↑/↓ j/k", action: "move" }, { key: "Enter", action: "select" }, { key: "r", action: "reload" }],
+    actions,
     mount: (ctx) => {
       root = new BoxRenderable(ctx.renderer, { flexDirection: "column", flexGrow: 1 });
       status = new TextRenderable(ctx.renderer, { content: "", height: 1, flexShrink: 0, fg: ctx.theme.textDim });
@@ -118,17 +138,6 @@ export function createOrdersScreen(load: Load = () => listOrders({ limit: 50 }))
     },
     onEnter: (ctx) => { void reload(ctx); },
     onLeave: () => { generation++; },
-    onKey: (name, ctx) => {
-      if (name === "r") { void reload(ctx); return true; }
-      if (!list) return false;
-      if (name === "up" || name === "k") { list.move(-1); return true; }
-      if (name === "down" || name === "j") { list.move(1); return true; }
-      if (name === "return" || name === "enter") {
-        if (list.selected() >= 0) list.select(list.selected());
-        return true;
-      }
-      return false;
-    },
   };
 }
 ```
@@ -179,6 +188,13 @@ try {
 - **Componentes compartilhados.** `panel`, `keyValueTable`, `list`,
   `heading`, `dim`, `spacer` e `listPanel` mantêm o visual igual entre abas.
   `spacer(renderer, height)` não recebe tema.
+- **Ação única para tecla e clique.** Cada comando é uma `ScreenAction` com
+  `keys`, `description`, `icon` e `run`. O botão e a linha de lista chamam a
+  mesma função.
+- **Ícones de `ctx.icons`.** Nenhum glifo de papel fixo na screen; a key
+  `tui.icons` troca o conjunto `nerd`, `unicode` ou `ascii`.
+- **Mouse e teclado no mesmo efeito.** O clique, o hover e a roda passam
+  pela mesma ação da tecla. O teste usa `setup.mockMouse`.
 - **Cores de `ctx.theme`.** Cor fixa no código quebra uma das paletas. No
   tema `terminal`, cada cor é uma referência à paleta do terminal.
 - **`mount` síncrono.** `mount` cria os nós. O trabalho ativo começa em
@@ -199,9 +215,10 @@ try {
 
 ## O que ela entrega
 
-A skill relata os arquivos alterados, as versões conferidas, as teclas, os
-estados cobertos, as dimensões ensaiadas e um frame real capturado. Separa
-testes executados, exemplos só compilados e comportamentos não exercitados.
+A skill relata os arquivos alterados, as versões conferidas, as teclas, as
+ações, os estados cobertos, as dimensões ensaiadas e um frame real capturado.
+Separa testes executados, exemplos só compilados e comportamentos não
+exercitados.
 
 | Arquivo | Mudança |
 | --- | --- |
