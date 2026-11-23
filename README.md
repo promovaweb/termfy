@@ -76,8 +76,7 @@ links dos agentes e a compatibilidade, preservando a identidade, o
 | [`termfy-mcp-client`](skills/termfy-mcp-client/SKILL.md) | configuração nos clientes de agente |
 
 Em outro projeto, peça ao agente para instalar as skills do repositório
-`https://github.com/promovaweb/termfy` e abrir `termfy-init`. O agente
-precisa ter acesso de leitura ao repositório privado.
+público `https://github.com/promovaweb/termfy` e abrir `termfy-init`.
 
 ## Guia e ebook
 
@@ -106,8 +105,8 @@ de `references/`. Sem argumento, usa `../termfy-starter-kit`. Caminhos com
 `<name>` e globs precisam corresponder a ao menos um caminho existente.
 Comandos como `bun run src/main.ts` são conferidos como arquivos.
 
-O job `compatibilidade` do CI exige o secret `STARTER_KIT_TOKEN` com acesso
-de leitura ao repositório privado `promovaweb/termfy-starter-kit`. Os checkouts
+O job `compatibilidade` do CI usa o secret `STARTER_KIT_TOKEN` para ler o
+repositório `promovaweb/termfy-starter-kit`. Os checkouts
 ficam em pastas irmãs dentro do workspace, conforme o suporte a
 [múltiplos repositórios do actions/checkout](https://github.com/actions/checkout#checkout-multiple-repos-side-by-side).
 A partir da pasta `termfy`, o comando usa `../termfy-starter-kit`.
@@ -134,6 +133,7 @@ O logo, a paleta com o lima do conector MCP, os tokens e as fontes ficam em
 
 ## Licença
 
-Repositório privado da Promovaweb. Uso interno e dos alunos autorizados. A
-documentação copiada de terceiros em `references/` mantém as licenças
+Distribuído sob a [GNU AGPL 3.0](LICENSE). A licença não concede o uso do
+nome e do logo do Termfy nem da marca Promovaweb (AGPL 3.0, seção 7, item e).
+A documentação copiada de terceiros em `references/` mantém as licenças
 originais (MIT).

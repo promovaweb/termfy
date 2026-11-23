@@ -50,7 +50,7 @@ jobs:
           if [ -n "$STARTER_KIT_TOKEN" ]; then
             echo "disponivel=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::notice::Secret STARTER_KIT_TOKEN ausente; a conferência com o starter kit privado foi pulada. Rode bun run skills:check-paths localmente."
+            echo "::notice::Secret STARTER_KIT_TOKEN ausente; a conferência com o starter kit foi pulada. Rode bun run skills:check-paths localmente."
             echo "disponivel=false" >> "$GITHUB_OUTPUT"
           fi
 

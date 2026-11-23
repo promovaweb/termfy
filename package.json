@@ -1,10 +1,10 @@
 {
   "name": "termfy",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "description": "Framework de skills da Promovaweb para construir binários de terminal em Bun com TUI, CLI e servidor MCP stdio no mesmo executável.",
   "type": "module",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "skills:validate": "bun run scripts/validate-skills.ts",
     "ebook": "bun run .ebook/build-ebook.mjs",
