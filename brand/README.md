@@ -4,14 +4,11 @@ O Termfy é o framework de skills da Promovaweb para construir binários de
 terminal em Bun com três modos no mesmo executável: TUI para pessoas, CLI
 com saída em texto ou `--json` para scripts e agentes, e servidor MCP via
 stdio para agentes de IA. Sua identidade combina o petróleo e o turquesa da
-Promovaweb com lima, cor própria do conector que liga o binário aos agentes.
+Promovaweb com lima, cor que identifica a opção selecionada no menu.
 
 ## Conceito visual
 
-O símbolo é um **terminal com conector**: uma janela de terminal com o
-prompt e um conector lima na lateral. A janela e o prompt representam a TUI
-e a CLI. O conector representa o servidor MCP, o canal pelo qual o mesmo
-binário também conversa com agentes.
+Prompt de terminal e menu de TUI com uma opção selecionada em verde-lima. A cor de identificação é `#A3E635`.
 
 ## Arquivos oficiais
 
@@ -45,7 +42,7 @@ hashes de cada arquivo ficam em `manifest.json`.
 ## Regras para agentes
 
 1. Use os ativos desta pasta sem redesenhá-los.
-2. Lima indica o conector, a integração com agentes e o destaque de ação;
+2. Lima indica a seleção no menu e o destaque de ação;
    turquesa identifica a família.
 3. Em fundo claro, o lima é `#4D7C0F`; o tom `#A3E635` só aparece em fundo
    escuro.

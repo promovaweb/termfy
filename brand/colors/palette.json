@@ -1,4 +1,9 @@
 {
+  "projectColor": {
+    "name": "Verde-lima",
+    "hex": "#A3E635",
+    "meaning": "A barra lima reproduz o destaque da opção selecionada numa interface de terminal."
+  },
   "name": "Termfy",
   "families": {
     "primary": {
