@@ -59,6 +59,10 @@ Encadeia `skills:validate` (estrutura, frontmatter e links das skills),
 `ebook:verify` (manifesto, hashes, XML, links e fontes do ebook). Confira
 `git status --short` ao final e preserve mudanças que já existiam.
 
+## Interface do Starter Kit
+
+Use os slots ANSI e as cores padrão do terminal. Tab e Shift+Tab percorrem toda a interface. Mostre atalhos na linha do rótulo, em tamanho normal, com negrito e contraste invertido.
+
 ## Publicação
 
 Versão em `package.json`, entrada em `CHANGELOG.md`, tag `vX.Y.Z` e GitHub

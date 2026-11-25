@@ -141,7 +141,7 @@ guarda pedidos localmente.
 | Key | Tipo | Padrão | Função |
 | --- | --- | --- | --- |
 | `output.format` | `enum` (`text`, `json`) | `text` | formato padrão da saída |
-| `tui.theme` | `enum` (`terminal`, `night`, `day`) | `terminal` | paleta da TUI |
+| `tui.theme` | `enum` (`terminal`) | `terminal` | paleta da TUI |
 
 ## Specs
 

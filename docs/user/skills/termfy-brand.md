@@ -75,34 +75,11 @@ esta tabela de origens:
 | `author`, `site` | bloco `termfy` | `about`, aba About, OpenCLI |
 | `license` | `license` | `about`, aba About, OpenCLI |
 | créditos | `credits` em `src/app/manifest.ts` | `about`, aba About, tool MCP `about` |
-| paleta | `DEFAULT_TERMINAL_SLOTS`, `themes.night` e `themes.day` em `src/tui/theme.ts` | toda a TUI |
+| paleta | `DEFAULT_TERMINAL_SLOTS` em `src/tui/theme.ts` | toda a TUI |
 
 Para a cor de marca do primeiro exemplo, a skill altera só os papéis de
 destaque. No tema `terminal`, ela escolhe o slot ANSI mais próximo em
-`DEFAULT_TERMINAL_SLOTS`. Nas paletas `night` e `day`, ela grava o hex.
-
-```ts
-export const themes: Record<"night" | "day", Theme> = {
-  night: {
-    name: "night",
-    // ...
-    borderActive: "#e4572e",
-    accent: "#e4572e",
-    accentSecondary: "#f08a6c",
-    keyBackground: "#e4572e",
-    // ...
-  },
-  day: {
-    name: "day",
-    // ...
-    borderActive: "#c43d16",
-    accent: "#c43d16",
-    accentSecondary: "#e4572e",
-    keyBackground: "#c43d16",
-    // ...
-  },
-};
-```
+`DEFAULT_TERMINAL_SLOTS`. O terminal define a cor exibida.
 
 O relato chega como uma tabela de antes e depois:
 
@@ -110,8 +87,6 @@ O relato chega como uma tabela de antes e depois:
 Campo              Antes          Depois
 author             Loja Exemplo   Loja Exemplo Ltda
 accent (terminal)  ANSI 4         ANSI 1
-accent (night)     #7aa2f7        #e4572e
-accent (day)       #2e7de9        #c43d16
 
 Arquivos: package.json, src/tui/theme.ts, docs/opencli.json, CHANGELOG.md
 Conferido: --version, about, --help, aba About, mcp --list
@@ -137,12 +112,7 @@ Conferido: --version, about, --help, aba About, mcp --list
 - **`description` em inglês, abaixo de 80 caracteres.** Ela aparece no
   `--help`, no cabeçalho da TUI e no OpenCLI. Acima disso, o cabeçalho
   corta o texto.
-- **Cores por papel, nas três paletas.** No tema `terminal`, a marca
-  escolhe o slot ANSI em `DEFAULT_TERMINAL_SLOTS`, por exemplo
-  `accent: ANSI.cyan`, sem hex. Cor hex da marca entra em `night` e
-  `day`. A cor entra como `accent` (e `accentSecondary` quando houver uma
-  segunda cor). Ela não vira campo novo usado por uma screen só. Assim,
-  trocar de tema mantém a marca.
+- **Cores por papel.** A marca escolhe o slot ANSI em `DEFAULT_TERMINAL_SLOTS`. O tema do terminal determina a cor de cada slot.
 - **Contraste mínimo de 4.5:1.** A skill confere `text` sobre `surface` e
   `keyText` sobre `keyBackground`. Abaixo disso, a leitura fica difícil em
   vários terminais.

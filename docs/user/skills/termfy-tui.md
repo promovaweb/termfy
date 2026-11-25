@@ -7,8 +7,7 @@ telas que consultam serviços, também trata o carregamento assíncrono e libera
 os recursos ao sair da aba.
 No fim, você tem uma screen registrada como aba, com número e ícone, com
 estados de carregando, vazio, erro e pronto, testada por teclas, por clique
-e por frames nas três faixas de largura. A conferência visual cobre os temas
-`terminal`, `night` e `day`.
+e por frames nas três faixas de largura. A conferência visual cobre as paletas clara e escura do terminal.
 
 ## Quando usar
 
@@ -62,7 +61,7 @@ Para revisar uma tela existente:
    mesma função. Testa a lógica isolada, depois a screen com
    `createTestRenderer` e por fim a navegação com `mountTui`, com tecla,
    clique e diálogos.
-7. Confere `terminal`, `night` e `day` em 60×16, 80×24 e 120×32.
+7. Confere as cores do terminal em 60×16, 80×24 e 120×32.
 8. Passa a `references/quality-checklist.md` linha a linha, atualiza
    `docs/tui.md`, roda `bun run validate` e marca `[x]` nos itens.
 
@@ -193,7 +192,7 @@ const setup = await createTestRenderer({ width: 80, height: 24 });
 (screens as Screen[]).push(createOrdersScreen(async () => ({
   items: [{ id: "o1", status: "open" }, { id: "o7", status: "paid" }],
 })));
-const closed = mountTui(setup.renderer, { initialTab: "orders" }, themes.night);
+const closed = mountTui(setup.renderer, { initialTab: "orders" }, terminalTheme());
 try {
   await setup.waitForFrame((frame) => frame.includes("o7  paid"));
   setup.mockInput.pressKey("j");

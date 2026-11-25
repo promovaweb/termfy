@@ -2,6 +2,14 @@
 
 Formato baseado em Keep a Changelog. Versões seguem SemVer.
 
+## [0.16.0] - 2026-11-25
+
+### Alterado
+
+- As skills passam a exigir as cores ANSI e as cores padrão do terminal em toda a TUI, inclusive nos formulários.
+- O guia descreve o percurso de Tab e Shift+Tab pelo menu, pelo conteúdo e pelo rodapé, com retorno do foco ao fechar diálogos.
+- Os atalhos ficam na linha do rótulo, em tamanho normal, com negrito e contraste invertido. O guia e o ebook acompanham o Termfy Starter Kit v0.14.0.
+
 ## [0.15.3] - 2026-11-23
 
 - Passa a distribuir o projeto sob a GNU AGPL 3.0, com o arquivo `LICENSE` na raiz e o campo `license` em `AGPL-3.0-only`. O README deixa de descrever o repositório como privado.

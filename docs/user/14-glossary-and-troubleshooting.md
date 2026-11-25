@@ -81,7 +81,7 @@ npx @modelcontextprotocol/inspector bun run src/main.ts mcp
 
 | Sintoma | Causa provável | O que fazer |
 | --- | --- | --- |
-| cores diferentes do esperado | o tema `terminal` segue o tema do terminal; `night` e `day` pedem cor de 24 bits | troque o tema do terminal ou fixe com `tui.theme night` num terminal com truecolor |
+| cores diferentes do esperado | a TUI usa os slots ANSI e as cores padrão | confira a paleta do terminal |
 | a aba nova não abre com `tui.initialTab` | o id não está nos valores da key | acrescente o id em `values` da key no `SETTINGS_SCHEMA` |
 | a tecla da tela não responde | a ação não está em `actions`, ou `onKey` devolve `false` | declare a ação em `actions` com `run`, ou devolva `true` quando a tela consumir a tecla |
 | o ícone aparece como quadrado | a fonte do terminal não tem Nerd Font | use `tui.icons unicode` ou instale uma Nerd Font |

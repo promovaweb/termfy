@@ -5,12 +5,12 @@
 Esquema ilustrativo da disposição, com rótulos traduzidos para leitura:
 
 ```text
- ▌ My CLI v<version>  │  Consulta e atualiza pedidos da loja.     linux-x64 • Bun 1.4.4
- ────────────────────────────────────────────────────────────────────────────────
-   1 ⌂ Overview   2 ⚙ Settings   3 ◈ Credentials   4 ≡ Docs   5 ℹ About
+ My CLI v<version> · Debian
+ ╭─ Menu ──────────────────────────────────────────────────────────────────╮
+ │ 1 Overview   2 Settings   3 Credentials   4 Docs   5 About              │
+ ╰─────────────────────────────────────────────────────────────────────────╯
  ╭─ Ambiente ──────────────────────────────╮╭─ Estado ───────────────────────────╮
  │ Binário     mycli v<version>            ││ settings.json     • padrões        │
- │ Runtime     Bun 1.4.4                   ││ credentials.json  • vazio          │
  ╰─────────────────────────────────────────╯╰────────────────────────────────────╯
   settings: padrões · cofre: 0    r recarregar   ? ajuda   q sair      ^K commands
 ```
@@ -36,16 +36,14 @@ O starter kit traz cinco abas:
 | Tecla | Ação |
 | --- | --- |
 | `←` `→` `[` `]` | aba anterior ou seguinte |
-| `Tab` `Shift+Tab` | próximo painel ou painel anterior da tela |
+| `Tab` `Shift+Tab` | avançar ou voltar na ordem de foco |
 | `1` … `9` | ir para a aba de mesmo número |
 | `Ctrl+K` `:` | abrir a paleta de comandos |
 | `?` | mostrar ou esconder a ajuda |
 | `Esc` | fechar o diálogo ou a ajuda; sem modal aberto, sair |
 | `q` `Ctrl+C` | sair |
 
-Dentro de um campo de texto, letras e números vão para o campo e `Esc` sai
-do campo. Fora dele, `Tab` e `Shift+Tab` movem o foco entre os painéis da
-tela, sem trocar de aba. O painel em foco usa a borda de destaque.
+Tab percorre o menu, os controles da aba e o rodapé. Shift+Tab volta pelo mesmo percurso. Enter ativa o controle em foco. Cada diálogo mantém o foco até fechar e então o devolve ao controle de origem. Os atalhos aparecem na linha do rótulo, em tamanho normal, com negrito e contraste invertido.
 
 A tela declara os próprios comandos em `actions`: tecla, descrição, ícone e
 a função que roda. Eles aparecem na barra inferior antes das globais, no
@@ -81,7 +79,7 @@ O shell desenha os diálogos e devolve a resposta à tela:
 ```ts
 const name = await ctx.prompt({ title: "Add credential", label: "Name" });
 const ok = await ctx.confirm({ title: "Remove", message: `Remove ${name}?`, danger: true });
-const index = await ctx.choose({ title: "Theme", items: ["terminal", "night", "day"] });
+const index = await ctx.choose({ title: "Icons", items: ["auto", "unicode", "ascii"] });
 ```
 
 | Diálogo | Campos | Interação |
@@ -171,12 +169,7 @@ branco.
 - Glifos de uma célula. Emoji fora, porque a largura varia por terminal.
 - Ícones de papel vêm de `ctx.icons`, sem glifo fixo na tela.
 
-As cores vivem em `src/tui/theme.ts`, em três paletas: `terminal` (padrão),
-`night` (derivada do Tokyo Night) e `day` (clara). Os nomes são de papel:
-`accent`, `textDim`, `border`, `ok`, `warn`, `error`. No tema `terminal`,
-cada cor é uma referência à paleta do terminal ou ao texto e fundo padrão,
-então a TUI acompanha o tema do terminal. Uma tela não escreve hexadecimal:
-usa os nomes de papel.
+As cores vêm dos slots ANSI e do texto e fundo padrão do terminal. Os componentes usam os papéis de `src/tui/theme.ts`, como `accent`, `border` e `error`.
 
 ## Componentes
 

@@ -20,8 +20,7 @@ Chaves em notação de ponto, com esquema tipado em `SETTINGS_SCHEMA`
 `tui.initialTab` aceita `overview` (padrão), `settings`, `credentials`,
 `docs` ou `about`.
 
-`tui.theme` aceita `terminal` (padrão), `night` ou `day`. O `terminal` herda
-as cores do tema do terminal. `night` e `day` são paletas fixas em RGB.
+`tui.theme` usa `terminal`. Configurações antigas com `night` ou `day` passam a usar as cores do terminal.
 
 `tui.icons` aceita `auto` (padrão), `nerd`, `unicode` ou `ascii`. O `auto`
 usa `nerd` no Ghostty, no Kitty, no WezTerm e no Omarchy, `ascii` no console
